@@ -1,2 +1,2 @@
-# 3380-Class-project
-Team Blind Spring 3380 project
+# 3380-Class-project: nGen
+Team Blind and Brice Spring 3380 project
