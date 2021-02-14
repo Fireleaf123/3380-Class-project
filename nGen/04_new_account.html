@@ -54,11 +54,11 @@
                         <div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo "><a href="index.html"><img src="images/logo.jpg" alt=""  /></a></div>
                         <div class="col-lg-3 col-xs-9 col-sm-5 col-md-3 selecttopic">
                             <div class="dropdown">
-                                <a data-toggle="dropdown" href="#">Borderlands 2</a> <b class="caret"></b>
+                                <a data-toggle="dropdown" href="#">My Account</a> <b class="caret"></b>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Borderlands 1</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-2" href="#">Borderlands 2</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-3" href="#">Borderlands 3</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Forum</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-2" href="#">My Account</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-3" href="#">Cattegories</a></li>
 
                                 </ul>
                             </div>
@@ -191,7 +191,7 @@
                                                             <div class="col-lg-6 col-md-6">
                                                                 <div class="checkbox">
                                                                     <label>
-                                                                        <input type="checkbox" id="friends"  /> Only Friends
+                                                                        <input type="checkbox" id="friends"  /> Only Me
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -255,50 +255,78 @@
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-6">
                                                         <select name="old" id="old"  class="form-control" >
-                                                            <option value="" disabled selected>How Old are you?</option>
-                                                            <option value="op1">Option1</option>
-                                                            <option value="op2">Option2</option>
+                                                            <option value="" disabled selected>What age bracket are you in?</option>
+                                                            <option value="op1"> <18</option>
+                                                            <option value="op2">18-25</option>
+                                                            <option value="op3">36-45</option>
+                                                            <option value="op4">46-55</option>
+                                                            <option value="op5">56+</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6">
                                                         <select name="who" id="who"  class="form-control" >
-                                                            <option value="" disabled selected>Who are you?</option>
-                                                            <option value="op1">Option1</option>
-                                                            <option value="op2">Option2</option>
+                                                            <option value="" disabled selected>What are you looking for on this site?</option>
+                                                            <option value="op1">Job opportunities</option>
+                                                            <option value="op2">Career Outlook</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-6">
                                                         <select name="help" id="help"  class="form-control" >
-                                                            <option value="" disabled selected>Will you help others here?</option>
-                                                            <option value="op1">Option1</option>
-                                                            <option value="op2">Option2</option>
+                                                            <option value="" disabled selected>Will you be active in discussion?</option>
+                                                            <option value="op1">Yes</option>
+                                                            <option value="op2">Maybe</option>
+                                                            <option value="op3">No</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6">
                                                         <select name="hear" id="hear"  class="form-control" >
-                                                            <option value="" disabled selected>Where do you hear about us?</option>
-                                                            <option value="op1">Option1</option>
-                                                            <option value="op2">Option2</option>
+                                                            <option value="" disabled selected>Where did you hear about us?</option>
+                                                            <option value="op1">Social Media</option>
+                                                            <option value="op2">Friends</option>
+                                                            <option value="op3">School</option>
+                                                            <option value="op4">Advertisement</option>
+                                                            <option value="op5">Other</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="row newtopcheckbox">
                                                     <div class="col-lg-6 col-md-6">
-                                                        <div><p>Some other question 1</p></div>
+                                                        <div><p>What fields are you interested in?</p></div>
                                                         <div class="row">
                                                             <div class="col-lg-6 col-md-6">
                                                                 <div class="checkbox">
                                                                     <label>
-                                                                        <input type="checkbox" id="everyone2" /> option 1 
+                                                                        <input type="checkbox" id="everyone2" /> Science 
                                                                     </label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6 col-md-6">
                                                                 <div class="checkbox">
                                                                     <label>
-                                                                        <input type="checkbox" id="friends2"  /> option 2 
+                                                                        <input type="checkbox" id="friends2"  /> Tech 
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" id="everyone2" /> Engineering 
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" id="friends2"  /> Art 
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" id="friends2"  /> Math 
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -306,24 +334,37 @@
                                                     </div>
                                                     <div class="col-lg-6 col-md-6">
                                                         <div>
-                                                            <p>Some other question 2</p>
+                                                            <p>What levels of education have you completed?</p>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-6 col-md-6">
                                                                 <div class="checkbox">
                                                                     <label>
-                                                                        <input type="checkbox" id="fb2"/> option 1 
+                                                                        <input type="checkbox" id="friends2"  /> No School 
                                                                     </label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6 col-md-6">
                                                                 <div class="checkbox">
                                                                     <label>
-                                                                        <input type="checkbox" id="tw2" /> option 2 
+                                                                        <input type="checkbox" id="fb2"/> Primary School
                                                                     </label>
                                                                 </div>
                                                             </div>
-
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" id="tw2" /> High School 
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" id="friends2"  /> College 
+                                                                    </label>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -337,6 +378,7 @@
 
 
                                     <!-- acc section -->
+<!-- Social Media Acct
                                     <div class="accsection networks">
                                         <div class="acccap">
                                             <div class="userinfo pull-left">&nbsp;</div>
@@ -376,7 +418,10 @@
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>  
-                                    </div><!-- acc section END -->
+                                  
+                                    </div>
+-->
+                                    <!-- acc section END -->
 
 
 
@@ -418,13 +463,13 @@
                                 <div class="divline"></div>
                                 <div class="blocktxt">
                                     <ul class="cats">
-                                        <li><a href="#">Trading for Money <span class="badge pull-right">20</span></a></li>
-                                        <li><a href="#">Vault Keys Giveway <span class="badge pull-right">10</span></a></li>
-                                        <li><a href="#">Misc Guns Locations <span class="badge pull-right">50</span></a></li>
-                                        <li><a href="#">Looking for Players <span class="badge pull-right">36</span></a></li>
-                                        <li><a href="#">Stupid Bugs &amp; Solves <span class="badge pull-right">41</span></a></li>
-                                        <li><a href="#">Video &amp; Audio Drivers <span class="badge pull-right">11</span></a></li>
-                                        <li><a href="#">2K Official Forums <span class="badge pull-right">5</span></a></li>
+                                        <li><a href="#">Science<span class="badge pull-right">20</span></a></li>
+                                        <li><a href="#">Technology<span class="badge pull-right">10</span></a></li>
+                                        <li><a href="#">Engineering<span class="badge pull-right">50</span></a></li>
+                                        <li><a href="#">Art<span class="badge pull-right">36</span></a></li>
+                                        <li><a href="#">Mathmatics<span class="badge pull-right">41</span></a></li>
+                                        <li><a href="#">Filler<span class="badge pull-right">11</span></a></li>
+                                        <li><a href="#">Filler<span class="badge pull-right">5</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -434,14 +479,14 @@
                                 <h3>Poll of the Week</h3>
                                 <div class="divline"></div>
                                 <div class="blocktxt">
-                                    <p>Which game you are playing this week?</p>
+                                    <p>How fluent in computers are you?</p>
                                     <form action="#" method="post" class="form">
                                         <table class="poll">
                                             <tr>
                                                 <td>
                                                     <div class="progress">
                                                         <div class="progress-bar color1" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
-                                                            Call of Duty Ghosts
+                                                            What's a computer?
                                                         </div>
                                                     </div>
                                                 </td>
@@ -454,7 +499,7 @@
                                                 <td>
                                                     <div class="progress">
                                                         <div class="progress-bar color2" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 63%">
-                                                            Titanfall
+                                                            I can google things
                                                         </div>
                                                     </div>
                                                 </td>
@@ -467,7 +512,7 @@
                                                 <td>
                                                     <div class="progress">
                                                         <div class="progress-bar color3" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
-                                                            Battlefield 4
+                                                            Practically a developer
                                                         </div>
                                                     </div>
                                                 </td>
@@ -478,7 +523,7 @@
                                             </tr>
                                         </table>
                                     </form>
-                                    <p class="smal">Voting ends on 19th of October</p>
+                                    <p class="smal">Voting ends on 19th of February</p>
                                 </div>
                             </div>
 
@@ -487,23 +532,23 @@
                                 <h3>My Active Threads</h3>
                                 <div class="divline"></div>
                                 <div class="blocktxt">
-                                    <a href="#">This Dock Turns Your iPhone Into a Bedside Lamp</a>
+                                    <a href="#">Full Stack Devloper here to answer programming questions!</a>
                                 </div>
                                 <div class="divline"></div>
                                 <div class="blocktxt">
-                                    <a href="#">Who Wins in the Battle for Power on the Internet?</a>
+                                    <a href="#">Have you ever wanted to design a building?</a>
                                 </div>
                                 <div class="divline"></div>
                                 <div class="blocktxt">
-                                    <a href="#">Sony QX10: A Funky, Overpriced Lens Camera for Your Smartphone</a>
+                                    <a href="#">Hi, I'm Mickey Loomis, general manager of the New Orleans Saints. AMA!</a>
                                 </div>
                                 <div class="divline"></div>
                                 <div class="blocktxt">
-                                    <a href="#">FedEx Simplifies Shipping for Small Businesses</a>
+                                    <a href="#">My name is Josh Saxon and I test water slides for a living, Ask Me Anything!</a>
                                 </div>
                                 <div class="divline"></div>
                                 <div class="blocktxt">
-                                    <a href="#">Loud and Brave: Saudi Women Set to Protest Driving Ban</a>
+                                    <a href="#">Do you want to work in car maintenance?</a>
                                 </div>
                             </div>
 
@@ -548,7 +593,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-1 col-xs-3 col-sm-2 logo "><a href="#"><img src="images/logo.jpg" alt=""  /></a></div>
-                        <div class="col-lg-8 col-xs-9 col-sm-5 ">Copyrights 2014, websitename.com</div>
+                        <div class="col-lg-8 col-xs-9 col-sm-5 ">Copyrights 2021, nGen.com</div>
                         <div class="col-lg-3 col-xs-12 col-sm-5 sociconcent">
                             <ul class="socialicons">
                                 <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
