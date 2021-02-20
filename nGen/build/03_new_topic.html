@@ -146,20 +146,20 @@
                                             </div>
                                         </div>
                                         <div class="posttext pull-left">
-
-                                            <div>
+                                            <div id="post_title">
                                                 <input type="text" placeholder="Enter Topic Title" class="form-control" />
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-lg-6 col-md-6">
+                                                <div id="select_field"class="col-lg-6 col-md-6">
                                                     <select name="category" id="category"  class="form-control" >
-                                                        <option value="" disabled selected>Select Category</option>
+                                                        <option value="" disabled selected>Select Field</option>
                                                         <option value="op1">Option1</option>
                                                         <option value="op2">Option2</option>
+                                                        <option value="op3">Option3</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6">
+                                                <div id="sub_cat" class="invisible col-lg-6 col-md-6">
                                                     <select name="subcategory" id="subcategory"  class="form-control" >
                                                         <option value="" disabled selected>Select Subcategory</option>
                                                         <option value="op1">Option1</option>
@@ -168,10 +168,10 @@
                                                 </div>
                                             </div>
 
-                                            <div>
+                                            <div id="post_content">
                                                 <textarea name="desc" id="desc" placeholder="Description"  class="form-control" ></textarea>
                                             </div>
-                                            <div class="row newtopcheckbox">
+                                            <div id="viewers" class="row newtopcheckbox">
                                                 <div class="col-lg-6 col-md-6">
                                                     <div><p>Who can see this?</p></div>
                                                     <div class="row">
@@ -225,7 +225,7 @@
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>                              
-                                    <div class="postinfobot">
+                                    <div id="notify" class="postinfobot">
 
                                         <div class="notechbox pull-left">
                                             <input type="checkbox" name="note" id="note" class="form-control" />
@@ -246,7 +246,7 @@
                                     </div>
                                 </form>
                             </div><!-- POST -->
-
+                            <div id="similiar_posts">
                             <div class="row similarposts">
                                 <div class="col-lg-10"><i class="fa fa-info-circle"></i> <p>Similar Posts according to your <a href="#">Topic Title</a>.</p></div>
                                 <div class="col-lg-2 loading"><i class="fa fa-spinner"></i></div>
@@ -354,13 +354,13 @@
                                 <div class="clearfix"></div>
                             </div><!-- POST -->
 
-
+                        </div>
 
 
 
 
                         </div>
-                        <div class="col-lg-4 col-md-4">
+                        <div id="sidebar" class="col-lg-4 col-md-4">
 
                             <!-- -->
                             <div class="sidebarblock">
