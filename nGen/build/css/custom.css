@@ -226,8 +226,30 @@ ul.socialicons li a:hover {
   visibility: hidden;
 }
 
-#post_content{
-    
+#post_title {
+  padding: 0%;
+  border: 1.5px solid teal;
+}
+
+#main_post_info {
+  border: 1.5px solid teal;
+}
+
+#select_field {
+  border: 1.5px solid teal;
+}
+
+#post_content {
+  resize: none;
+  display: inline-block;
+  min-height: calc(100vh - 600px);
+  border: 1.5px solid teal;
+}
+
+#submit{
+  padding-top: 0%;
+  padding-bottom: 0%;
+  font-size: 20px;
 }
 /*-----------------------------------------------------------------*/
 /*--- Content ---*/
