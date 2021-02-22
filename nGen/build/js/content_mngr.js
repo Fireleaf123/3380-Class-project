@@ -1,11 +1,3 @@
-class search{
-
-}
-
-class content{
-
-}
-
 class DataHandler{
     constructor(){
        this.database = firebase.database();
@@ -25,7 +17,8 @@ class DataHandler{
           timeSubmitted:timeSubmitted
         });
     }
-
+    
+    //note: currently untested without a working forumn
     writeComment(userId,timeSubmitted,postID){
       
       let content = document.getElementById('comment').value;
@@ -40,6 +33,7 @@ class DataHandler{
     /*
       might just keep it to only comments for simplicity.
       but writing the methods for replies regardless
+      note: currently untested without a working forumn
     */
     writeReply(userId,timeSubmitted,postID,commentID){
 
@@ -53,14 +47,22 @@ class DataHandler{
     }
     
     //gets all posts from a forumn/field
-    getPost(field){
-      this.database().ref(`${field}/posts`).on('value', (posts) => {
-        console.log();
-      });
+    getAllsPost(field){
+
     }
 
-    //gets all comments from a post
-    getComment(field,postID,){
+    //gets a specific post
+    getAPost(field,postID){
+     
+    }
+
+
+    getAllComments(field,postID){
+
+    }
+
+
+    getAComment(field,postID){
 
     }
 
@@ -68,12 +70,17 @@ class DataHandler{
       might just keep it to only comments for simplicity.
       but writing the methods for replies regardless
     */
-    getReplies(location){
+    getAllReplies(location){
+
+    }
+
+    getAReply(location){
 
     }
  
 }
 
+//note this is UTC time
 function getTime(){
   let date = new Date();
 
@@ -83,24 +90,26 @@ function getTime(){
   return `${month}-${day}-${date.getUTCFullYear()} ${date.getUTCHours()}:${date.getUTCMinutes()}`;
 }
 
-function allFieldsFilled(){
+//if any item in the list has is blank, has no value, it returns false
+function allFieldsFilled(list){
+  return !list.includes("");
+}
+
+/*
+  >> called when post button(id="submit") is clicked
+  >> sends post_data to database to be stored
+*/
+function sendPostData(userId){
+
   let title = document.getElementById('post_title').value;
   let field = document.getElementById('select_field').value;
   let content = document.getElementById('post_content').value;
 
-  if(title == "" || field == "" || content == "" )
-    return false;
-  return true;
-}
-
-
-function sendData(userId){
-
-  if(allFieldsFilled())
+  if(allFieldsFilled([title, field, content]))
   {
     const dataHandler = new DataHandler();
     dataHandler.writePost(userId,getTime());
-    setInterval(() => {location.href = 'index.html';},1000);
+      setInterval(() => {location.href = 'index.html';},1500); //sends user back to homepage after post creation
   }
   else{
     alert("Please Fill Out All Fields")
