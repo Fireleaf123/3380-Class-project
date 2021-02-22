@@ -3,13 +3,10 @@ class DataHandler{
        this.database = firebase.database();
     }
 
-    writePost(userId,timeSubmitted){
-      
-      let title = document.getElementById('post_title').value;
-      let field = document.getElementById('select_field').value;
-      let content = document.getElementById('post_content').value;
-      let newKey = this.database.ref().child('posts').push().key;
-      
+    writePost(userId,timeSubmitted,title,field,content){
+
+      let newKey = this.database.ref().child('comments').push().key;
+
       this.database.ref(`${field}/posts/${newKey}`).set({
           userId:userId,
           title:title,
@@ -19,9 +16,8 @@ class DataHandler{
     }
     
     //note: currently untested without a working forumn
-    writeComment(userId,timeSubmitted,postID){
+    writeComment(userId,timeSubmitted,postID,content){
       
-      let content = document.getElementById('comment').value;
       let newKey = this.database.ref().child('comments').push().key;
       
       this.database.ref(`${field}/${postID}/comments/${newKey}`).set({
@@ -35,9 +31,8 @@ class DataHandler{
       but writing the methods for replies regardless
       note: currently untested without a working forumn
     */
-    writeReply(userId,timeSubmitted,postID,commentID){
+    writeReply(userId,timeSubmitted,postID,commentID,content){
 
-      let content = document.getElementById('comment').value;
       let newKey = this.database.ref().child('comments').push().key;
 
       this.database.ref(`${field}/${postID}/comments/${commentID}/replies/reply${newKey}`).set({
@@ -108,7 +103,7 @@ function sendPostData(userId){
   if(allFieldsFilled([title, field, content]))
   {
     const dataHandler = new DataHandler();
-    dataHandler.writePost(userId,getTime());
+    dataHandler.writePost(userId,getTime(),title,field,content);
       setInterval(() => {location.href = 'index.html';},1500); //sends user back to homepage after post creation
   }
   else{
