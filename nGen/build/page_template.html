@@ -35,16 +35,34 @@
 
 
 
-
-
-
     <!-- get jQuery from the google apis -->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
     <!--SCRIPTS  -->
     <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
     <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script defer src="js/test.js" type="module"></script>
+    <script defer src="js/content_mngr.js"></script>
+    <script type="text/JavaScript">
+      
+    </script>
+      <script>
+        function createComment(userId,content,timeSubmitted){
+            let commentBox = document.createElement('div');
+            let contentBox = document.createElement('div');
 
+            commentBox.classList.add('post')
+
+            contentBox.innerHTML = "hello";
+            commentBox.appendChild(contentBox)
+
+            commentBox.style.border = "2px";
+            contentBox.innerHTML = content;
+
+            document.body.appendChild(commentBox)
+            document.body.style.backgroundColor = "black"
+        }
+
+        createComment();
+      </script>
   </body>
 </html>

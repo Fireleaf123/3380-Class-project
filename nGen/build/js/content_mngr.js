@@ -29,12 +29,12 @@ class DataHandler {
   }
 
   //note: currently untested without a working forumn
-  writeComment(userId, timeSubmitted, postID, content) {
+  writeComment(userId, comment, field, postId) {
     let newKey = this.database.ref().child("comments").push().key;
 
-    this.database.ref(`${field}/${postID}/comments/${newKey}`).set({
+    this.database.ref(`${field}/posts/${postId}/comments/${newKey}`).set({
       userId: userId,
-      comment: content,
+      comment: comment,
     });
   }
 
@@ -183,7 +183,7 @@ function allFieldsFilled(list) {
   >> sends post_data to database to be stored
 */
 
-function test(userId) {
+function sendPost(userId) {
   let title = document.getElementById("post_title").value;
   let field = document.getElementById("select_field").value;
   let content = document.getElementById("post_content").value;
@@ -200,5 +200,16 @@ function test(userId) {
   }
 }
 
+
+function sendComment(userId, field, postId) {
+  let comment = document.getElementById("reply").value;
+  console.log(comment);
+  const dataHandler = new DataHandler();
+
+  dataHandler.writeComment(userId, comment, field, postId);
+}
+
+
+
 //exports
-export { DataHandler };
+//export { DataHandler };
