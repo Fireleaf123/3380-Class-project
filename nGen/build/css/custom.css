@@ -89,6 +89,7 @@ ul.socialicons li a:hover {
 }
 
 .content {
+  float: center;
   background-color: #ecf0f1;
   border-top: solid 1px #e0e4e5;
   min-height: calc(100vh - 30px);

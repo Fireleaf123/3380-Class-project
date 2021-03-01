@@ -1,3 +1,16 @@
+class Search {
+  constructor(field) {
+    this.database = firebase.database.ref(`field/posts`);
+  }
+
+  findPost(userId, postTitle) {
+    this.database.ref
+      .orderByChild("title")
+      .startAt(postTitle)
+      .endAt(postTitle + "\uf8ff");
+  }
+}
+
 class DataHandler {
   constructor() {
     this.database = firebase.database();
@@ -11,6 +24,7 @@ class DataHandler {
       title: title,
       content: content,
       timeSubmitted: timeSubmitted,
+      clicks: 0,
     });
   }
 
@@ -49,10 +63,39 @@ class DataHandler {
       >>IMPORTANT NOTE: On the actual forum/field pages themselves(i.e the Basket Weaving Sub-Forum)
                         postBox would not be pasted on the body directly, but in a specific container.
     */
-  addPost(userID, title, content, timeSubmitted, postsContainer) {
+   //gets the clicks of the post with id postId in the specified forumn
+  getClicks(postId, field) {
+    let val = 0;
+    this.database.ref(`${field}/posts/${postId}`).once("value", (post) => {
+      val = post.val().clicks;
+    });
+    if (val === undefined) return 0;
+    return val;
+  }
+
+  //incremenets posts count on each click.
+  updateClicks(field, postId) {
+    this.database
+      .ref(`${field}/posts/${postId}`)
+      .child("clicks")
+      .set(this.getClicks(postId, field) + 1);
+  }
+
+  addPost(userID, title, content, timeSubmitted, postId, field) {
     let postBox = document.createElement("div");
 
     postBox.classList.add("container", "border"); //using boostrap container and border
+    postBox.setAttribute("id", postId);
+
+    /**
+     * increments clicks on post by 1, then redirects to actual post
+     * currently redirects to index.html, >> victoira make sure to redirect to actual post(topic page)
+     * when its done
+     */
+    postBox.onclick = () => {
+      this.updateClicks(field, postId);
+      location.href = "index.html";
+    };
 
     /*Below are examples of styling using JS
         userBox.classList.add('border') -> example of adding/using boostrap  
@@ -102,7 +145,7 @@ class DataHandler {
       for (const post in posts) {
         let forum_page = posts[post].valueOf().val();
         for (const post in forum_page) {
-          this.addPost(forum_page[post].userId, forum_page[post].title, forum_page[post].content, forum_page[post].timeSubmitted);
+          this.addPost(forum_page[post].userId, forum_page[post].title, forum_page[post].content, forum_page[post].timeSubmitted, post, field);
         }
       }
     });
@@ -140,7 +183,7 @@ function allFieldsFilled(list) {
   >> sends post_data to database to be stored
 */
 
-function sendPostData(userId) {
+function test(userId) {
   let title = document.getElementById("post_title").value;
   let field = document.getElementById("select_field").value;
   let content = document.getElementById("post_content").value;
@@ -148,7 +191,7 @@ function sendPostData(userId) {
   const dataHandler = new DataHandler();
 
   if (allFieldsFilled([title, field, content])) {
-    dataHandler.writePost(userId, getTime(), title, field, content);
+    dataHandler.writePost(userId, date.now(), title, field, content);
     setInterval(() => {
       location.href = "index.html";
     }, 1500); //sends user back to homepage after post creation
@@ -157,5 +200,5 @@ function sendPostData(userId) {
   }
 }
 
-//exports 
-export {DataHandler};
+//exports
+export { DataHandler };
