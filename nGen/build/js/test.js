@@ -13,10 +13,4 @@ function googleLogin() {
     .cath(console.log);
 }
 
-function createPost() {
-  let d = new DataHandler();
-  d.getAllPosts("Basket Weaving");
-  console.log("here");
-}
-
 //createPost();

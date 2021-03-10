@@ -72,10 +72,10 @@
               </div>
             </div>
             <div class="col-lg-4 search hidden-xs hidden-sm col-md-3">
-              <div class="wrap">
+              <div class="invisible wrap">
                 <form action="#" method="post" class="form">
                   <div class="pull-left txt">
-                    <input type="text" class="form-control" placeholder="Search Topics" />
+                    <input type="text"  class="hide form-control" placeholder="Search Topics" />
                   </div>
                   <div class="pull-right">
                     <button class="btn btn-default" type="button">
@@ -190,7 +190,7 @@
                         <textarea id="post_content" name="desc" id="desc" placeholder="Description" class="form-control"></textarea>
                       </div>
                       <div class="float-end">
-                        <button id="submit" onclick="sendPost('baboya')" class="btn-primary" type="button">Post</button>
+                        <button id="submit" onclick="" class="btn-primary" type="button">Post</button>
                       </div>
                     </div>
                     <div class="clearfix"></div>
@@ -233,6 +233,6 @@
     <!-- get jQuery from the google apis -->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script defer src="js/content_mngr.js"></script> 
+    <script type="module" src="js/postCreationPage.js"></script> 
   </body>
 </html>
