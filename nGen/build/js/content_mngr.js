@@ -193,17 +193,31 @@ class Forum {
     */
 	getAllPosts() {
 		let forum = this.database.ref(`${this.forum}/posts/`); //reference to posts in the specified forum/field
-		let listOfPosts = [];
-		forum.on("value", (posts) => {
+		//let listOfPosts = [];
+		forum.orderByChild('clicks').on("value", (posts) => {
 			for (const post in posts) {
 				let forum_page = posts[post].valueOf().val();
 
 				for (const post in forum_page) {
+					console.log(post)
+					//listOfPosts.push(post)
 					this.addPost(post); //passes the postId [post] to be created.
 				}
 			}
 		});
 		//return listOfPosts;
+	}
+	orderByPost(){
+		list = getAllPosts();
+		for(post in list){
+			let p = new Post(this.forum,post)
+			clicks = p.getClicks()
+		}
+
+		list.ForEach( (element) => {this.addPost(this.forum, post)})
+	    for(post in FinalArray){
+			this.addPost(this.forum, post)
+		}
 	}
 }
 
