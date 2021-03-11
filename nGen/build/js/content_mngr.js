@@ -57,7 +57,7 @@ class Post {
 
 	//incremenets posts count on each click.
 	updateClicks() {
-		this.ref.child("clicks").set(this.getClicks() + 1);
+		this.ref.child("clicks").set(this.getClicks() - 1);
 	}
 
 	getAllComments(field, postID) {}
@@ -145,7 +145,7 @@ class Forum {
 		 */
 		postBox.onclick = () => {
 			post.updateClicks();
-			location.href = "index.html";
+		//	location.href = "index.html";
 		};
 
 		/*Below are examples of styling using JS
@@ -191,22 +191,36 @@ class Forum {
       > gets all posts from the specified forumn/field
         >> note: I use forumn and field interchangeably because each forum is supposed to represent a field/industry
     */
-	getAllPosts() {
-		let forum = this.database.ref(`${this.forum}/posts/`); //reference to posts in the specified forum/field
-		//let listOfPosts = [];
-		forum.orderByChild('clicks').on("value", (posts) => {
-			for (const post in posts) {
-				let forum_page = posts[post].valueOf().val();
+		getAllPosts() {
+				
+				let forum = this.database.ref(`${this.forum}/posts/`) 
+		
+				forum.orderByChild('clicks').once('value', (posts) => {
 
-				for (const post in forum_page) {
-					console.log(post)
-					//listOfPosts.push(post)
-					this.addPost(post); //passes the postId [post] to be created.
-				}
+					posts.forEach(function (childPost) {
+
+						var childKey = childPost.key; // gets postId
+						var childData = childPost.val(); //gets data
+
+						// console.log(childData) 
+						console.log(childKey) // prints postId
+						
+
+						// for (const post in posts) {
+						// 	let forum_page = posts[post].valueOf().val();
+
+						// 	for (const post in forum_page) {
+						// 		console.log(post)
+						// 		//listOfPosts.push(post)
+						// 		this.addPost(post); //passes the postId [post] to be created.
+						// 	}
+						// }
+					})
+					
+				});
+		
 			}
-		});
-		//return listOfPosts;
-	}
+		
 	orderByPost(){
 		list = getAllPosts();
 		for(post in list){
