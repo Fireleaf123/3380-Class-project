@@ -5,6 +5,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Forum :: New account</title>
 
+     !-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-analytics.js"></script>
+    
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyD0ywn3gXo-BJEqPbJnzJGnr3mAUF9lBJ0",
+            authDomain: "ngen-883ad.firebaseapp.com",
+            databaseURL: "https://ngen-883ad-default-rtdb.firebaseio.com",
+            projectId: "ngen-883ad",
+            storageBucket: "ngen-883ad.appspot.com",
+            messagingSenderId: "1069369171399",
+            appId: "1:1069369171399:web:1e96aaa07d2a2b8e0ecde2",
+            measurementId: "G-0E5SMWE8CD"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+
         <script defer src="/__/firebase/8.2.8/firebase-app.js"></script>
         <!-- include only the Firebase features as you need -->
         <script defer src="/__/firebase/8.2.8/firebase-auth.js"></script>
@@ -20,6 +45,8 @@
         initialize the SDK after all desired features are loaded, set useEmulator to false
         to avoid connecting the SDK to running emulators.
         -->
+
+        
         <script defer src="/__/firebase/init.js?useEmulator=false"></script>
 
         <!-- Bootstrap -->
@@ -134,7 +161,7 @@
                             <div class="post">
                                 <form action="#" class="form newtopic" method="post">
                                     <div class="postinfotop">
-                                        <h2>Create New Account</h2>
+                                        <h2>Register with Email and Password</h2>
                                     </div>
 
                                     <!-- acc section -->
@@ -155,41 +182,19 @@
                                                     <button class="btn">Add</button>
                                                 </div>
                                             </div>
-                                            <div class="posttext pull-left">
-                                                <div class="row">
-                                                   <!-- <div class="">
-                                                        <input type="text" placeholder="First Name" class="form-control" />
-                                                    </div>-->
-                                                    <div class="col-lg-6 col-md-6">
-                                                        <label for="userFullName">First Name</label>
-                                                        <input type="text" class="form-control" id="userFirstName" onblur="checkUserFirstName()" placeholder="First Name">
-                                                        
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6">
-                                                        <label for="userSurname">Last Name</label>
-                                                        <input type="text" class="form-control" id="userSurname" onblur="checkUserSurname()" placeholder="Last Name">
-                                                        
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6">
-                                                        <label for="username">Username</label>
-                                                        <input type="text" class="form-control" id="userName" onblur="checkUsername()" placeholder="Username">
-                                                        
-                                                    </div>
+                                            <div class="posttext pull-left" id="signUpForm">
+                                                <div class="row">   
                                                     <div class="col-lg-6 col-md-6">
                                                         <label for="userEmail">Email</label>
-                                                        <input type="text" class="form-control" id="userEmail" onblur="checkUserEmail()" placeholder="you@example.com">
+                                                        <input type="text" class="form-control" id="email" placeholder="you@example.com">
                                                         
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-6">
                                                         <label for="userPassword">Password</label>
-                                                        <input type="password" class="form-control" id="userPassword" onblur="checkUserPassword()" placeholder="**********">
-                                                        
+                                                        <input type="password" class="form-control" id="password" placeholder="**********">
                                                     </div>
-                                                    
                                                 </div>
 
                                             </div>
@@ -375,17 +380,11 @@
 
 
 
-                                    <!-- acc section 
+                                   
                                     <div class="accsection networks">
                                         <div class="acccap">
                                             <div class="userinfo pull-left">&nbsp;</div>
                                             <div class="posttext pull-left">
-                                                <div class="htext">
-                                                    <h3>Social Networks ( Optional )</h3>
-                                                </div>
-                                                <div class="hnotice">
-                                                    Link Social Networks and Earn this Badge : <img src="images/icon6.jpg" alt="" />
-                                                </div>
                                                 <div class="clearfix"></div>
                                             </div>
                                             <div class="clearfix"></div>
@@ -396,27 +395,24 @@
 
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-6">
-                                                        <button class="btn btn-fb">Link Facebook Account</button>
+                                                        <button class="btn btn-fb" onclick="signInWithPopup()">Register with Facebook</button>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6">
-                                                        <button class="btn btn-tw">Link Twitter Account</button>                                                       
+                                                        <button class="btn btn-tw">Register with Twitter</button>                                                       
                                                     </div>
                                                 </div>
-
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-6">
-                                                        <button class="btn btn-gp">Link Google + Account</button>
+                                                        <button class="btn btn-gp">Register with Google</button>
                                                     </div>
-                                                    <div class="col-lg-6 col-md-6">
-                                                        <button class="btn btn-pin">Link Pinterest Account</button>                                                       
-                                                    </div>
+                                                    
                                                 </div>
 
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>  
                                     </div>
-                                    acc section END -->
+                                    
 
 
 
@@ -436,10 +432,9 @@
                                             <!--
                                                 <div class="pull-left smile"><a href="#"><i class="fa fa-smile-o"></i></a></div>
                                             -->
-                                            <button type="button" class="btn btn-outline-primary text-uppercase mb-3" onclick="signUp()">Sign Up</button>
+                                            <button type="button" class="btn btn-outline-primary text-uppercase mb-3" onclick="firebase.auth().createUserWithEmailAndPassword(email,password)">Sign Up</button>
                                             <div class="clearfix"></div>
                                         </div>
-
 
                                         <div class="clearfix"></div>
                                     </div>

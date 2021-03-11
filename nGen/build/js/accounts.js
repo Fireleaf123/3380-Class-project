@@ -10,140 +10,58 @@
  * |  Latest Update: February 24, 2021                                                                           |
  * =============================================================================================================== */
  
-
+var firebaseConfig = {
+    apiKey: "AIzaSyD0ywn3gXo-BJEqPbJnzJGnr3mAUF9lBJ0",
+    authDomain: "ngen-883ad.firebaseapp.com",
+    databaseURL: "https://ngen-883ad-default-rtdb.firebaseio.com",
+    projectId: "ngen-883ad",
+    storageBucket: "ngen-883ad.appspot.com",
+    messagingSenderId: "1069369171399",
+    appId: "1:1069369171399:web:1e96aaa07d2a2b8e0ecde2",
+    measurementId: "G-0E5SMWE8CD"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  
  import firebase from "firebase/app";
  import "firebase/auth";
+ 
  // User First Name Validation
 
-function checkUserFirstName(){
-    var userFirstname = document.getElementById("userFirstName").value;
-    var flag = false;
-    if(userFirstname === ""){
-        flag = true;
-    }
-    else{
-        flag = false;
-    }
-}
 
-// User Last Name Validation 
+ firebase.auth().createUserWithEmailAndPassword(email, password)
+ .then((userCredential) => {
+   // Signed in 
+   var user = userCredential.user;
+   // ...
+ })
+ .catch((error) => {
+   var errorCode = error.code;
+   var errorMessage = error.message;
+   // ..
+ });
 
-function checkUserSurname(){
-    var userSurname = document.getElementById("userSurname").value;
-    var flag = false;
-    if(userSurname === ""){
-        flag = true;
-    }
-    else{
-        flag = false;
-    }
-}
+ var provider = new firebase.auth.GoogleAuthProvider();
 
-// Username Validation
+ firebase.auth()
+  .signInWithPopup(provider)
+  .then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    var credential = result.credential;
 
-function checkUserName(){
-    var userName = document.getElementById("userName").value;
-    var flag = false;
-    if(userName === ""){
-        flag = true;
-    }
-    else{
-        flag = false;
-    }
-}
-
-// Email Validation 
-
-function checkUserEmail(){
-    var userEmail = document.getElementById("userEmail");
-    var userEmailFormate = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    var flag;
-    if(userEmail.value.match(userEmailFormate)){
-        flag = false;
-    }
-    else{
-        flag = true;
-}
-
-// Password Validation
-
-function checkUserPassword(){
-    var userPassword = document.getElementById("userPassword");
-    var userPasswordFormate = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}/;      
-    var flag;
-    if(userPassword.value.match(userPasswordFormate)){
-        flag = false;
-    }
-    else{
-        flag = true;
-    }    
-}
-
-
-// User Creation in Firebase function
-
-
-function signUp(){
-    var userFirstName = document.getElementById("userFirstName").value;
-    var userSurname = document.getElementById("userSurname").value;
-    var userEmail = document.getElementById("userEmail").value;
-    var userName = document.getElementById("userName").value;
-    var userPassword = document.getElementById("userPassword").value;
-    var userFirstNameFormate = /^([A-Za-z.\s_-])/;    
-    var userSurnameFormate = /^([A-Za-z.\s_-])/; 
-    var userEmailFormate = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    var userPasswordFormate = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}/;      
-
-    var checkUserFirstNameValid = userFirstName.match(userFirstNameFormate);
-    var checkUserSurnameValid = userSurname.match(userSurnameFormate);
-    var checkUserEmailValid = userEmail.match(userEmailFormate);
-    var checkUserPasswordValid = userPassword.match(userPasswordFormate);
-
-    if(checkUserFirstNameValid == null){
-        return checkUserFirstName();
-    }
-    else if(checkUserSurnameValid === null){
-        return checkUserSurname();
-    }
-    else if(checkUserEmailValid == null){
-        return checkUserEmail();
-    }
-    else if(checkUserPasswordValid == null){
-        return checkUserPassword();
-    }
-    else{
-        firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword).then((success) => {
-            var user = firebase.auth().currentUser;
-            var uid;
-            if (user != null) {
-                uid = user.uid;
-            }
-            var firebaseRef = firebase.database().ref();
-            var userData = {
-                userFirstName: userFirstName,
-                userSurname: userSurname,
-                userName: userName,
-                userEmail: userEmail,
-                userPassword: userPassword,
-            }
-            firebaseRef.child(uid).set(userData);
-            swal('Your Account Created','Your account was created successfully, you can log in now.',
-            ).then((value) => {
-                setTimeout(function(){
-                    window.location.replace("../index.html");
-                }, 1000)
-            });
-        }).catch((error) => {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            swal({
-                type: 'error',
-                title: 'Error',
-                text: "Error",
-            })
-        });
-    }
-    setInterval(() => {location.href = 'index.html';},1500); //sends user back to homepage after account creation
-}
-}
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
