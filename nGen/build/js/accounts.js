@@ -9,59 +9,49 @@
  * |  Project led by Baboya Chock                                                                                |
  * |  Latest Update: March 11, 2021                                                                           |
  * =============================================================================================================== */
- 
-var firebaseConfig = {
-    apiKey: "AIzaSyD0ywn3gXo-BJEqPbJnzJGnr3mAUF9lBJ0",
-    authDomain: "ngen-883ad.firebaseapp.com",
-    databaseURL: "https://ngen-883ad-default-rtdb.firebaseio.com",
-    projectId: "ngen-883ad",
-    storageBucket: "ngen-883ad.appspot.com",
-    messagingSenderId: "1069369171399",
-    appId: "1:1069369171399:web:1e96aaa07d2a2b8e0ecde2",
-    measurementId: "G-0E5SMWE8CD"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-  
- import firebase from "firebase/app";
- import "firebase/auth";
- 
- // User First Name Validation
 
+function signUpWithEmailPassword() {
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      // Signed in 
+      var user = userCredential.user;
+      location.href = "index.html"
+      // ...
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ..
+    }
+    );
+}
 
- firebase.auth().createUserWithEmailAndPassword(email, password)
- .then((userCredential) => {
-   // Signed in 
-   var user = userCredential.user;
-   // ...
- })
- .catch((error) => {
-   var errorCode = error.code;
-   var errorMessage = error.message;
-   // ..
- });
+function googleLogin(){
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+      .then(result =>{
+          const user = result.user;
+          document.write('Hello ' + user.displayName);
+          console.log(user)
+      })
+      .cath(console.log)
+}
 
- var provider = new firebase.auth.GoogleAuthProvider();
-
- firebase.auth()
-  .signInWithPopup(provider)
-  .then((result) => {
-    /** @type {firebase.auth.OAuthCredential} */
-    var credential = result.credential;
-
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
+function signInWithEmailPassword() {
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+  // [START auth_signin_password]
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      // Signed in
+      var user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    });
+  // [END auth_signin_password]
+}
