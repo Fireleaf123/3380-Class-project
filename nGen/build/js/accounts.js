@@ -7,7 +7,7 @@
  * ===============================================================================================================
  * | Accounts Branch designed by: Ryan Bourdais rbourd4                                                          |
  * |  Project led by Baboya Chock                                                                                |
- * |  Latest Update: February 24, 2021                                                                           |
+ * |  Latest Update: March 11, 2021                                                                           |
  * =============================================================================================================== */
  
 var firebaseConfig = {
