@@ -3,17 +3,22 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>My Profile</title>
+        <title>Forum :: New account</title>
 
         <script defer src="/__/firebase/8.2.8/firebase-app.js"></script>
         <!-- include only the Firebase features as you need -->
         <script defer src="/__/firebase/8.2.8/firebase-auth.js"></script>
         <script defer src="/__/firebase/8.2.8/firebase-database.js"></script>
         <script defer src="/__/firebase/8.2.8/firebase-firestore.js"></script>
+        <script defer src="/__/firebase/8.2.8/firebase-functions.js"></script>
+        <script defer src="/__/firebase/8.2.8/firebase-messaging.js"></script>
         <script defer src="/__/firebase/8.2.8/firebase-storage.js"></script>
+        <script defer src="/__/firebase/8.2.8/firebase-analytics.js"></script>
+        <script defer src="/__/firebase/8.2.8/firebase-remote-config.js"></script>
+        <script defer src="/__/firebase/8.2.8/firebase-performance.js"></script>
         <!-- 
-          initialize the SDK after all desired features are loaded, set useEmulator to false
-          to avoid connecting the SDK to running emulators.
+        initialize the SDK after all desired features are loaded, set useEmulator to false
+        to avoid connecting the SDK to running emulators.
         -->
         <script defer src="/__/firebase/init.js?useEmulator=false"></script>
 
@@ -41,7 +46,7 @@
         <link rel="stylesheet" type="text/css" href="rs-plugin/css/settings.css" media="screen" />
 
     </head>
-    <body>
+    <body class="newaccountpage">
 
         <div class="container-fluid">
 
@@ -66,11 +71,11 @@
                         <div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo "><a href="index.html"><img src="images/logo.jpg" alt=""  /></a></div>
                         <div class="col-lg-3 col-xs-9 col-sm-5 col-md-3 selecttopic">
                             <div class="dropdown">
-                                <a data-toggle="dropdown" href="#" >My Recent posts</a> <b class="caret"></b>
+                                <a data-toggle="dropdown" href="#">Borderlands 2</a> <b class="caret"></b>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">latest post</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-2" href="#"> 2nd to last</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-3" href="#">3rd to last</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Borderlands 1</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-2" href="#">Borderlands 2</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-3" href="#">Borderlands 3</a></li>
 
                                 </ul>
                             </div>
@@ -86,14 +91,14 @@
                         </div>
                         <div class="col-lg-4 col-xs-12 col-sm-5 col-md-4 avt">
                             <div class="stnt pull-left">                            
-                                <form action="index.html" method="post" class="form">
-                                    <button class="btn btn-primary">Home</button>
+                                <form action="03_new_topic.html" method="post" class="form">
+                                    <button class="btn btn-primary">Start New Topic</button>
                                 </form>
                             </div>
                             <div class="env pull-left"><i class="fa fa-envelope"></i></div>
 
                             <div class="avatar pull-left dropdown">
-                                <a data-toggle="dropdown" href="#"><img src="images/avatar.png" alt="" /></a> <b class="caret"></b>
+                                <a data-toggle="dropdown" href="#"><img src="images/avatar.jpg" alt="" /></a> <b class="caret"></b>
                                 <div class="status green">&nbsp;</div>
                                 <ul class="dropdown-menu" role="menu">
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">My Profile</a></li>
@@ -102,7 +107,6 @@
                                     <li role="presentation"><a role="menuitem" tabindex="-4" href="04_new_account.html">Create account</a></li>
                                 </ul>
                             </div>
-                            
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -111,291 +115,330 @@
 
 
             <section class="content">
-              <!-- Row on top of content-->
-               <!-- <div class="container">
-                      
+                <div class="container">
                     <div class="row">
-                        <div class="col-lg-8 col-xs-12 col-md-8">
-                            <div class="pull-left"><a href="#" class="prevnext"><i class="fa fa-angle-left"></i></a></div>
-                            <div class="pull-left">
-                                <ul class="paginationforum">
-                                    <li class="hidden-xs"><a href="#">1</a></li>
-                                    <li class="hidden-xs"><a href="#">2</a></li>
-                                    <li class="hidden-xs"><a href="#">3</a></li>
-                                    <li class="hidden-xs"><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">6</a></li>
-                                    <li><a href="#" class="active">7</a></li>
-                                    <li><a href="#">8</a></li>
-                                    <li class="hidden-xs"><a href="#">9</a></li>
-                                    <li class="hidden-xs"><a href="#">10</a></li>
-                                    <li class="hidden-xs hidden-md"><a href="#">11</a></li>
-                                    <li class="hidden-xs hidden-md"><a href="#">12</a></li>
-                                    <li class="hidden-xs hidden-sm hidden-md"><a href="#">13</a></li>
-                                    <li><a href="#">1586</a></li>
-                                </ul>
-                            </div>
-                            <div class="pull-left"><a href="#" class="prevnext last"><i class="fa fa-angle-right"></i></a></div>
-                            <div class="clearfix"></div>
+                        <div class="col-lg-8 breadcrumbf">
+                            <a href="#">My Profile</a> 
                         </div>
                     </div>
-               </div> --> 
+                </div>
 
-                  <!-- Feed-->
+
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8 col-md-8">
-                            <!-- POST -->
-                             <div class="post">
-                                <div class="wrap-ut pull-left">
-                                    <div class="userinfo pull-left">
-                                        <div class="avatar">
-                                            <img src="images/avatar.jpg" alt="" />
-                                            <div class="status green">&nbsp;</div>
-                                        </div>
-
-                                       <!-- <div class="icons">
-                                            <img src="images/icon1.jpg" alt="" /><img src="images/icon4.jpg" alt="" />
-                                        </div> -->
-                                    </div>
-                                    <div class="posttext pull-left">
-                             <!-- takes to file on click-->  <!-- <h2><a href="02_topic.html">My Profile</a></h2> --> 
-                                        <h3> My Profile</h3>
-                                        <p>This is a test of what the sample profile page will look like.</p>
-                                        <h2> Name: Test</h2>
-                                        <h2> Email: Test</h2>
-                                        <h2> Education: Test</h2>
-                                        <h2> Address: Test</h2>
-                                    </div>
-                                    
-                                    <div class="clearfix"></div>
-                                </div>
-
-                                 <div class="postinfo pull-left">
-                                   <!--  <div class="comments">
-                                      <div class="commentbg">
-                                            
-                                             <div class="mark"></div> 
-                                        </div> 
-
-                                    </div> -->
-                                  <!--   <div class="views"><i class="fa fa-eye"></i> 1,568</div>
-                                    <div class="time"><i class="fa fa-clock-o"></i> 24 min</div>    -->                                
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <!-- end of POST -->
-
-
-                            <!-- POST -->
-                           <!-- <div class="post">
-                                <div class="wrap-ut pull-left">
-                                    <div class="userinfo pull-left">
-                                        <div class="avatar">
-                                            <img src="images/avatar2.jpg" alt="" />
-                                            <div class="status red">&nbsp;</div>
-                                        </div>
-
-                                        <div class="icons">
-                                            <img src="images/icon3.jpg" alt="" /><img src="images/icon4.jpg" alt="" /><img src="images/icon5.jpg" alt="" /><img src="images/icon6.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div class="posttext pull-left">
-                                        <h2><a href="02_topic.html">What Instagram Ads Will Look Like</a></h2>
-                                        <p>Instagram offered a first glimpse at what its ads will look like in a blog post Thursday. The sample ad, which you can see below.</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="postinfo pull-left">
-                                    <div class="comments">
-                                        <div class="commentbg">
-                                            89
-                                            <div class="mark"></div>
-                                        </div>
-
-                                    </div>
-                                    <div class="views"><i class="fa fa-eye"></i> 1,568</div>
-                                    <div class="time"><i class="fa fa-clock-o"></i> 15 min</div>                                    
-                                </div>
-                                <div class="clearfix"></div>
-                            --><!-- end of POST -->
-
-
-                            <!-- POST -->
-                           <!-- <div class="post">
-                                <div class="wrap-ut pull-left">
-                                    <div class="userinfo pull-left">
-                                        <div class="avatar">
-                                            <img src="images/avatar3.jpg" alt="" />
-                                            <div class="status red">&nbsp;</div>
-                                        </div>
-
-                                        <div class="icons">
-                                            <img src="images/icon2.jpg" alt="" /><img src="images/icon4.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div class="posttext pull-left">
-                                        <h2><a href="02_topic.html">The Future of Magazines Is on Tablets</a></h2>
-                                        <p>Eric Schmidt has seen the future of magazines, and it's on the tablet. At a Magazine Publishers Association.</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="postinfo pull-left">
-                                    <div class="comments">
-                                        <div class="commentbg">
-                                            456
-                                            <div class="mark"></div>
-                                        </div>
-
-                                    </div>
-                                    <div class="views"><i class="fa fa-eye"></i> 1,568</div>
-                                    <div class="time"><i class="fa fa-clock-o"></i> 2 days</div>                                    
-                                </div>
-                                <div class="clearfix"></div>
-                            --> <!-- POST -->
-
-
-                            <!-- POST -->
-                          <!--  <div class="post">
-                                <div class="wrap-ut pull-left">
-                                    <div class="userinfo pull-left">
-                                        <div class="avatar">
-                                            <img src="images/avatar4.jpg" alt="" />
-                                            <div class="status yellow">&nbsp;</div>
-                                        </div>
-
-                                        <div class="icons">
-                                            <img src="images/icon1.jpg" alt="" /><img src="images/icon4.jpg" alt="" /><img src="images/icon6.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div class="posttext pull-left">
-                                        <h2><a href="02_topic.html">Pinterest Now Worth $3.8 Billion</a></h2>
-                                        <p>Pinterest's valuation is closing in on $4 billion after its latest funding round of $225 million, according to a report.</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="postinfo pull-left">
-                                    <div class="comments">
-                                        <div class="commentbg">
-                                            78
-                                            <div class="mark"></div>
-                                        </div>
-
-                                    </div>
-                                    <div class="views"><i class="fa fa-eye"></i> 1,568</div>
-                                    <div class="time"><i class="fa fa-clock-o"></i> 24 min</div>                                    
-                                </div>
-                                <div class="clearfix"></div>
-                            -->  <!-- POST -->
 
 
 
                             <!-- POST -->
-                         <!--    <div class="post">
-                                <div class="wrap-ut pull-left">
-                                    <div class="userinfo pull-left">
-                                        <div class="avatar">
-                                            <img src="images/avatar.jpg" alt="" />
-                                            <div class="status green">&nbsp;</div>
+                            <div class="post">
+                                <form action="#" class="form newtopic" method="post">
+                                    <div class="postinfotop">
+                                        <h2>My Profile Settings</h2>
+                                    </div>
+
+                                    <!-- acc section -->
+                                    <div class="accsection">
+                                        <div class="acccap">
+                                            <div class="userinfo pull-left">&nbsp;</div>
+                                             <!-- <div class="posttext pull-left"><h3>Required Fields</h3></div> -->
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="topwrap">
+                                            <div class="userinfo pull-left">
+                                                <div class="avatar">
+                                                    <img src="images/avatar-blank.jpg" alt="" />
+                                                    <div class="status green">&nbsp;</div>
+                                                </div>
+                                                <div class="imgsize">70 x 70</div>
+                                                <div>
+                                                    <button class="btn">Add</button>
+                                                </div>
+                                            </div>
+                                            <div class="posttext pull-left">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <input type="text" placeholder="John" class="form-control" />
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <input type="text" placeholder="Smith" class="form-control" />
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <input type="text" placeholder="JohnSmith99" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                 <div class="row"> 
+                                                    <!-- Email form-->
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <input type="text" placeholder="Email" class="form-control" />
+                                                    </div>
+                                                 </div>
+                                                
+                                                <div class="row">
+                                                    
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <input type="password" placeholder="Password" class="form-control" id="pass" name="pass" />
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <input type="password" placeholder="Retype Password" class="form-control" id="pass2" name="pass2" />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>  
+                                    </div><!-- acc section END -->
+
+
+
+                                    <!-- acc section -->
+                                    <div class="accsection privacy">
+                                        <div class="acccap">
+                                            <div class="userinfo pull-left">&nbsp;</div>
+                                            <div class="posttext pull-left"><h3>Privacy</h3></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="topwrap">
+                                            <div class="userinfo pull-left">&nbsp;</div>
+                                            <div class="posttext pull-left">
+
+                                                <div class="row newtopcheckbox">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <div><p>Who can see my Profile?</p></div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" id="everyone" /> Everyone
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" id="friends"  /> Only Friends
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <div>
+                                                            <p>Share posts on Social Networks</p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-3 col-md-4">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" id="fb"/> <i class="fa fa-facebook-square"></i>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-4">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" id="tw" /> <i class="fa fa-twitter"></i>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-4">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" id="gp"  /> <i class="fa fa-google-plus-square"></i>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>  
+                                    </div><!-- acc section END -->
+
+
+
+                                    <!-- acc section -->
+                                    <div class="accsection survey">
+                                        <div class="acccap">
+                                            <div class="userinfo pull-left">&nbsp;</div>
+                                            <div class="posttext pull-left">
+                                                <div class="htext">
+                                                    <h3>Small Survey ( Optional )</h3>
+                                                </div>
+                                                <div class="hnotice">
+                                                    Answer this survey and Earn this Badge : <img src="images/icon5.jpg" alt="" />
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="topwrap">
+                                            <div class="userinfo pull-left">&nbsp;</div>
+                                            <div class="posttext pull-left">
+
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <select name="old" id="old"  class="form-control" >
+                                                            <option value="" disabled selected>How Old are you?</option>
+                                                            <option value="op1">Option1</option>
+                                                            <option value="op2">Option2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <select name="who" id="who"  class="form-control" >
+                                                            <option value="" disabled selected>Who are you?</option>
+                                                            <option value="op1">Option1</option>
+                                                            <option value="op2">Option2</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <select name="help" id="help"  class="form-control" >
+                                                            <option value="" disabled selected>Will you help others here?</option>
+                                                            <option value="op1">Option1</option>
+                                                            <option value="op2">Option2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <select name="hear" id="hear"  class="form-control" >
+                                                            <option value="" disabled selected>Where do you hear about us?</option>
+                                                            <option value="op1">Option1</option>
+                                                            <option value="op2">Option2</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row newtopcheckbox">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <div><p>Some other question 1</p></div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" id="everyone2" /> option 1 
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" id="friends2"  /> option 2 
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <div>
+                                                            <p>Some other question 2</p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" id="fb2"/> option 1 
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" id="tw2" /> option 2 
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>  
+                                    </div><!-- acc section END -->
+
+
+
+
+
+                                    <!-- acc section -->
+                                    <div class="accsection networks">
+                                        <div class="acccap">
+                                            <div class="userinfo pull-left">&nbsp;</div>
+                                            <div class="posttext pull-left">
+                                                <div class="htext">
+                                                    <h3>Social Networks ( Optional )</h3>
+                                                </div>
+                                                <div class="hnotice">
+                                                    Link Social Networks and Earn this Badge : <img src="images/icon6.jpg" alt="" />
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="topwrap">
+                                            <div class="userinfo pull-left">&nbsp;</div>
+                                            <div class="posttext pull-left">
+
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <button class="btn btn-fb">Link Facebook Account</button>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <button class="btn btn-tw">Link Twitter Account</button>                                                       
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <button class="btn btn-gp">Link Google + Account</button>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <button class="btn btn-pin">Link Pinterest Account</button>                                                       
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>  
+                                    </div><!-- acc section END -->
+
+
+
+
+
+                                    <div class="postinfobot">
+                                        <!-- 
+                                                <div class="notechbox pull-left">
+                                                <input type="checkbox" name="note" id="note" class="form-control" />
+                                                 </div>
+
+                                                <div class="pull-left lblfch">
+                                                    <label for="note"> I agree with the Terms and Conditions of this site</label>
+                                                </div>  
+                                        -->
+
+                                        <div class="pull-right postreply">
+                                            <div class="pull-left smile"><a href="#"><i class="fa fa-smile-o"></i></a></div>
+                                            <div class="pull-left"><button type="submit" class="btn btn-primary">Save Changes</button></div>
+                                            <div class="clearfix"></div>
                                         </div>
 
-                                        <div class="icons">
-                                            <img src="images/icon1.jpg" alt="" /><img src="images/icon4.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div class="posttext pull-left">
-                                        <h2><a href="02_topic.html">10 Kids Unaware of Their Halloween Costume</a></h2>
-                                        <p>It's one thing to subject yourself to a Halloween costume mishap because, hey, that's your prerogative.</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="postinfo pull-left">
-                                    <div class="comments">
-                                        <div class="commentbg">
-                                            560
-                                            <div class="mark"></div>
-                                        </div>
 
+                                        <div class="clearfix"></div>
                                     </div>
-                                    <div class="views"><i class="fa fa-eye"></i> 1,568</div>
-                                    <div class="time"><i class="fa fa-clock-o"></i> 24 min</div>                                    
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                             POST -->
-
-
-                            <!-- POST -->
-                         <!--    <div class="post">
-                                <div class="wrap-ut pull-left">
-                                    <div class="userinfo pull-left">
-                                        <div class="avatar">
-                                            <img src="images/avatar2.jpg" alt="" />
-                                            <div class="status red">&nbsp;</div>
-                                        </div>
-
-                                        <div class="icons">
-                                            <img src="images/icon3.jpg" alt="" /><img src="images/icon4.jpg" alt="" /><img src="images/icon5.jpg" alt="" /><img src="images/icon6.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div class="posttext pull-left">
-                                        <h2><a href="02_topic.html">What Instagram Ads Will Look Like</a></h2>
-                                        <p>Instagram offered a first glimpse at what its ads will look like in a blog post Thursday. The sample ad, which you can see below.</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="postinfo pull-left">
-                                    <div class="comments">
-                                        <div class="commentbg">
-                                            89
-                                            <div class="mark"></div>
-                                        </div>
-
-                                    </div>
-                                    <div class="views"><i class="fa fa-eye"></i> 1,568</div>
-                                    <div class="time"><i class="fa fa-clock-o"></i> 15 min</div>                                    
-                                </div>
-                                <div class="clearfix"></div>
-                             </div> POST -->
-
-
-                            <!-- POST -->
-                           <!--  <div class="post">
-                                <div class="wrap-ut pull-left">
-                                    <div class="userinfo pull-left">
-                                        <div class="avatar">
-                                            <img src="images/avatar3.jpg" alt="" />
-                                            <div class="status red">&nbsp;</div>
-                                        </div>
-
-                                        <div class="icons">
-                                            <img src="images/icon2.jpg" alt="" /><img src="images/icon4.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                    <div class="posttext pull-left">
-                                        <h2><a href="02_topic.html">The Future of Magazines Is on Tablets</a></h2>
-                                        <p>Eric Schmidt has seen the future of magazines, and it's on the tablet. At a Magazine Publishers Association.</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="postinfo pull-left">
-                                    <div class="comments">
-                                        <div class="commentbg">
-                                            456
-                                            <div class="mark"></div>
-                                        </div>
-
-                                    </div>
-                                    <div class="views"><i class="fa fa-eye"></i> 1,568</div>
-                                    <div class="time"><i class="fa fa-clock-o"></i> 2 days</div>                                    
-                                </div>
-                                <div class="clearfix"></div>
+                                </form>
                             </div><!-- POST -->
 
-                      <!--  </div> --> 
-                      <!--  <div class="col-lg-4 col-md-4">
 
-                            
+
+
+
+
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+
+                            <!-- -->
                             <div class="sidebarblock">
                                 <h3>Categories</h3>
                                 <div class="divline"></div>
@@ -410,10 +453,10 @@
                                         <li><a href="#">2K Official Forums <span class="badge pull-right">5</span></a></li>
                                     </ul>
                                 </div>
-                            </div> -->
-                        
+                            </div>
+
                             <!-- -->
-                          <!--  <div class="sidebarblock">
+                            <div class="sidebarblock">
                                 <h3>Poll of the Week</h3>
                                 <div class="divline"></div>
                                 <div class="blocktxt">
@@ -463,10 +506,10 @@
                                     </form>
                                     <p class="smal">Voting ends on 19th of October</p>
                                 </div>
-                            </div> --> 
+                            </div>
 
                             <!-- -->
-                             <!-- <div class="sidebarblock">
+                            <div class="sidebarblock">
                                 <h3>My Active Threads</h3>
                                 <div class="divline"></div>
                                 <div class="blocktxt">
@@ -489,17 +532,17 @@
                                     <a href="#">Loud and Brave: Saudi Women Set to Protest Driving Ban</a>
                                 </div>
                             </div>
-                        -->
-                        <!-- 
+
+
                         </div>
                     </div>
                 </div>
-            -->
 
-                 <!-- Row on bottom of content-->
-              <!--   <div class="container">
+
+
+                <div class="container">
                     <div class="row">
-                       <div class="col-lg-8 col-xs-12">
+                        <div class="col-lg-8 col-xs-12">
                             <div class="pull-left"><a href="#" class="prevnext"><i class="fa fa-angle-left"></i></a></div>
                             <div class="pull-left">
                                 <ul class="paginationforum">
@@ -523,16 +566,15 @@
                             <div class="clearfix"></div>
                         </div>
                     </div>
-                </div> COMMENTING OUT BOTTOM CONTENT --> 
-                
+                </div>
 
             </section>
-             <!-- Footer-->
+
             <footer>
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-1 col-xs-3 col-sm-2 logo "><a href="#"><img src="images/logo.jpg" alt=""  /></a></div>
-                        <div class="col-lg-8 col-xs-9 col-sm-5 ">Copyrights 2021, nGen.com</div>
+                        <div class="col-lg-8 col-xs-9 col-sm-5 ">Copyrights 2014, websitename.com</div>
                         <div class="col-lg-3 col-xs-12 col-sm-5 sociconcent">
                             <ul class="socialicons">
                                 <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
@@ -548,20 +590,25 @@
             </footer>
         </div>
 
+
         <!-- get jQuery from the google apis -->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
- 
 
         <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
         <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
         <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/index.js" type="module" ></script>
+
 
         <!-- LOOK THE DOCUMENTATION FOR MORE INFORMATIONS -->
         <script type="text/javascript">
-            
+            document.addEventListener("DOMContentLoaded", event => {
+                const app = firebase.app();
+                console.log(app);
+            });
             var revapi;
 
             jQuery(document).ready(function() {
