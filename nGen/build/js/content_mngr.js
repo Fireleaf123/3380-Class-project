@@ -79,7 +79,7 @@ class Post {
 
 	getAReply(location) {}
 
-	createPost() {
+	createPost(container) {
 		let post = this;
 		let postBox = document.createElement("div");
 
@@ -88,7 +88,7 @@ class Post {
 		let content = post.getContent();
 		let timeSubmitted = post.getTimeSubmitted();
 
-		postBox.classList.add("container", "border", "POSTS"); //using boostrap container and border
+		postBox.classList.add("container", "border", "POSTS","post"); //using boostrap container and border
 		postBox.setAttribute("id", post.getPostId());
 
 		/**
@@ -136,7 +136,7 @@ class Post {
 		 * In actuality,  each postBox would be pasted onto
 		 * document.getElementById(postContainer) instead of document.body
 		 */
-		document.body.appendChild(postBox);
+		container.appendChild(postBox);
 	}
 }
 
@@ -198,12 +198,12 @@ class Forum {
       > gets all posts from the specified forumn/field
         >> note: I use forumn and field interchangeably because each forum is supposed to represent a field/industry
     */
-	getAllPosts() {
+	getAllPosts(container) {
 		let forum = this.database.ref(`${this.forum}/posts/`);
 
 		let get = forum.orderByChild("clicks").on("value", (posts) => {
 			posts.forEach((childPost) => {
-				let p = new Post(this.forum, childPost.key).createPost();
+				let p = new Post(this.forum, childPost.key).createPost(container);
 			});
 		});
 		setInterval(() => {

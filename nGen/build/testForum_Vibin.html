@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>nGen</title>
+    <title>Vibin</title>
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/8.2.8/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
@@ -27,6 +27,7 @@
 
     <!-- Custom -->
     <link href="css/custom.css" rel="stylesheet">
+    <link href="css/forums.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,25 +50,10 @@
   <body>
     <div class="container-fluid">
 
-      <!-- Slider -->
-      <div class="tp-banner-container">
-          <div class="tp-banner" >
-              <ul>	
-                  <!-- SLIDE  -->
-                  <li data-transition="fade" data-slotamount="7" data-masterspeed="1500" >
-                      <!-- MAIN IMAGE -->
-                      <img src="images/slide.jpg"  alt="slidebg1"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-                      <!-- LAYERS -->
-                  </li>
-              </ul>
-          </div>
-      </div>
-      <!-- //Slider -->
-
       <div class="headernav">
           <div class="container">
               <div class="row">
-                  <div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo "><a href="testForum_Vibin.html"><img src="images/logo.jpg" alt=""  /></a></div>
+                  <div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo "><a href="index.html"><img src="images/logo.jpg" alt=""  /></a></div>
                   <div class="col-lg-3 col-xs-9 col-sm-5 col-md-3 selecttopic">
                       <div class="dropdown">
                           <a data-toggle="dropdown" href="#" >Borderlands 2</a> <b class="caret"></b>
@@ -90,9 +76,7 @@
                   </div>
                   <div class="col-lg-4 col-xs-12 col-sm-5 col-md-4 avt">
                       <div class="stnt pull-left">                            
-                          <form action="03_new_topic.html" method="post" class="form">
-                              <button class="btn btn-primary">Start New Topic</button>
-                          </form>
+                              <div class="btn btn-primary">Start New Topic</div>
                       </div>
                         <div class="env pull-left"><i class="fa fa-envelope"></i></div>
                       <div class="avatar pull-left dropdown">
@@ -146,244 +130,11 @@
           <div class="container">
               <div class="row">
                   <div class="col-lg-8 col-md-8">
-                      <!-- POST -->
-                      <div class="post">
-                          <div class="wrap-ut pull-left">
-                              <div class="userinfo pull-left">
-                                  <div class="avatar">
-                                      <img src="images/avatar.jpg" alt="" />
-                                      <div class="status green">&nbsp;</div>
-                                  </div>
+                     <div class="clearfix"></div>
+                        <div id="postArea">
 
-                                  <div class="icons">
-                                      <img src="images/icon1.jpg" alt="" /><img src="images/icon4.jpg" alt="" />
-                                  </div>
-                              </div>
-                              <div class="posttext pull-left">
-                                  <h2><a href="02_topic.html">10 Kids Unaware of Their Halloween Costume</a></h2>
-                                  <p>It's one thing to subject yourself to a Halloween costume mishap because, hey, that's your prerogative.</p>
-                              </div>
-                              <div class="clearfix"></div>
-                          </div>
-                          <div class="postinfo pull-left">
-                              <div class="comments">
-                                  <div class="commentbg">
-                                      560
-                                      <div class="mark"></div>
-                                  </div>
-
-                              </div>
-                              <div class="views"><i class="fa fa-eye"></i> 1,568</div>
-                              <div class="time"><i class="fa fa-clock-o"></i> 24 min</div>                                    
-                          </div>
-                          <div class="clearfix"></div>
-                      </div><!-- POST -->
-
-
-                      <!-- POST -->
-                      <div class="post">
-                          <div class="wrap-ut pull-left">
-                              <div class="userinfo pull-left">
-                                  <div class="avatar">
-                                      <img src="images/avatar2.jpg" alt="" />
-                                      <div class="status red">&nbsp;</div>
-                                  </div>
-
-                                  <div class="icons">
-                                      <img src="images/icon3.jpg" alt="" /><img src="images/icon4.jpg" alt="" /><img src="images/icon5.jpg" alt="" /><img src="images/icon6.jpg" alt="" />
-                                  </div>
-                              </div>
-                              <div class="posttext pull-left">
-                                  <h2><a href="02_topic.html">What Instagram Ads Will Look Like</a></h2>
-                                  <p>Instagram offered a first glimpse at what its ads will look like in a blog post Thursday. The sample ad, which you can see below.</p>
-                              </div>
-                              <div class="clearfix"></div>
-                          </div>
-                          <div class="postinfo pull-left">
-                              <div class="comments">
-                                  <div class="commentbg">
-                                      89
-                                      <div class="mark"></div>
-                                  </div>
-
-                              </div>
-                              <div class="views"><i class="fa fa-eye"></i> 1,568</div>
-                              <div class="time"><i class="fa fa-clock-o"></i> 15 min</div>                                    
-                          </div>
-                          <div class="clearfix"></div>
-                      </div><!-- POST -->
-
-
-                      <!-- POST -->
-                      <div class="post">
-                          <div class="wrap-ut pull-left">
-                              <div class="userinfo pull-left">
-                                  <div class="avatar">
-                                      <img src="images/avatar3.jpg" alt="" />
-                                      <div class="status red">&nbsp;</div>
-                                  </div>
-
-                                  <div class="icons">
-                                      <img src="images/icon2.jpg" alt="" /><img src="images/icon4.jpg" alt="" />
-                                  </div>
-                              </div>
-                              <div class="posttext pull-left">
-                                  <h2><a href="02_topic.html">The Future of Magazines Is on Tablets</a></h2>
-                                  <p>Eric Schmidt has seen the future of magazines, and it's on the tablet. At a Magazine Publishers Association.</p>
-                              </div>
-                              <div class="clearfix"></div>
-                          </div>
-                          <div class="postinfo pull-left">
-                              <div class="comments">
-                                  <div class="commentbg">
-                                      456
-                                      <div class="mark"></div>
-                                  </div>
-
-                              </div>
-                              <div class="views"><i class="fa fa-eye"></i> 1,568</div>
-                              <div class="time"><i class="fa fa-clock-o"></i> 2 days</div>                                    
-                          </div>
-                          <div class="clearfix"></div>
-                      </div><!-- POST -->
-
-
-                      <!-- POST -->
-                      <div class="post">
-                          <div class="wrap-ut pull-left">
-                              <div class="userinfo pull-left">
-                                  <div class="avatar">
-                                      <img src="images/avatar4.jpg" alt="" />
-                                      <div class="status yellow">&nbsp;</div>
-                                  </div>
-
-                                  <div class="icons">
-                                      <img src="images/icon1.jpg" alt="" /><img src="images/icon4.jpg" alt="" /><img src="images/icon6.jpg" alt="" />
-                                  </div>
-                              </div>
-                              <div class="posttext pull-left">
-                                  <h2><a href="02_topic.html">Pinterest Now Worth $3.8 Billion</a></h2>
-                                  <p>Pinterest's valuation is closing in on $4 billion after its latest funding round of $225 million, according to a report.</p>
-                              </div>
-                              <div class="clearfix"></div>
-                          </div>
-                          <div class="postinfo pull-left">
-                              <div class="comments">
-                                  <div class="commentbg">
-                                      78
-                                      <div class="mark"></div>
-                                  </div>
-
-                              </div>
-                              <div class="views"><i class="fa fa-eye"></i> 1,568</div>
-                              <div class="time"><i class="fa fa-clock-o"></i> 24 min</div>                                    
-                          </div>
-                          <div class="clearfix"></div>
-                      </div><!-- POST -->
-
-
-
-                      <!-- POST -->
-                      <div class="post">
-                          <div class="wrap-ut pull-left">
-                              <div class="userinfo pull-left">
-                                  <div class="avatar">
-                                      <img src="images/avatar.jpg" alt="" />
-                                      <div class="status green">&nbsp;</div>
-                                  </div>
-
-                                  <div class="icons">
-                                      <img src="images/icon1.jpg" alt="" /><img src="images/icon4.jpg" alt="" />
-                                  </div>
-                              </div>
-                              <div class="posttext pull-left">
-                                  <h2><a href="02_topic.html">10 Kids Unaware of Their Halloween Costume</a></h2>
-                                  <p>It's one thing to subject yourself to a Halloween costume mishap because, hey, that's your prerogative.</p>
-                              </div>
-                              <div class="clearfix"></div>
-                          </div>
-                          <div class="postinfo pull-left">
-                              <div class="comments">
-                                  <div class="commentbg">
-                                      560
-                                      <div class="mark"></div>
-                                  </div>
-
-                              </div>
-                              <div class="views"><i class="fa fa-eye"></i> 1,568</div>
-                              <div class="time"><i class="fa fa-clock-o"></i> 24 min</div>                                    
-                          </div>
-                          <div class="clearfix"></div>
-                      </div><!-- POST -->
-
-
-                      <!-- POST -->
-                      <div class="post">
-                          <div class="wrap-ut pull-left">
-                              <div class="userinfo pull-left">
-                                  <div class="avatar">
-                                      <img src="images/avatar2.jpg" alt="" />
-                                      <div class="status red">&nbsp;</div>
-                                  </div>
-
-                                  <div class="icons">
-                                      <img src="images/icon3.jpg" alt="" /><img src="images/icon4.jpg" alt="" /><img src="images/icon5.jpg" alt="" /><img src="images/icon6.jpg" alt="" />
-                                  </div>
-                              </div>
-                              <div class="posttext pull-left">
-                                  <h2><a href="02_topic.html">What Instagram Ads Will Look Like</a></h2>
-                                  <p>Instagram offered a first glimpse at what its ads will look like in a blog post Thursday. The sample ad, which you can see below.</p>
-                              </div>
-                              <div class="clearfix"></div>
-                          </div>
-                          <div class="postinfo pull-left">
-                              <div class="comments">
-                                  <div class="commentbg">
-                                      89
-                                      <div class="mark"></div>
-                                  </div>
-
-                              </div>
-                              <div class="views"><i class="fa fa-eye"></i> 1,568</div>
-                              <div class="time"><i class="fa fa-clock-o"></i> 15 min</div>                                    
-                          </div>
-                          <div class="clearfix"></div>
-                      </div><!-- POST -->
-
-
-                      <!-- POST -->
-                      <div class="post">
-                          <div class="wrap-ut pull-left">
-                              <div class="userinfo pull-left">
-                                  <div class="avatar">
-                                      <img src="images/avatar3.jpg" alt="" />
-                                      <div class="status red">&nbsp;</div>
-                                  </div>
-
-                                  <div class="icons">
-                                      <img src="images/icon2.jpg" alt="" /><img src="images/icon4.jpg" alt="" />
-                                  </div>
-                              </div>
-                              <div class="posttext pull-left">
-                                  <h2><a href="02_topic.html">The Future of Magazines Is on Tablets</a></h2>
-                                  <p>Eric Schmidt has seen the future of magazines, and it's on the tablet. At a Magazine Publishers Association.</p>
-                              </div>
-                              <div class="clearfix"></div>
-                          </div>
-                          <div class="postinfo pull-left">
-                              <div class="comments">
-                                  <div class="commentbg">
-                                      456
-                                      <div class="mark"></div>
-                                  </div>
-
-                              </div>
-                              <div class="views"><i class="fa fa-eye"></i> 1,568</div>
-                              <div class="time"><i class="fa fa-clock-o"></i> 2 days</div>                                    
-                          </div>
-                          <div class="clearfix"></div>
-                      </div><!-- POST -->
-
+                        </div>
+                     <div class="clearfix"></div>
                   </div>
                   <div class="col-lg-4 col-md-4">
 
@@ -549,26 +300,6 @@
   <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 
   <script src="js/bootstrap.min.js"></script>
-
-
-  <!-- LOOK THE DOCUMENTATION FOR MORE INFORMATIONS -->
-  <script type="text/javascript">
-      var revapi;
-
-      jQuery(document).ready(function() {
-          "use strict";
-          revapi = jQuery('.tp-banner').revolution(
-                  {
-                      delay: 15000,
-                      startwidth: 1200,
-                      startheight: 278,
-                      hideThumbs: 10,
-                      fullWidth: "on"
-                  });
-
-      });	//ready
-
-  </script>
-  <!-- END REVOLUTION SLIDER -->
+  <script defer type="module" src="js/forum.js"></script>
   </body>
 </html>
