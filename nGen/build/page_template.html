@@ -47,21 +47,63 @@
     </script>
       <script>
         function createComment(userId,content,timeSubmitted){
+
             let commentBox = document.createElement('div');
-            let contentBox = document.createElement('div');
+            //let commentBox2 = document.createElement('div');
+            //let commentBox3 = document.createElement('div');
+            //let commentBox4 = document.createElement('div');
+            //let contentBox = document.createElement('div');
+            //let testComment = document.createElement('p');
+            //let contentClearFix = document.createElement('div');
+            
 
-            commentBox.classList.add('post')
 
-            contentBox.innerHTML = "hello";
-            commentBox.appendChild(contentBox)
+            
+            commentBox.innerHTML = "Ji";
+            
+            
+          
 
-            commentBox.style.border = "2px";
-            contentBox.innerHTML = content;
+            commentBox.classList.add("post");
+            //commentBox2.classList.add("topwrap");
+            //commentBox3.classList.add("userinfo pull-left");
+            //commentBox4.classList.add("avatar");
+            //contentBox.classList.add("posttext pull-left");
+            //contentClearFix.classList.add("clearfix");
 
-            document.body.appendChild(commentBox)
+            //commentBox.appendChild(commentBox2);
+            //commentBox2.appendChild(commentBox3);
+
+
+
+            
+
+            //contentBox.innerHTML = "hello";
+            //commentBox.appendChild(contentBox)
+
+            //commentBox.style.border = "2px";
+            //contentBox.innerHTML = content;
+
+           
+
+            document.body.appendChild(commentBox);
             document.body.style.backgroundColor = "black"
+            
         }
 
+        /**function test1(){
+
+          let cup = document.createElement("div");
+          let butn = document.createElement("span");
+
+          butn.textContent = "Test";
+          cup.append(butn);
+
+          document.body.append(cup)
+        }
+
+        test1();
+        **/
         createComment();
       </script>
   </body>
