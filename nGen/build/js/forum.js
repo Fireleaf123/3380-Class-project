@@ -1,9 +1,15 @@
-import { Forum } from "./content_mngr.js";
+import { Forum , Post} from "./content_mngr.js";
+const page = document.title
 
-function createPosts(forum) {
-	let page = new Forum(forum);
-	page.getAllPosts();
-	console.log('hello')
+
+
+function showPosts(){
+	let p = new Forum(page).getAllPosts()
 }
 
-createPosts("Vibin");
+showPosts();
+
+
+
+
+
