@@ -209,7 +209,41 @@ function sendComment(userId, field, postId) {
   dataHandler.writeComment(userId, comment, field, postId);
 }
 
+function createComment(userId,content,timeSubmitted){
 
+  let commentBox = document.createElement('div');
+  let commentBox2 = document.createElement('div');
+  let commentBox3 = document.createElement('div');
+  let commentBox4 = document.createElement('div');
+  let image = document.createElement('img')
+  let contentBox = document.createElement('div');
+  let contentBox2 = document.createElement('blockquote');
+  let testComment = document.createElement('p');
+  let contentClearFix = document.createElement('div');
+  
+  testComment.innerHTML = content;
+  
+  commentBox.classList.add("post");
+  commentBox2.classList.add("topwrap");
+  commentBox3.classList.add("userinfo");
+  commentBox4.classList.add("avatar");
+  contentBox.classList.add("posttext");
+  contentClearFix.classList.add("clearfix");
+  image.src = "images/avatar3.jpg";
+
+  commentBox.appendChild(commentBox2);
+  commentBox2.appendChild(commentBox3);
+  commentBox3.appendChild(commentBox4);
+  commentBox4.appendChild(image);
+  contentBox.appendChild(contentBox2);
+  contentBox2.appendChild(testComment);
+  commentBox2.appendChild(contentBox);
+  commentBox2.appendChild(contentClearFix);
+
+  document.body.appendChild(commentBox);
+  
+  
+}
 
 //exports
 //export { DataHandler };
