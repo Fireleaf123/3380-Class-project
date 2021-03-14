@@ -25,10 +25,3 @@ document.getElementById("submit").onclick = () => {
 	savePost("baboya");
 };
 
-function saveComment(userId, field, postId) {
-	let comment = document.getElementById("reply").value;
-	console.log(comment);
-	const dataHandler = new Forum("Vibin");
-
-	dataHandler.writeComment(userId, comment, field, postId);
-}

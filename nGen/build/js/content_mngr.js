@@ -14,22 +14,47 @@ class Search {
 class Post {
 	constructor(forum, postId) {
 		this.ref = firebase.database().ref(`${forum}/posts/${postId}`);
+		this.forum = forum;
 		this.postId = postId;
-		this.post = this.getPost();
+		this.post; 
+		this.getPost();
+		console.log(this.post)
+	}
+	//note: currently untested without a working forumn
+	writeComment(comment) {
+		let newKey = this.database.ref().push().key;
+
+		firebase.database().ref(`${this.forum}/posts/${this.postId}/comments/${newKey}`).set({
+			userId: userId,
+			comment: comment,
+			timeSubmitted: Date.now(),
+		});
+	}
+
+	/*
+		  might just keep it to only comments for simplicity.
+		  but writing the methods for replies regardless
+		  note: currently untested without a working forumn
+		*/
+	writeReply(userId, postID, commentID, content) {
+		let newKey = this.database.ref().child.push().key;
+
+		this.database.ref(`${this.forum}/${postID}/comments/comment-${commentID}/replies/reply-${newKey}`).set({
+			userId: userId,
+			reply: content,
+			timeSubmitted: Date.now(),
+		});
 	}
 
 	getPost() {
-		let p;
-
+	
 		this.ref.on("value", (post) => {
-			p = post.val();
+			this.post = post.val();
 		});
-
-		return p;
 	}
 
 	updatePost() {
-		this.post = this.getPost();
+		this.getPost();
 	}
 
 	getUser() {
@@ -67,9 +92,27 @@ class Post {
 		this.ref.child("clicks").set(this.getClicks() - 1);
 	}
 
-	getAllComments(field, postID) {}
+	getAComment(commentId) {
+		let commentRef = firebase.database().ref(`${this.forum}/posts/${this.postId}/comments/${commentId}`);;
 
-	getAComment(field, postID) {}
+		commentRef.once("value", (comment) => {
+			return comment.val();
+		});
+	}
+
+	getAllComments(container) {
+
+
+		let get = this.ref.child('comments').on("value", (comments) => {
+			comments.forEach((comment) => {
+				let c = this.getAComment(comment);
+				this.createComments(container,c.user,c.comment,c.timeSubmitted);
+			});
+		});
+		setTimeout(() => {
+			this.ref.off("value", get);
+		}, 1500);
+	}
 
 	/*
       might just keep it to only comments for simplicity.
@@ -79,6 +122,30 @@ class Post {
 
 	getAReply(location) {}
 
+	createComments(commentArea,userId,comment,timeSubmitted){
+		let container = document.createElement('div');
+		let userBox = document.createElement('div');
+		let commentBox = document.createElement('div');
+		let timeBox = document.createElement('div');
+
+		container.setAttribute('id','commentBox');
+		container.classList.add('post');
+
+		userBox.setAttribute('id','user')
+		userBox.innerHTML = userId;
+
+		commentBox.setAttribute('id','userComment')
+		commentBox.innerHTML = `<p>${comment}</p>`;
+
+		timeBox.setAttribute('id','userTimeSub')
+		timeBox.innerText = timeSubmitted;
+
+		container.appendChild(userBox);
+		container.appendChild(commentBox);
+		container.appendChild(timeBox);
+		
+		commentArea.appendChild(container)
+	}
 	createPost(container) {
 		let post = this;
 		let postBox = document.createElement("div");
@@ -88,7 +155,7 @@ class Post {
 		let content = post.getContent();
 		let timeSubmitted = post.getTimeSubmitted();
 
-		postBox.classList.add("container", "border", "POSTS","post"); //using boostrap container and border
+		postBox.classList.add("container", "border", "POSTS", "post"); //using boostrap container and border
 		postBox.setAttribute("id", post.getPostId());
 
 		/**
@@ -157,43 +224,6 @@ class Forum {
 		});
 	}
 
-	//note: currently untested without a working forumn
-	writeComment(userId, comment, postId) {
-		let newKey = this.database.ref().push().key;
-
-		this.database.ref(`${this.forum}/posts/${postId}/comments/${newKey}`).set({
-			userId: userId,
-			comment: comment,
-			timeSubmitted: Date.now(),
-		});
-	}
-
-	/*
-      might just keep it to only comments for simplicity.
-      but writing the methods for replies regardless
-      note: currently untested without a working forumn
-    */
-	writeReply(userId, postID, commentID, content) {
-		let newKey = this.database.ref().child.push().key;
-
-		this.database.ref(`${this.forum}/${postID}/comments/comment-${commentID}/replies/reply-${newKey}`).set({
-			userId: userId,
-			reply: content,
-			timeSubmitted: Date.now(),
-		});
-	}
-	/*
-      creates containers, called postBox, that stores
-      post info(userID,title,content, and timeSubmmited)
-      in seperate divs(userBox,titleBox,contentBox, and timeSubmitedBox)
-      that are then pasted added into postBox using appenChild().
-      
-      postBox, now having all the info stored, is pasted onto the body.
-
-      >>IMPORTANT NOTE: On the actual forum/field pages themselves(i.e the Basket Weaving Sub-Forum)
-        postBox would not be pasted on the body directly, but in a specific container.
-*/
-
 	/*
       > gets all posts from the specified forumn/field
         >> note: I use forumn and field interchangeably because each forum is supposed to represent a field/industry
@@ -206,11 +236,10 @@ class Forum {
 				let p = new Post(this.forum, childPost.key).createPost(container);
 			});
 		});
-		setInterval(() => {
+		setTimeout(() => {
 			forum.orderByChild("clicks").off("value", get);
 		}, 1500);
 	}
-	orderByPost() {}
 }
 
 export { Forum, Post };
