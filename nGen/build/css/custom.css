@@ -913,6 +913,10 @@ a.down:hover {
 	background-color: #bd1425;
 }
 
+.networks .btn-go {
+  background-color: #46f74c;
+}
+
 .newaccountpage .postinfobot {
 	padding: 0 30px 0 115px;
 }
