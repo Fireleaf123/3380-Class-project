@@ -49,48 +49,54 @@
         function createComment(userId,content,timeSubmitted){
 
             let commentBox = document.createElement('div');
-            //let commentBox2 = document.createElement('div');
-            //let commentBox3 = document.createElement('div');
-            //let commentBox4 = document.createElement('div');
-            //let contentBox = document.createElement('div');
-            //let testComment = document.createElement('p');
-            //let contentClearFix = document.createElement('div');
+            let commentBox2 = document.createElement('div');
+            let commentBox3 = document.createElement('div');
+            let commentBox4 = document.createElement('div');
+            let image = document.createElement('img')
+            let contentBox = document.createElement('div');
+            let contentBox2 = document.createElement('blockquote');
+            let testComment = document.createElement('p');
+            let contentClearFix = document.createElement('div');
+           
             
 
 
             
-            commentBox.innerHTML = "Ji";
+            testComment.innerHTML = content;
             
             
           
 
             commentBox.classList.add("post");
-            //commentBox2.classList.add("topwrap");
-            //commentBox3.classList.add("userinfo pull-left");
-            //commentBox4.classList.add("avatar");
-            //contentBox.classList.add("posttext pull-left");
-            //contentClearFix.classList.add("clearfix");
+            commentBox2.classList.add("topwrap");
+            commentBox3.classList.add("userinfo");
+            commentBox4.classList.add("avatar");
+            contentBox.classList.add("posttext");
+            contentClearFix.classList.add("clearfix");
+            image.src = "images/avatar3.jpg";
 
-            //commentBox.appendChild(commentBox2);
-            //commentBox2.appendChild(commentBox3);
+            commentBox.appendChild(commentBox2);
+            commentBox2.appendChild(commentBox3);
+            commentBox3.appendChild(commentBox4);
+            commentBox4.appendChild(image);
+            contentBox.appendChild(contentBox2);
+            contentBox2.appendChild(testComment);
+            commentBox2.appendChild(contentBox);
+            commentBox2.appendChild(contentClearFix);
 
 
 
             
 
-            //contentBox.innerHTML = "hello";
-            //commentBox.appendChild(contentBox)
 
-            //commentBox.style.border = "2px";
-            //contentBox.innerHTML = content;
-
+           
            
 
             document.body.appendChild(commentBox);
-            document.body.style.backgroundColor = "black"
+            
             
         }
-
+        document.body.style.backgroundColor = "black"
         /**function test1(){
 
           let cup = document.createElement("div");
