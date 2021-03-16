@@ -9,13 +9,14 @@
     <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/8.2.8/firebase-auth.js"></script>
     <script defer src="/__/firebase/8.2.8/firebase-database.js"></script>
+    <!--
     <script defer src="/__/firebase/8.2.8/firebase-firestore.js"></script>
     <script defer src="/__/firebase/8.2.8/firebase-functions.js"></script>
     <script defer src="/__/firebase/8.2.8/firebase-messaging.js"></script>
     <script defer src="/__/firebase/8.2.8/firebase-storage.js"></script>
     <script defer src="/__/firebase/8.2.8/firebase-analytics.js"></script>
     <script defer src="/__/firebase/8.2.8/firebase-remote-config.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-performance.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-performance.js"></script> -->
     <!-- 
         initialize the SDK after all desired features are loaded, set useEmulator to false
         to avoid connecting the SDK to running emulators.
@@ -28,6 +29,7 @@
     <!-- Custom -->
     <link href="css/custom.css" rel="stylesheet" />
     <link href="css/topic.css" rel="stylesheet" />
+    <link href="css/forum.css" rel="stylesheet" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -115,6 +117,7 @@
                   <div class="userinfo pull-left">
                   </div>
                   <div class="posttext pull-left">
+                    <h2 id="user"><i class="fa fa-user"></i></h2>
                     <h2 id="title"></h2>
                     <p id=content></p>
                     <div id="timeCreated"class="posted pull-left"><i class="fa fa-clock-o"></i></div>
@@ -340,7 +343,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-    <script defer type="module" src="js/asyncPostPage.js"></script>
+    <script defer type="module" src="js/postPage.js"></script>
     </script>
 
     <!-- END REVOLUTION SLIDER -->
