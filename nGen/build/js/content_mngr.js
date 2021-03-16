@@ -16,9 +16,8 @@ class Post {
 		this.ref = firebase.database().ref(`${forum}/posts/${postId}`);
 		this.forum = forum;
 		this.postId = postId;
-		this.post; 
+		this.post;
 		this.getPost();
-		console.log(this.post)
 	}
 	//note: currently untested without a working forumn
 	writeComment(comment) {
@@ -47,7 +46,6 @@ class Post {
 	}
 
 	getPost() {
-	
 		this.ref.on("value", (post) => {
 			this.post = post.val();
 		});
@@ -93,7 +91,7 @@ class Post {
 	}
 
 	getAComment(commentId) {
-		let commentRef = firebase.database().ref(`${this.forum}/posts/${this.postId}/comments/${commentId}`);;
+		let commentRef = firebase.database().ref(`${this.forum}/posts/${this.postId}/comments/${commentId}`);
 
 		commentRef.once("value", (comment) => {
 			return comment.val();
@@ -101,12 +99,10 @@ class Post {
 	}
 
 	getAllComments(container) {
-
-
-		let get = this.ref.child('comments').on("value", (comments) => {
+		let get = this.ref.child("comments").on("value", (comments) => {
 			comments.forEach((comment) => {
 				let c = this.getAComment(comment);
-				this.createComments(container,c.user,c.comment,c.timeSubmitted);
+				this.createComments(container, c.user, c.comment, c.timeSubmitted);
 			});
 		});
 		setTimeout(() => {
@@ -122,29 +118,29 @@ class Post {
 
 	getAReply(location) {}
 
-	createComments(commentArea,userId,comment,timeSubmitted){
-		let container = document.createElement('div');
-		let userBox = document.createElement('div');
-		let commentBox = document.createElement('div');
-		let timeBox = document.createElement('div');
+	createComments(commentArea, userId, comment, timeSubmitted) {
+		let container = document.createElement("div");
+		let userBox = document.createElement("div");
+		let commentBox = document.createElement("div");
+		let timeBox = document.createElement("div");
 
-		container.setAttribute('id','commentBox');
-		container.classList.add('post');
+		container.setAttribute("id", "commentBox");
+		container.classList.add("post");
 
-		userBox.setAttribute('id','user')
+		userBox.setAttribute("id", "user");
 		userBox.innerHTML = userId;
 
-		commentBox.setAttribute('id','userComment')
+		commentBox.setAttribute("id", "userComment");
 		commentBox.innerHTML = `<p>${comment}</p>`;
 
-		timeBox.setAttribute('id','userTimeSub')
-		timeBox.innerText = timeSubmitted;
+		timeBox.setAttribute("id", "userTimeSub");
+		timeBox.innerText = '<i class="fa fa-clock-o"></i> ' + new Date(post.timeSubmitted);
 
 		container.appendChild(userBox);
 		container.appendChild(commentBox);
 		container.appendChild(timeBox);
-		
-		commentArea.appendChild(container)
+
+		commentArea.appendChild(container);
 	}
 	createPost(container) {
 		let post = this;
@@ -155,7 +151,7 @@ class Post {
 		let content = post.getContent();
 		let timeSubmitted = post.getTimeSubmitted();
 
-		postBox.classList.add("container", "border", "POSTS", "post"); //using boostrap container and border
+		postBox.classList.add("POSTS", "post"); //using boostrap container and border
 		postBox.setAttribute("id", post.getPostId());
 
 		/**
@@ -165,7 +161,7 @@ class Post {
 		 */
 		postBox.onclick = () => {
 			this.updateClicks();
-			location.href = "index.html";
+			location.href = "02_topic.html";
 		};
 
 		/*Below are examples of styling using JS
@@ -176,21 +172,22 @@ class Post {
 
 		//creating a div to hold userID
 		let userBox = document.createElement("div");
-		userBox.style.width = "fit-content"; //set width to fit content in the div, UserBox.
+		userBox.classList.add("postContent");
 		userBox.innerHTML = userID; //putting content into the div UserBox.
 
 		let titleBox = document.createElement("div");
-		titleBox.style.width = "fit-content";
+		titleBox.classList.add("postContent");
 		titleBox.innerHTML = title;
 
 		let contentBox = document.createElement("div");
-		contentBox.style.width = "fit-content";
+		contentBox.classList.add("postContent");
 		contentBox.innerHTML = content;
 
 		let timeSubmittedBox = document.createElement("div");
+		timeSubmittedBox.classList.add("postContent");
 		timeSubmittedBox.style.width = "fit-content";
 
-		timeSubmittedBox.innerHTML = new Date(timeSubmitted);
+		timeSubmittedBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(timeSubmitted);
 
 		postBox.appendChild(userBox);
 		postBox.appendChild(titleBox);

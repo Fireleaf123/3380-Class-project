@@ -1,28 +1,18 @@
-import {Post,Forum} from './content_mngr.js'
-const post = new Post('Arts','-MVXzImDpP0hxvluFntz');
-const title = document.getElementById('title');
-const content = document.getElementById('content');
-const timeSubmitted = document.getElementById('timeCreated');
-const commentArea = document.getElementById('comments');
+import { Post,Forum } from "./content_mngr.js";
+
+const title = document.getElementById("title");
+const content = document.getElementById("content");
+const timeSubmitted = document.getElementById("timeCreated");
+const commentArea = document.getElementById("comments");
+const forum = "Arts";
+const postId = "-MVnkqsze9meTKVFAAFY";
+//const post = await getPost();
+const userComment = document.getElementById("reply");
 
 
-function showComments(){
-    post.getAllComments(commentArea);
-}showComments();
 
-function setForm(){
-    title.value =  post.getTitle();
-    content.value =  post.getContent();
-    timeSubmitted.value = post.getTimeSubmitted();
-}setForm()
-
-function saveComment(userId) {
-	const comment = document.getElementById("reply").value;
-    post.writeComment(comment);
-
+function showPosts(){
+	let p = new Forum(forum).getAllComments(commentArea,postId)
 }
 
-document.getElementById("comment").onclick = () => {
-	saveComment('baboya');
-};
-
+showPosts();
