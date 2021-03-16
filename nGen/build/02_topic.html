@@ -9,13 +9,14 @@
     <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/8.2.8/firebase-auth.js"></script>
     <script defer src="/__/firebase/8.2.8/firebase-database.js"></script>
+    <!--
     <script defer src="/__/firebase/8.2.8/firebase-firestore.js"></script>
     <script defer src="/__/firebase/8.2.8/firebase-functions.js"></script>
     <script defer src="/__/firebase/8.2.8/firebase-messaging.js"></script>
     <script defer src="/__/firebase/8.2.8/firebase-storage.js"></script>
     <script defer src="/__/firebase/8.2.8/firebase-analytics.js"></script>
     <script defer src="/__/firebase/8.2.8/firebase-remote-config.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-performance.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-performance.js"></script> -->
     <!-- 
         initialize the SDK after all desired features are loaded, set useEmulator to false
         to avoid connecting the SDK to running emulators.
@@ -28,6 +29,7 @@
     <!-- Custom -->
     <link href="css/custom.css" rel="stylesheet" />
     <link href="css/topic.css" rel="stylesheet" />
+    <link href="css/forum.css" rel="stylesheet" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -115,9 +117,10 @@
                   <div class="userinfo pull-left">
                   </div>
                   <div class="posttext pull-left">
-                    <h2 id="title">10 Kids Unaware of Their Halloween Costume </h2>
-                    <p id=content>Today, we're looking at three particularly interesting stories. Pinterest added a new location-based feature on Wednesday that uses Place Pins as a way to map out vacations and favorite areas. Southwest Airlines is providing Wi-Fi access from gate to gate for $8 per day through an onboard hotspot. And in an effort to ramp up its user base, Google Wallet is offering a debit card that can take out cash from.</p>
-                    <div id="timeCreated"class="posted pull-left"><i class="fa fa-clock-o"></i> Posted on : 20 Nov @ 9:30am</div>
+                    <h2 id="user"><i class="fa fa-user"></i></h2>
+                    <h2 id="title"></h2>
+                    <p id=content></p>
+                    <div id="timeCreated"class="posted pull-left"><i class="fa fa-clock-o"></i></div>
                   </div>
                   <div class="clearfix"></div>
                 </div>
@@ -143,7 +146,7 @@
                       <div class="pull-left smile">
                         <a href="#"><i class="fa fa-smile-o"></i></a>
                       </div>
-                      <div id="comment" class="pull-left"><button class="btn btn-primary">Post Reply</button></div>
+                      <div id="comment" class="pull-left"><button class="btn btn-primary">Post Comment</button></div>
                       <div class="clearfix"></div>
                     </div>
 

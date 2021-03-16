@@ -1,15 +1,30 @@
-#title{
-    box-shadow: 2px 2px 12px #5f5f5f98;
-    font-size: 20px
+.commentContent {
+	padding-left: 10px;
+	border: 2x solid blue;
 }
-#timeCreated{
-
+#postUser {
+}
+#title {
+	box-shadow: 1px 1px 1px #5f5f5f98;
+	font-size: 20px;
+	font-weight: bold;
 }
 
-#content{
-    border: 1px solid #bfbfbf
-    ;
+#timeCreated {
 }
-#comments{
 
+#content {
+	border: 1px solid #bfbfbf;
+}
+
+#comments {
+}
+
+#user {
+}
+
+#userComment {
+}
+
+#userTimeSub {
 }
