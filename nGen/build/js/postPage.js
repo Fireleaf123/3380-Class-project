@@ -1,4 +1,4 @@
-import { Post, Forum} from "./content_mngr.js";
+import { Post, Forum } from "./content_mngr.js";
 import { Cookie } from "./cookies.js";
 
 const user = document.getElementById("user");
@@ -16,7 +16,7 @@ const _post = new Post(forum, postId);
 const post = new Forum(forum).getPost(postId);
 const userComment = document.getElementById("reply");
 
-console.log()
+console.log();
 
 function setForm(userId, postTitle, postContent, postTimeSubmitted) {
 	user.innerHTML = user.innerHTML + " " + userId;
@@ -45,7 +45,7 @@ function createComments(cont, userId, comment, timeSubmitted, id, type) {
 	commentBox.classList.add("commentContent");
 	commentBox.innerHTML = `<p>${comment}</p>`;
 
-	replyNTimeCont.classList.add("row","commentContent");
+	replyNTimeCont.classList.add("row", "commentContent");
 
 	timeBox.setAttribute("id", "userTimeSub");
 	timeBox.classList.add("col-sm");
@@ -57,17 +57,17 @@ function createComments(cont, userId, comment, timeSubmitted, id, type) {
 	container.appendChild(replyNTimeCont);
 
 	if (type === "comment") {
-		mainCont.appendChild(container)
+		mainCont.appendChild(container);
 
-		repliesCont = document.createElement("div")
+		repliesCont = document.createElement("div");
 		repliesCont.classList.add("replies");
 		mainCont.appendChild(repliesCont);
 
 		let reply = document.createElement("div");
-		reply.classList.add("col-sm","replyBtn")
+		reply.classList.add("col-sm", "replyBtn");
 		let replyBtn = document.createElement("button");
 
-		replyBtn.classList.add("pull-right","Replies");
+		replyBtn.classList.add("pull-right", "Replies");
 		replyBtn.innerHTML = '<i class="fa fa-reply"></i>';
 
 		replyBtn.onclick = () => {
@@ -79,47 +79,45 @@ function createComments(cont, userId, comment, timeSubmitted, id, type) {
 		reply.appendChild(replyBtn);
 		replyNTimeCont.appendChild(reply);
 		cont.appendChild(mainCont);
+	} else if (type === "reply") {
+		cont.appendChild(container);
 	}
-	else if(type === "reply"){
-		cont.appendChild(container)
-	}
-	
-	
 }
 
-function saveComment(comment,userId,type,commentId) {
-	if(type === 'comment'){
-		console.log(type,comment);
+function saveComment(comment, userId, type, commentId) {
+	if (type === "comment") {
+		console.log(type, comment);
 		_post.writeComment(userId, comment);
-	}
-	else if (type === 'reply'){
-		console.log(type,comment); 
-		_post.writeReply(userId,comment,commentId);
+	} else if (type === "reply") {
+		console.log(type, comment);
+		_post.writeReply(userId, comment, commentId);
 	}
 }
 
-document.getElementById('comment').onclick = () => {
+document.getElementById("comment").onclick = () => {
 	const state = commentBtn.innerHTML;
 	const comment = userComment.value;
 
-	if(userComment.value = '') alert("Please Type A Comment")
-	else{
-		if (state === "Post Comment"){saveComment(comment,"baboya",'comment');}
-		else if(state === "Post Reply"){saveComment(comment,"baboya",'reply',commentWriter.parentElement.getAttribute('id'));}
-	} 
+	if ((userComment.value = "")) alert("Please Type A Comment");
+	else {
+		if (state === "Post Comment") {
+			saveComment(comment, "baboya", "comment");
+		} else if (state === "Post Reply") {
+			saveComment(comment, "baboya", "reply", commentWriter.parentElement.getAttribute("id"));
+		}
+	}
 };
 
 post.then((data) => {
-	console.log(data);
 	setForm(data.userId, data.title, data.content, data.timeSubmitted);
 	for (let comment in data.comments) {
 		let c = data.comments[comment];
 		//console.log(c.replies)
 		createComments(commentArea, c.userId, c.comment, c.timeSubmitted, comment, "comment");
-		for(let reply in c.replies){
-			let r = c.replies[reply]
+		for (let reply in c.replies) {
+			let r = c.replies[reply];
 			console.log(r);
-			createComments(document.getElementById(comment).parentElement.querySelector('.replies'), r.userId, r.reply, r.timeSubmitted,reply,"reply");
+			createComments(document.getElementById(comment).parentElement.querySelector(".replies"), r.userId, r.reply, r.timeSubmitted, reply, "reply");
 		}
 	}
-})
+});
