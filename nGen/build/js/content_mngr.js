@@ -38,10 +38,10 @@ class Post {
 		  but writing the methods for replies regardless
 		  note: currently untested without a working forumn
 		*/
-	writeReply(userId, postID, commentID, content) {
+	writeReply(userId,content,commentID) {
 		let newKey = this.ref.child("comments/replies").push().key;
 
-		this.database.ref(`${this.forum}/${postID}/comments/comment-${commentID}/replies/reply-${newKey}`).set({
+		firebase.database().ref(`${this.forum}/posts/${this.postId}/comments/${commentID}/replies/${newKey}`).set({
 			userId: userId,
 			reply: content,
 			timeSubmitted: Date.now(),
@@ -56,17 +56,9 @@ class Post {
 	getThisPost() {
 		return this.post;
 	}
+	
 	setPost(post) {
-		console.log(post);
 		this.post = post;
-	}
-
-	asyncGetPost() {
-		return new Promise((resolve) => {
-			this.ref.on("value", (post) => {
-				resolve(post.val());
-			});
-		});
 	}
 
 	updatePost() {
@@ -220,7 +212,13 @@ class Forum {
 			clicks: 0,
 		});
 	}
-
+	getPost(postId) {
+		return new Promise((resolve) => {
+			this.database.child(postId).once("value", (post) => {
+				resolve(post.val());
+			});
+		});
+	}
 	/*
       > gets all posts from the specified forumn/field
         >> note: I use forumn and field interchangeably because each forum is supposed to represent a field/industry
