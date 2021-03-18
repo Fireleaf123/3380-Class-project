@@ -237,7 +237,4 @@ class Forum {
 	}
 }
 
-
-
-//exports
-//export { DataHandler };
+export { Forum, Post };
