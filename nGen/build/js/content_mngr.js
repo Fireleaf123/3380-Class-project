@@ -1,249 +1,263 @@
 class Search {
-  constructor(field) {
-    this.database = firebase.database.ref(`field/posts`);
-  }
+	constructor(field) {
+		this.database = firebase.database.ref(`field/posts`);
+	}
 
-  findPost(userId, postTitle) {
-    this.database.ref
-      .orderByChild("title")
-      .startAt(postTitle)
-      .endAt(postTitle + "\uf8ff");
-  }
+	findPost(userId, postTitle) {
+		this.database.ref
+			.orderByChild("title")
+			.startAt(postTitle)
+			.endAt(postTitle + "\uf8ff");
+	}
 }
 
-class DataHandler {
-  constructor() {
-    this.database = firebase.database();
-  }
+class Post {
+	constructor(forum, postId) {
+		this.ref = firebase.database().ref(`${forum}/posts/${postId}`);
+		this.forum = forum;
+		this.postId = postId;
+		this.post; 
+		this.getPost();
+		console.log(this.post)
+	}
+	//note: currently untested without a working forumn
+	writeComment(comment) {
+		let newKey = this.database.ref().push().key;
 
-  writePost(userId, timeSubmitted, title, field, content) {
-    let newKey = this.database.ref().child("comments").push().key;
+		firebase.database().ref(`${this.forum}/posts/${this.postId}/comments/${newKey}`).set({
+			userId: userId,
+			comment: comment,
+			timeSubmitted: Date.now(),
+		});
+	}
 
-    this.database.ref(`${field}/posts/${newKey}`).set({
-      userId: userId,
-      title: title,
-      content: content,
-      timeSubmitted: timeSubmitted,
-      clicks: 0,
-    });
-  }
+	/*
+		  might just keep it to only comments for simplicity.
+		  but writing the methods for replies regardless
+		  note: currently untested without a working forumn
+		*/
+	writeReply(userId, postID, commentID, content) {
+		let newKey = this.database.ref().child.push().key;
 
-  //note: currently untested without a working forumn
-  writeComment(userId, comment, field, postId) {
-    let newKey = this.database.ref().child("comments").push().key;
+		this.database.ref(`${this.forum}/${postID}/comments/comment-${commentID}/replies/reply-${newKey}`).set({
+			userId: userId,
+			reply: content,
+			timeSubmitted: Date.now(),
+		});
+	}
 
-    this.database.ref(`${field}/posts/${postId}/comments/${newKey}`).set({
-      userId: userId,
-      comment: comment,
-    });
-  }
+	getPost() {
+	
+		this.ref.on("value", (post) => {
+			this.post = post.val();
+		});
+	}
 
-  /*
+	updatePost() {
+		this.getPost();
+	}
+
+	getUser() {
+		return this.post.userId;
+	}
+
+	getTitle() {
+		return this.post.title;
+	}
+
+	getContent() {
+		return this.post.content;
+	}
+
+	getTimeSubmitted() {
+		return this.post.timeSubmitted;
+	}
+
+	getPostId() {
+		return this.postId;
+	}
+
+	getClicks() {
+		this.updatePost();
+
+		let val = this.post.clicks;
+
+		if (val === undefined) return 0;
+
+		return val;
+	}
+
+	//incremenets posts count on each click.
+	updateClicks() {
+		this.ref.child("clicks").set(this.getClicks() - 1);
+	}
+
+	getAComment(commentId) {
+		let commentRef = firebase.database().ref(`${this.forum}/posts/${this.postId}/comments/${commentId}`);;
+
+		commentRef.once("value", (comment) => {
+			return comment.val();
+		});
+	}
+
+	getAllComments(container) {
+
+
+		let get = this.ref.child('comments').on("value", (comments) => {
+			comments.forEach((comment) => {
+				let c = this.getAComment(comment);
+				this.createComments(container,c.user,c.comment,c.timeSubmitted);
+			});
+		});
+		setTimeout(() => {
+			this.ref.off("value", get);
+		}, 1500);
+	}
+
+	/*
       might just keep it to only comments for simplicity.
       but writing the methods for replies regardless
-      note: currently untested without a working forumn
     */
-  writeReply(userId, timeSubmitted, postID, commentID, content) {
-    let newKey = this.database.ref().child("comments").push().key;
+	getAllReplies(location) {}
 
-    this.database.ref(`${field}/${postID}/comments/${commentID}/replies/reply${newKey}`).set({
-      userId: userId,
-      reply: content,
-    });
-  }
+	getAReply(location) {}
 
-  /*
-      creates containers, called postBox, that stores
-      post info(userID,title,content, and timeSubmmited)
-      in seperate divs(userBox,titleBox,contentBox, and timeSubmitedBox)
-      that are then pasted added into postBox using appenChild().
-      
-      postBox, now having all the info stored, is pasted onto the body.
+	createComments(commentArea,userId,comment,timeSubmitted){
+	
+    let commentBox = document.createElement('div');
+    let commentBox2 = document.createElement('div');
+    let userBox = document.createElement('div');
+    let commentBox4 = document.createElement('div');
+    let image = document.createElement('img')
+    let contentBox = document.createElement('div');
+    let contentBox2 = document.createElement('blockquote');
+    let testComment = document.createElement('p');
+    let contentClearFix = document.createElement('div');
+    let timeBox = document.createElement('div');
+    
+    
+    testComment.innerHTML = comment;
+    userBox.innerHTML = userId;
+    timeBox.innerHTML = timeSubmitted;
+    
+    commentBox.classList.add("post");
+    commentBox2.classList.add("topwrap");
+    userBox.classList.add("userinfo");
+    commentBox4.classList.add("avatar");
+    contentBox.classList.add("posttext");
+    contentClearFix.classList.add("clearfix");
+    image.src = "images/avatar3.jpg";
+  
+    commentBox.appendChild(commentBox2);
+    commentBox2.appendChild(userBox);
+    userBox.appendChild(commentBox4);
+    commentBox4.appendChild(image);
+    contentBox.appendChild(contentBox2);
+    contentBox2.appendChild(testComment);
+    commentBox2.appendChild(contentBox);
+    commentBox2.appendChild(timeBox);
+    commentBox2.appendChild(contentClearFix);
+  
+    document.body.appendChild(commentBox);
+    
+	}
+	createPost(container) {
+		let post = this;
+		let postBox = document.createElement("div");
 
-      >>IMPORTANT NOTE: On the actual forum/field pages themselves(i.e the Basket Weaving Sub-Forum)
-                        postBox would not be pasted on the body directly, but in a specific container.
+		let userID = post.getUser();
+		let title = post.getTitle();
+		let content = post.getContent();
+		let timeSubmitted = post.getTimeSubmitted();
+
+		postBox.classList.add("container", "border", "POSTS", "post"); //using boostrap container and border
+		postBox.setAttribute("id", post.getPostId());
+
+		/**
+		 * increments clicks on post by 1, then redirects to actual post
+		 * currently redirects to index.html, >> victoira make sure to redirect to actual post(topic page)
+		 * when its done
+		 */
+		postBox.onclick = () => {
+			this.updateClicks();
+			location.href = "index.html";
+		};
+
+		/*Below are examples of styling using JS
+      userBox.classList.add('border') -> example of adding/using boostrap  
+      userBox.style.backgroundColor = 'black';
+      userBox.style.color = 'gold';
     */
-   //gets the clicks of the post with id postId in the specified forumn
-  getClicks(postId, field) {
-    let val = 0;
-    this.database.ref(`${field}/posts/${postId}`).once("value", (post) => {
-      val = post.val().clicks;
-    });
-    if (val === undefined) return 0;
-    return val;
-  }
 
-  //incremenets posts count on each click.
-  updateClicks(field, postId) {
-    this.database
-      .ref(`${field}/posts/${postId}`)
-      .child("clicks")
-      .set(this.getClicks(postId, field) + 1);
-  }
+		//creating a div to hold userID
+		let userBox = document.createElement("div");
+		userBox.style.width = "fit-content"; //set width to fit content in the div, UserBox.
+		userBox.innerHTML = userID; //putting content into the div UserBox.
 
-  addPost(userID, title, content, timeSubmitted, postId, field) {
-    let postBox = document.createElement("div");
+		let titleBox = document.createElement("div");
+		titleBox.style.width = "fit-content";
+		titleBox.innerHTML = title;
 
-    postBox.classList.add("container", "border"); //using boostrap container and border
-    postBox.setAttribute("id", postId);
+		let contentBox = document.createElement("div");
+		contentBox.style.width = "fit-content";
+		contentBox.innerHTML = content;
 
-    /**
-     * increments clicks on post by 1, then redirects to actual post
-     * currently redirects to index.html, >> victoira make sure to redirect to actual post(topic page)
-     * when its done
-     */
-    postBox.onclick = () => {
-      this.updateClicks(field, postId);
-      location.href = "index.html";
-    };
+		let timeSubmittedBox = document.createElement("div");
+		timeSubmittedBox.style.width = "fit-content";
 
-    /*Below are examples of styling using JS
-        userBox.classList.add('border') -> example of adding/using boostrap  
-        userBox.style.backgroundColor = 'black';
-        userBox.style.color = 'gold';
-      */
+		timeSubmittedBox.innerHTML = new Date(timeSubmitted);
 
-    //creating a div to hold userID
-    let userBox = document.createElement("div");
-    userBox.style.width = "fit-content"; //set width to fit content in the div, UserBox.
-    userBox.innerHTML = userID; //putting content into the div UserBox.
+		postBox.appendChild(userBox);
+		postBox.appendChild(titleBox);
+		postBox.appendChild(contentBox);
+		postBox.appendChild(timeSubmittedBox);
 
-    let titleBox = document.createElement("div");
-    titleBox.style.width = "fit-content";
-    titleBox.innerHTML = title;
+		/**
+		 *currently pastes each postBox onto the body.
+		 * This was done for the sake of experimenting.
+		 * In actuality,  each postBox would be pasted onto
+		 * document.getElementById(postContainer) instead of document.body
+		 */
+		container.appendChild(postBox);
+	}
+}
 
-    let contentBox = document.createElement("div");
-    contentBox.style.width = "fit-content";
-    contentBox.innerHTML = content;
+class Forum {
+	constructor(forum) {
+		this.forum = forum;
+		this.database = firebase.database();
+	}
 
-    let timeSubmittedBox = document.createElement("div");
-    timeSubmittedBox.style.width = "fit-content";
-    timeSubmittedBox.innerHTML = timeSubmitted;
+	writePost(userId, title, content) {
+		let newKey = this.database.ref().push().key;
+		this.database.ref(`${this.forum}/posts/${newKey}`).set({
+			userId: userId,
+			title: title,
+			content: content,
+			timeSubmitted: Date.now(),
+			clicks: 0,
+		});
+	}
 
-    postBox.appendChild(userBox);
-    postBox.appendChild(titleBox);
-    postBox.appendChild(contentBox);
-    postBox.appendChild(timeSubmittedBox);
-
-    /**
-     *currently pastes each postBox onto the body.
-     * This was done for the sake of experimenting.
-     * In actuality,  each postBox would be pasted onto
-     * document.getElementById(postContainer) instead of document.body
-     */
-    document.body.appendChild(postBox);
-  }
-
-  /*
+	/*
       > gets all posts from the specified forumn/field
         >> note: I use forumn and field interchangeably because each forum is supposed to represent a field/industry
     */
-  getAllPosts(field) {
-    let forum = this.database.ref(`${field}/posts/`); //reference to posts in the specified forum/field
+	getAllPosts(container) {
+		let forum = this.database.ref(`${this.forum}/posts/`);
 
-    forum.on("value", (posts) => {
-      for (const post in posts) {
-        let forum_page = posts[post].valueOf().val();
-        for (const post in forum_page) {
-          this.addPost(forum_page[post].userId, forum_page[post].title, forum_page[post].content, forum_page[post].timeSubmitted, post, field);
-        }
-      }
-    });
-  }
-
-  getAllComments(field, postID) {}
-
-  getAComment(field, postID) {}
-
-  /*
-      might just keep it to only comments for simplicity.
-      but writing the methods for replies regardless
-    */
-  getAllReplies(location) {}
-
-  getAReply(location) {}
-}
-
-function getTime() {
-  let date = new Date();
-
-  let month = ("0" + (date.getUTCMonth() + 1)).slice(-2);
-  let day = ("0" + date.getUTCDate()).slice(-2);
-
-  return `${month}-${day}-${date.getUTCFullYear()} ${date.getUTCHours()}:${date.getUTCMinutes()}`;
-}
-
-//if any item in the list has is blank, has no value, it returns false
-function allFieldsFilled(list) {
-  return !list.includes("");
-}
-
-/*
-  >> called when post button(id="submit") is clicked
-  >> sends post_data to database to be stored
-*/
-
-function sendPost(userId) {
-  let title = document.getElementById("post_title").value;
-  let field = document.getElementById("select_field").value;
-  let content = document.getElementById("post_content").value;
-
-  const dataHandler = new DataHandler();
-
-  if (allFieldsFilled([title, field, content])) {
-    dataHandler.writePost(userId, date.now(), title, field, content);
-    setInterval(() => {
-      location.href = "index.html";
-    }, 1500); //sends user back to homepage after post creation
-  } else {
-    alert("Please Fill Out All Fields");
-  }
+		let get = forum.orderByChild("clicks").on("value", (posts) => {
+			posts.forEach((childPost) => {
+				let p = new Post(this.forum, childPost.key).createPost(container);
+			});
+		});
+		setTimeout(() => {
+			forum.orderByChild("clicks").off("value", get);
+		}, 1500);
+	}
 }
 
 
-function sendComment(userId, field, postId) {
-  let comment = document.getElementById("reply").value;
-  console.log(comment);
-  const dataHandler = new DataHandler();
-
-  dataHandler.writeComment(userId, comment, field, postId);
-}
-
-function createComment(userId,content,timeSubmitted){
-
-  let commentBox = document.createElement('div');
-  let commentBox2 = document.createElement('div');
-  let commentBox3 = document.createElement('div');
-  let commentBox4 = document.createElement('div');
-  let image = document.createElement('img')
-  let contentBox = document.createElement('div');
-  let contentBox2 = document.createElement('blockquote');
-  let testComment = document.createElement('p');
-  let contentClearFix = document.createElement('div');
-  
-  testComment.innerHTML = content;
-  
-  commentBox.classList.add("post");
-  commentBox2.classList.add("topwrap");
-  commentBox3.classList.add("userinfo");
-  commentBox4.classList.add("avatar");
-  contentBox.classList.add("posttext");
-  contentClearFix.classList.add("clearfix");
-  image.src = "images/avatar3.jpg";
-
-  commentBox.appendChild(commentBox2);
-  commentBox2.appendChild(commentBox3);
-  commentBox3.appendChild(commentBox4);
-  commentBox4.appendChild(image);
-  contentBox.appendChild(contentBox2);
-  contentBox2.appendChild(testComment);
-  commentBox2.appendChild(contentBox);
-  commentBox2.appendChild(contentClearFix);
-
-  document.body.appendChild(commentBox);
-  
-  
-}
 
 //exports
 //export { DataHandler };

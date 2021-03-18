@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TEST</title>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Vibin</title>
 
-    <script defer src="/__/firebase/8.2.8/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/8.2.8/firebase-auth.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-database.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-firestore.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-storage.js"></script>
-    <!-- 
+		<script defer src="/__/firebase/8.2.8/firebase-app.js"></script>
+		<!-- include only the Firebase features as you need -->
+		<script defer src="/__/firebase/8.2.8/firebase-auth.js"></script>
+		<script defer src="/__/firebase/8.2.8/firebase-database.js"></script>
+		<script defer src="/__/firebase/8.2.8/firebase-firestore.js"></script>
+		<script defer src="/__/firebase/8.2.8/firebase-storage.js"></script>
+		<!-- 
       initialize the SDK after all desired features are loaded, set useEmulator to false
       to avoid connecting the SDK to running emulators.
     -->
@@ -46,71 +46,105 @@
       
     </script>
       <script>
+        
         function createComment(userId,content,timeSubmitted){
 
-            let commentBox = document.createElement('div');
-            let commentBox2 = document.createElement('div');
-            let commentBox3 = document.createElement('div');
-            let commentBox4 = document.createElement('div');
-            let image = document.createElement('img')
-            let contentBox = document.createElement('div');
-            let contentBox2 = document.createElement('blockquote');
-            let testComment = document.createElement('p');
-            let contentClearFix = document.createElement('div');
            
-            
-
-
-            
-            testComment.innerHTML = content;
-            
-            
           
 
-            commentBox.classList.add("post");
-            commentBox2.classList.add("topwrap");
-            commentBox3.classList.add("userinfo");
-            commentBox4.classList.add("avatar");
-            contentBox.classList.add("posttext");
-            contentClearFix.classList.add("clearfix");
-            image.src = "images/avatar3.jpg";
-
-            commentBox.appendChild(commentBox2);
-            commentBox2.appendChild(commentBox3);
-            commentBox3.appendChild(commentBox4);
-            commentBox4.appendChild(image);
-            contentBox.appendChild(contentBox2);
-            contentBox2.appendChild(testComment);
-            commentBox2.appendChild(contentBox);
-            commentBox2.appendChild(contentClearFix);
+let commentBox = document.createElement('div');
+let commentBox2 = document.createElement('div');
+let commentBox3 = document.createElement('div');
+let commentBox4 = document.createElement('div');
+let image = document.createElement('img')
+let contentBox = document.createElement('div');
+let contentBox2 = document.createElement('blockquote');
+let testComment = document.createElement('p');
+let contentClearFix = document.createElement('div');
 
 
 
+
+
+testComment.innerHTML = content;
+
+
+
+
+commentBox.classList.add("post");
+commentBox2.classList.add("topwrap");
+commentBox3.classList.add("userinfo");
+commentBox4.classList.add("avatar");
+contentBox.classList.add("posttext");
+contentClearFix.classList.add("clearfix");
+image.src = "images/avatar3.jpg";
+
+commentBox.appendChild(commentBox2);
+commentBox2.appendChild(commentBox3);
+commentBox3.appendChild(commentBox4);
+commentBox4.appendChild(image);
+contentBox.appendChild(contentBox2);
+contentBox2.appendChild(testComment);
+commentBox2.appendChild(contentBox);
+commentBox2.appendChild(contentClearFix);
+
+
+
+
+
+
+
+
+
+document.body.appendChild(commentBox);
+
+
+}
+
+function createComments(commentArea,userId,comment,timeSubmitted){
+	
+  let commentBox = document.createElement('div');
+  let commentBox2 = document.createElement('div');
+  let userBox = document.createElement('div');
+  let commentBox4 = document.createElement('div');
+  let image = document.createElement('img')
+  let contentBox = document.createElement('div');
+  let contentBox2 = document.createElement('blockquote');
+  let testComment = document.createElement('p');
+  let contentClearFix = document.createElement('div');
+  let timeBox = document.createElement('div');
+  
+  
+  testComment.innerHTML = comment;
+  userBox.innerHTML = userId;
+  timeBox.innerHTML = timeSubmitted;
+  
+  commentBox.classList.add("post");
+  commentBox2.classList.add("topwrap");
+  userBox.classList.add("userinfo");
+  commentBox4.classList.add("avatar");
+  contentBox.classList.add("posttext");
+  contentClearFix.classList.add("clearfix");
+  image.src = "images/avatar3.jpg";
+
+  commentBox.appendChild(commentBox2);
+  commentBox2.appendChild(userBox);
+  userBox.appendChild(commentBox4);
+  commentBox4.appendChild(image);
+  contentBox.appendChild(contentBox2);
+  contentBox2.appendChild(testComment);
+  commentBox2.appendChild(contentBox);
+  commentBox2.appendChild(timeBox);
+  commentBox2.appendChild(contentClearFix);
+
+  document.body.appendChild(commentBox);
+  
+}
             
-
-
-           
-           
-
-            document.body.appendChild(commentBox);
-            
-            
-        }
+        
         document.body.style.backgroundColor = "black"
-        /**function test1(){
-
-          let cup = document.createElement("div");
-          let butn = document.createElement("span");
-
-          butn.textContent = "Test";
-          cup.append(butn);
-
-          document.body.append(cup)
-        }
-
-        test1();
-        **/
-        createComment();
+    
+        createComments();
       </script>
   </body>
 </html>
