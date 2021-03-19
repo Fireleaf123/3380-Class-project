@@ -40,16 +40,6 @@ function signUpWithEmailPassword() {
   // [END auth_signin_password]
 }
 
-function googleLogin(){
-  const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider)
-      .then(result =>{
-          const user = result.user;
-          document.write('Hello ' + user.displayName);
-          console.log(user)
-      })
-      .cath(console.log)
-}
 
 function signInWithEmailPassword() {
   var email = document.getElementById("email").value;
@@ -67,26 +57,23 @@ function signInWithEmailPassword() {
       var errorMessage = error.message;
     });
 }
-
-
- 
-  
   //initialize variables for saveUser()
 
-function saveUser(userName, userBbday, userId) {
+function saveUser(userName, userBbday, userId, userRole) {
   var userId = firebase.auth().currentUser.uid;
   var userName = document.getElementById("userName").value;
   var userBday = document.getElementById("userBday").value;
+  var userRole = document.getElementById("userRole").value;
   //let newKey = this.database.ref().push().key;
   firebase.database().ref(`users/${userId}/`).set({
       userId: userId,
       username: userName,
       birthday: userBday,
+      userrole: userRole,
   });
-  location.href = "index.html"
+  setTimeout(function(){location.href = "index.html"} , 200);
 }
 function UserStateChecker(){
-
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
     // User is signed in.
@@ -95,4 +82,8 @@ function UserStateChecker(){
       console.log("there is no signed in user");
     }
   });
+}
+
+function RedirectToNewAccount(){
+  setTimeout(function(){location.href = "index.html"} , 2000);
 }
