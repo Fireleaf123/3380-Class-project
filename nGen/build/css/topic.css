@@ -1,0 +1,44 @@
+.commentContent {
+	padding-left: 10px;
+	border: 2x solid blue;
+}
+#postUser {
+}
+#title {
+	box-shadow: 1px 1px 1px #5f5f5f98;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#timeCreated {
+}
+
+#content {
+	border: 1px solid #bfbfbf;
+}
+
+#comments {
+}
+
+#user {
+}
+
+#userComment {
+}
+
+#userTimeSub {
+	
+}
+
+.replies{
+	padding-left: 50px;
+}
+
+.replyTime{
+	
+}
+
+.replyBtn{
+	max-width: 30px;
+
+}
