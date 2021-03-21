@@ -15,7 +15,7 @@
 }
 
 #content {
-	/*border: 1px solid #bfbfbf;*/
+	border: 1px solid #00e63a;
 }
 
 #comments {
@@ -32,14 +32,15 @@
 
 #userTimeSub {
 	text-decoration: overline;
+	font-style: italic;
 }
 
 .replies{
-	padding-left: 50px;
+	padding-right: 100px;
 }
 
 .replyTime{
-	text-decoration: overline;
+	
 }
 
 .replyBtn{
