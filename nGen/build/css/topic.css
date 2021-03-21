@@ -1,5 +1,5 @@
 .commentContent {
-	*padding-left: 10px;*
+	*padding-left: 10px;
 	border: 2x solid blue;
 }
 #postUser {
@@ -11,24 +11,27 @@
 }
 
 #timeCreated {
+	border: 10px #000;
 }
 
 #content {
-	border: 1px solid #bfbfbf;
+	/*border: 1px solid #bfbfbf;*/
 }
 
 #comments {
-	
+	border: 5px #000;
 }
 
 #user {
+	padding-bottom: 5px;
 }
 
 #userComment {
+	text-decoration: underline;
 }
 
 #userTimeSub {
-	
+	text-decoration: overline;
 }
 
 .replies{
@@ -36,7 +39,7 @@
 }
 
 .replyTime{
-	
+	text-decoration: overline;
 }
 
 .replyBtn{
