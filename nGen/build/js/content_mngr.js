@@ -19,7 +19,7 @@ class Post {
 		this.forum = forum;
 		this.postId = postId;
 		this.post;
-		this.getPost();
+		this.#getPost();
 	}
 
 	//note: currently untested without a working forumn
@@ -48,7 +48,7 @@ class Post {
 		});
 	}
 
-	getPost() {
+	#getPost() {
 		this.ref.on("value", (post) => {
 			this.post = post.val();
 		});
@@ -56,13 +56,9 @@ class Post {
 	getThisPost() {
 		return this.post;
 	}
-	
-	setPost(post) {
-		this.post = post;
-	}
 
-	updatePost() {
-		this.getPost();
+	#updatePost() {
+		this.#getPost();
 	}
 
 	getUser() {
@@ -88,7 +84,7 @@ class Post {
 		return this.forum;
 	}
 	getClicks() {
-		this.updatePost();
+		this.#updatePost();
 
 		let val = this.post.clicks;
 
