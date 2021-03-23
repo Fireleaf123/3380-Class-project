@@ -14,7 +14,10 @@ const forum = new Cookie().getCookie("forum");
 const postId = new Cookie().getCookie("postId");
 
 const POST = new Post(forum, postId); 
+//const COMMENT = new Comment(forum,postId,)
 
+console.log(POST.getParent(),POST.getId())
+console.log(POST.getAttribute('title'));
 
 async function setPost(){
 	user.innerHTML = await POST.getAttribute('userId');

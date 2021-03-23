@@ -12,24 +12,17 @@ class Search {
 			.endAt(postTitle + "\uf8ff");
 	}
 }
-
-class postFactory{
-	constructor(parentContainer){
-		this.parentContainer
+class content{
+	constructor(content){
+		
 	}
-	createPost() {
+	#createPost(forum,id) {
 		let postBox = document.createElement("div");
 
-		let userID = this.getUser();
-		let title = this.getTitle();
-		let content = this.getContent();
-		let timeSubmitted = this.getTimeSubmitted();
-		let postId = this.getPostId();
-		let forum = this.getForum();
-		//console.log(postId,forum)
+		let post = new Post(forum,Id);
 
 		postBox.classList.add("POSTS", "post"); //using boostrap container and border
-		postBox.setAttribute("id", postId);
+		postBox.setAttribute("id", post.getAttribute('id'));
 
 		/**
 		 * increments clicks on post by 1, then redirects to actual post
@@ -38,8 +31,8 @@ class postFactory{
 		 */
 		postBox.onclick = () => {
 			this.updateClicks();
-			new Cookie().setCookie("postId", postId, 30);
-			new Cookie().setCookie("forum", forum, 30);
+			new Cookie().setCookie("postId", post.getAttribute('id'), 7);
+			new Cookie().setCookie("forum", post.getAttribute('id'), 7);
 			location.href = "02_topic.html";
 		};
 
@@ -52,15 +45,15 @@ class postFactory{
 		//creating a div to hold userID
 		let userBox = document.createElement("div");
 		userBox.classList.add("postContent");
-		userBox.innerHTML = '<i class="fa fa-user"></i> ' + userID; //putting content into the div UserBox.
+		userBox.innerHTML = '<i class="fa fa-user"></i> ' + post.getAttribute('userId'); //putting content into the div UserBox.
 
 		let titleBox = document.createElement("div");
 		titleBox.classList.add("postContent");
-		titleBox.innerHTML = title;
+		titleBox.innerHTML = post.getAttribute('title');
 
 		let contentBox = document.createElement("div");
 		contentBox.classList.add("postContent");
-		contentBox.innerHTML = content;
+		contentBox.innerHTML = post.getAttribute('content');
 
 		let timeSubmittedBox = document.createElement("div");
 		timeSubmittedBox.classList.add("postContent");
@@ -82,7 +75,7 @@ class postFactory{
 		return postBox
 	}
 
-	createComments(userId, comment, timeSubmitted, id, type) {
+	#createComments(parentRef,id) {
 		let mainCont = document.createElement("div");
 		let container = document.createElement("div");
 		let userBox = document.createElement("div");
@@ -90,8 +83,10 @@ class postFactory{
 		let replyNTimeCont = document.createElement("div");
 		let timeBox = document.createElement("div");
 		let repliesCont;
-	
-		container.setAttribute("id", id);
+		
+		let comment = new Comment(parentRef,id);
+
+		container.setAttribute("id", comment);
 		container.classList.add("post");
 	
 		userBox.setAttribute("id", "user");
@@ -141,12 +136,68 @@ class postFactory{
 		}
 	}
 }
-class Comment {
+/*
+class contentFactory extends content{
+	constructor(parentContainer,object){
+		this.parentContainer;
+		this.object = object;
+	}
+
+	#getContent(contentType,isReply){
+		if(contentType === 'post'){
+			super(this.object,contentType);
+			return super.#createPost()
+		}
+		else if(contentType === 'comment'){
+			if(isReply){
+				//super(this.object,contentType);
+				return super.#createComment('reply');
+			}
+				
+			else{
+				super(this.object);
+				return super.#createComment('comment');
+
+			}
+		}
+	}
+
+	displayContent(contentType,isReply){
+		this.parentContainer.appendChild(this.#getContent(contentType,isReply))
+	}
+}
+*/
+class Data{
+	constructor(parent,id,type){
+		this.parent = parent;
+		this.id = id;
+		this.ref = firebase.database().ref(`${parent}/${type}/${id}`);
+		console.log(`${parent}/${type}`)
+	}
+	//returns the id
+	getId(){ return this.id; }
+
+	getParent(){ return this.parent;}
+
+	/**
+	 * returns the specified comment attribute
+	 * i.e userId,comment, and timeSubmitted
+	 * @returns {Any}
+	 */
+	 getAttribute(attribute){
+		let location = this.ref.child(attribute);
+		return new Promise( (resolve,reject) => {
+			location.once('value', (data) => {
+				resolve(data.val());
+			})
+		});
+	}
+}
+
+class Comment extends Data{
 	
-	constructor(parentRef,commentId){
-		this.parentref = parentRef;
-		this.commentId = commentId;
-		this.ref = parentRef.child(`comments/${commentId}`);
+	constructor(forum,postId,commentId){
+		super(`${forum}/posts/${postId}/comments`,commentId);
 	}
 
 	/**
@@ -174,20 +225,7 @@ class Comment {
 			})
 		})
 	}
-	/**
-	 * returns the specified comment attribute
-	 * i.e userId,comment, and timeSubmitted
-	 * @returns {Any}
-	 */
-	getAttribute(attribute){
-		let location = this.ref.child(attribute);
-		return new Promise( (resolve,reject) => {
-			location.once('value', (data) => {
-				resolve(data.val());
-			})
-		});
-	}
-
+	
 	/**
 	 * returns list of all replies for the given comments as an array
 	 * @returns {Array}
@@ -203,13 +241,9 @@ class Comment {
 	}
 }
 
-class Post {
+class Post extends Data{
 	constructor(forum, postId) {
-		this.ref = firebase.database().ref(`${forum}/posts/${postId}`);
-		this.forum = forum;
-		this.postId = postId;
-		this.post;
-		this.#getPost();
+		super(`${forum}/posts`,postId)
 	}
 
 	//note: currently untested without a working forumn
@@ -223,10 +257,6 @@ class Post {
 		});
 	}
 
-	getForum(){return this.forum;}
-
-	getPostId(){return this.postId;}
-
 	getPost(){
 		return new Promise( (resolve,reject) =>{
 			this.ref.once('value', (post) => {resolve(post.val())})
@@ -235,18 +265,11 @@ class Post {
 
 	async #updatePost(){this.post =  await this.getPost();}
 
-	getAttribute(attribute){
-		let location = this.ref.child(attribute);
-		return new Promise( (resolve,reject) => {
-			location.once('value', (data) => {
-				resolve(data.val());
-			})
-		});
-	}
 	async updateClicks() {
 		let clicks = await this.getAttribute('clicks') === undefined ? 0 : await this.getAttribute('clicks');
 		this.ref.child("clicks").set(clicks - 1);
 	}
+
 	/**
 	 * creates comment objects of children of parent post, and stores them in a list
 	 * @returns {Array}
@@ -265,13 +288,13 @@ class Post {
 
 class Forum {
 	constructor(forum) {
-		this.forum = forum;
-		this.database = firebase.database().ref(`${this.forum}/posts/`);
+		this.forum = `${forum}/posts`;
+		this.ref = firebase.database().ref(this.forum);
 	}
 
 	writePost(userId, title, content) {
-		let newKey = this.database.push().key;
-		this.database.child(newKey).set({
+		let newKey = this.ref.child('posts').push().key;
+		this.ref.child(newKey).set({
 			userId: userId,
 			title: title,
 			content: content,
@@ -279,29 +302,34 @@ class Forum {
 			clicks: 0,
 		});
 	}
-	getPost(postId) {
-		return new Promise((resolve) => {
-			this.database.child(postId).once("value", (post) => {
-				resolve(post.val());
-			});
-		});
-	}
+
+
 	/*
       > gets all posts from the specified forumn/field
         >> note: I use forumn and field interchangeably because each forum is supposed to represent a field/industry
     */
-	getAllPosts(container) {
-		//let forum = this.database.ref(`${this.forum}/posts/`);
+	getAllPosts() {
+		let listOfPosts = [];
 
-		let get = this.database.orderByChild("clicks").on("value", (posts) => {
+		let get = this.ref.orderByChild("clicks").on("value", (posts) => {
 			posts.forEach((childPost) => {
-				let p = new Post(this.forum, childPost.key).createPost(container);
+				new Post(this.ref, childPost.key).getPost().then(
+					(post) =>{
+						listOfPosts.push(post);
+					}
+				)
+
 			});
-		});
+		})
+
 		setTimeout(() => {
-			this.database.orderByChild("clicks").off("value", get);
-		}, 1500);
+			this.ref.orderByChild("clicks").off("value", get);
+		}, 1500); 
+
+		return listOfPosts;
 	}
 }
+
+
 
 export { Forum, Post , Comment};
