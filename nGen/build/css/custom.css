@@ -1173,3 +1173,15 @@ a.down:hover {
 		padding: 0;
 	}
 }
+#signupbutton{
+	position: relative;
+	right: 450px;
+	bottom: 75px;
+}
+
+#redirect_button{
+	width: 200px;
+	position: relative;
+	bottom: 135px;
+	left: 88px;
+}

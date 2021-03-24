@@ -25,3 +25,5 @@ document.getElementById("submit").onclick = () => {
 	savePost("baboya");
 };
 
+  
+

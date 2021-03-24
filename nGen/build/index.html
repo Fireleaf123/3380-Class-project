@@ -21,12 +21,13 @@
       to avoid connecting the SDK to running emulators.
     -->
     <script defer src="/__/firebase/init.js?useEmulator=false"></script>
-
+    <script type="module" src="js/index.js"></script>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom -->
     <link href="css/custom.css" rel="stylesheet">
+    <link href="css/home.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -57,7 +58,7 @@
                       <div class="dropdown">
                           <a data-toggle="dropdown" href="#" >Borderlands 2</a> <b class="caret"></b>
                           <ul class="dropdown-menu" role="menu">
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Borderlands 1</a></li>
+                              <li role="presentation"><a role="menuitem" tabindex="-1" a href="05_login.html">Login</a></li>
                               <li role="presentation"><a role="menuitem" tabindex="-2" href="#">Borderlands 2</a></li>
                               <li role="presentation"><a role="menuitem" tabindex="-3" href="#">Borderlands 3</a></li>
 
@@ -82,15 +83,15 @@
                       <div class="env pull-left"><i class="fa fa-envelope"></i></div>
 
                       <div class="avatar pull-left dropdown">
-                          <a data-toggle="dropdown" href="#"><img src="images/avatar.jpg" alt="" /></a> <b class="caret"></b>
-                          <div class="status green">&nbsp;</div>
-                          <ul class="dropdown-menu" role="menu">
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">My Profile</a></li>
-                              <li role="presentation"><a role="menuitem" tabindex="-2" href="#">Inbox</a></li>
-                              <li role="presentation"><a role="menuitem" tabindex="-3" href="#">Log Out</a></li>
-                              <li role="presentation"><a role="menuitem" tabindex="-4" href="04_new_account.html">Create account</a></li>
-                          </ul>
+                          <form  id ="account" action="05_login.html" method="post" class="form">
+                              <button class="btn btn-primary">Login</button>
+                          </form>
                       </div>
+                      <div class="avatar pull-left dropdown">
+                        <form  method="post" class="form">
+                            <p id ="logout" class="btn btn-primary">logout</p>
+                        </form>
+                    </div>
                       
                       <div class="clearfix"></div>
                   </div>
@@ -809,6 +810,7 @@
   <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
   <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 
+  
   <script src="js/bootstrap.min.js"></script>
 
 
