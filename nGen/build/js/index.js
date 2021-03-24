@@ -1,5 +1,5 @@
 
-import {User} from './firebase.js'
+import {User} from './User.js'
 
 
    const FIRE = new User();
