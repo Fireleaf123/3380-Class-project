@@ -83,7 +83,6 @@ class Post extends Data {
 	constructor(forum, postId) {
 		super(`${forum}/posts/`, postId);
 		this.forum = forum;
-		this.postId = postId;
 	}
 
 	//note: currently untested without a working forumn
@@ -146,7 +145,7 @@ class Forum extends Data {
       > gets all posts from the specified forumn/field
         >> note: I use forumn and field interchangeably because each forum is supposed to represent a field/industry
     */
-	getPosts() {
+	async getPosts() {
 		let listOfPosts = [];
 
 		let get = this.ref.orderByChild("clicks").on("value", (posts) => {
@@ -235,7 +234,7 @@ class PostBox {
 		let postBox = document.createElement("div");
 
 		postBox.classList.add("POSTS", "post"); //using boostrap container and border
-		postBox.setAttribute("id", this.post.getAttribute("id"));
+		postBox.setAttribute("id",this.post.getId());
 
 		/**
 		 * increments clicks on post by 1, then redirects to actual post
@@ -244,29 +243,29 @@ class PostBox {
 		 */
 		postBox.onclick = () => {
 			this.post.updateClicks();
-			new Cookie().setCookie("postId", this.post.getAttribute("id"), 7);
-			new Cookie().setCookie("forum", this.post.getAttribute("id"), 7);
+			new Cookie().setCookie("postId", this.post.getId(), 7);
+			new Cookie().setCookie("forum", this.post.forum, 7);
 			location.href = "02_topic.html";
 		};
 
 		//creating a div to hold userID
 		let userBox = document.createElement("div");
 		userBox.classList.add("postContent");
-		userBox.innerHTML = '<i class="fa fa-user"></i> ' + this.post.getAttribute("userId"); //putting content into the div UserBox.
+		this.post.getAttribute("userId").then( user => userBox.innerHTML = '<i class="fa fa-user"></i> ' + user); //putting content into the div UserBox.
 
 		let titleBox = document.createElement("div");
 		titleBox.classList.add("postContent");
-		titleBox.innerHTML = this.post.getAttribute("title");
+		this.post.getAttribute("title").then( title => titleBox.innerHTML = title);
 
 		let contentBox = document.createElement("div");
 		contentBox.classList.add("postContent");
-		contentBox.innerHTML = this.post.getAttribute("content");
+		this.post.getAttribute("content").then( content => contentBox.innerHTML = content);
 
 		let timeSubmittedBox = document.createElement("div");
 		timeSubmittedBox.classList.add("postContent");
 		timeSubmittedBox.style.width = "fit-content";
 
-		timeSubmittedBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(this.post.getAttribute("timeSubmitted"));
+		this.post.getAttribute("timeSubmitted").then(time => timeSubmittedBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time));
 
 		postBox.appendChild(userBox);
 		postBox.appendChild(titleBox);
@@ -376,15 +375,23 @@ class PostFactory {
 	 * @param {DIV} parentContainer
 	 * @param {Array} posts
 	 */
-	constructor(parentContainer, posts) {
+	constructor(parentContainer, forum) {
 		this.parentContainer = parentContainer;
-		this.posts = posts;
+		this.forum = forum;
 	}
 
-	display() {
-		for (let post in this.posts) {
-			new PostBox(post, this.parentContainer).createPost();
-		}
+	displayPosts() {
+		let ref = firebase.database().ref(`${this.forum}/posts/`);
+		let get = ref.orderByChild("clicks").on("value", (posts) => {
+			posts.forEach((childPost) => {
+				new PostBox(new Post(this.forum, childPost.key), this.parentContainer,).createPost();
+			});
+		});
+
+		setTimeout(() => {
+			ref.orderByChild("clicks").off("value", get);
+		}, 1500);
+
 	}
 }
 
