@@ -1,4 +1,4 @@
-class Firebase{
+class User{
     constructor(){
 
     }
@@ -34,6 +34,15 @@ class Firebase{
            {education:newEducation}
         )
     }
+    async getAttribute(attribute) {
+        let ref = firebase.database().ref(`users/${await this.getUserId()}`)
+        let location = ref.child(attribute);
+        return new Promise((resolve, reject) => {
+        location.once("value", (data) => {
+        resolve(data.val());
+    });
+});
+}
 }
 
-export {Firebase}
+export {User}
