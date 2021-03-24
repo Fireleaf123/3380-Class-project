@@ -12,201 +12,53 @@ class Search {
 			.endAt(postTitle + "\uf8ff");
 	}
 }
-class content{
-	constructor(content){
-		
-	}
-	#createPost(forum,id) {
-		let postBox = document.createElement("div");
 
-		let post = new Post(forum,Id);
-
-		postBox.classList.add("POSTS", "post"); //using boostrap container and border
-		postBox.setAttribute("id", post.getAttribute('id'));
-
-		/**
-		 * increments clicks on post by 1, then redirects to actual post
-		 * currently redirects to index.html, >> victoira make sure to redirect to actual post(topic page)
-		 * when its done
-		 */
-		postBox.onclick = () => {
-			this.updateClicks();
-			new Cookie().setCookie("postId", post.getAttribute('id'), 7);
-			new Cookie().setCookie("forum", post.getAttribute('id'), 7);
-			location.href = "02_topic.html";
-		};
-
-		/*Below are examples of styling using JS
-      userBox.classList.add('border') -> example of adding/using boostrap  
-      userBox.style.backgroundColor = 'black';
-      userBox.style.color = 'gold';
-    */
-
-		//creating a div to hold userID
-		let userBox = document.createElement("div");
-		userBox.classList.add("postContent");
-		userBox.innerHTML = '<i class="fa fa-user"></i> ' + post.getAttribute('userId'); //putting content into the div UserBox.
-
-		let titleBox = document.createElement("div");
-		titleBox.classList.add("postContent");
-		titleBox.innerHTML = post.getAttribute('title');
-
-		let contentBox = document.createElement("div");
-		contentBox.classList.add("postContent");
-		contentBox.innerHTML = post.getAttribute('content');
-
-		let timeSubmittedBox = document.createElement("div");
-		timeSubmittedBox.classList.add("postContent");
-		timeSubmittedBox.style.width = "fit-content";
-
-		timeSubmittedBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(timeSubmitted);
-
-		postBox.appendChild(userBox);
-		postBox.appendChild(titleBox);
-		postBox.appendChild(contentBox);
-		postBox.appendChild(timeSubmittedBox);
-
-		/**
-		 *currently pastes each postBox onto the body.
-		 * This was done for the sake of experimenting.
-		 * In actuality,  each postBox would be pasted onto
-		 * document.getElementById(postContainer) instead of document.body
-		 */
-		return postBox
-	}
-
-	#createComments(parentRef,id) {
-		let mainCont = document.createElement("div");
-		let container = document.createElement("div");
-		let userBox = document.createElement("div");
-		let commentBox = document.createElement("div");
-		let replyNTimeCont = document.createElement("div");
-		let timeBox = document.createElement("div");
-		let repliesCont;
-		
-		let comment = new Comment(parentRef,id);
-
-		container.setAttribute("id", comment);
-		container.classList.add("post");
-	
-		userBox.setAttribute("id", "user");
-		userBox.classList.add("commentContent");
-		userBox.innerHTML = `<strong>${userId}</strong>`;
-	
-		commentBox.setAttribute("id", "userComment");
-		commentBox.classList.add("commentContent");
-		commentBox.innerHTML = `<p>${comment}</p>`;
-	
-		replyNTimeCont.classList.add("row", "commentContent");
-	
-		timeBox.setAttribute("id", "userTimeSub");
-		timeBox.classList.add("col-sm");
-		timeBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(timeSubmitted);
-		replyNTimeCont.appendChild(timeBox);
-	
-		container.appendChild(userBox);
-		container.appendChild(commentBox);
-		container.appendChild(replyNTimeCont);
-	
-		if (type === "comment") {
-			mainCont.appendChild(container);
-	
-			repliesCont = document.createElement("div");
-			repliesCont.classList.add("replies");
-			mainCont.appendChild(repliesCont);
-	
-			let reply = document.createElement("div");
-			reply.classList.add("col-sm", "replyBtn");
-			let replyBtn = document.createElement("button");
-	
-			replyBtn.classList.add("pull-right", "Replies");
-			replyBtn.innerHTML = '<i class="fa fa-reply"></i>';
-	
-			replyBtn.onclick = () => {
-				commentBtn.innerHTML = "Post Reply";
-				container.appendChild(commentWriter);
-				//_post.writeReply('baboya',postId,id,reply)
-			};
-	
-			reply.appendChild(replyBtn);
-			replyNTimeCont.appendChild(reply);
-			return mainCont;
-		} else if (type === "reply") {
-			return container;
-		}
-	}
-}
-/*
-class contentFactory extends content{
-	constructor(parentContainer,object){
-		this.parentContainer;
-		this.object = object;
-	}
-
-	#getContent(contentType,isReply){
-		if(contentType === 'post'){
-			super(this.object,contentType);
-			return super.#createPost()
-		}
-		else if(contentType === 'comment'){
-			if(isReply){
-				//super(this.object,contentType);
-				return super.#createComment('reply');
-			}
-				
-			else{
-				super(this.object);
-				return super.#createComment('comment');
-
-			}
-		}
-	}
-
-	displayContent(contentType,isReply){
-		this.parentContainer.appendChild(this.#getContent(contentType,isReply))
-	}
-}
-*/
-class Data{
-	constructor(parent,id,type){
+class Data {
+	constructor(parent, id) {
 		this.parent = parent;
 		this.id = id;
-		this.ref = firebase.database().ref(`${parent}/${type}/${id}`);
-		console.log(`${parent}/${type}`)
+		if (parent === " ") {
+			this.ref = firebase.database().ref(`${id}/posts`);
+		}
+		this.ref = firebase.database().ref(`${parent}/${id}`);
 	}
-	//returns the id
-	getId(){ return this.id; }
 
-	getParent(){ return this.parent;}
+	//returns the id
+	getId() {
+		return this.id;
+	}
+	//returns the parent
+	#getParent() {
+		return this.parent;
+	}
 
 	/**
-	 * returns the specified comment attribute
-	 * i.e userId,comment, and timeSubmitted
+	 * returns the specified  attribute
+	 * attributes are specific to the type: posts and comments have different attributes
 	 * @returns {Any}
 	 */
-	 getAttribute(attribute){
+	getAttribute(attribute) {
 		let location = this.ref.child(attribute);
-		return new Promise( (resolve,reject) => {
-			location.once('value', (data) => {
+		return new Promise((resolve, reject) => {
+			location.once("value", (data) => {
 				resolve(data.val());
-			})
+			});
 		});
 	}
 }
 
-class Comment extends Data{
-	
-	constructor(forum,postId,commentId){
-		super(`${forum}/posts/${postId}/comments`,commentId);
+class Comment extends Data {
+	constructor(forum, postId, commentId) {
+		super(`${forum}/posts/${postId}/comments/`, commentId);
 	}
 
 	/**
 	 * Writes the reply to the parent comment
-	 * @param {String} userId 
-	 * @param {String} content 
+	 * @param {String} userId
+	 * @param {String} content
 	 */
-	writeReply(userId,content) {
-		let newKey = this.ref.child('replies').push().key;
+	writeReply(userId, content) {
+		let newKey = this.ref.child("replies").push().key;
 
 		this.ref.child(`replies/${newKey}`).set({
 			userId: userId,
@@ -215,35 +67,23 @@ class Comment extends Data{
 		});
 	}
 	/**
-	 * returns the given comment as an object 
+	 * returns the given comment as an object
 	 * @returns {Object}
 	 */
-	getComment(){
-		return new Promise( (resolve,reject) =>{
-			this.ref.once('value', (comment) => {
-				resolve(comment.val())
-			})
-		})
-	}
-	
-	/**
-	 * returns list of all replies for the given comments as an array
-	 * @returns {Array}
-	 */
-	async getAllReplies(){
-		let listOfReplies = [];
-		let replies = await this.getAttribute('replies');
-		for(let reply in replies){
-			let r = replies[reply];
-			listOfReplies.push(r);
-		}
-		return listOfReplies;
+	getComment() {
+		return new Promise((resolve, reject) => {
+			this.ref.once("value", (comment) => {
+				resolve(comment.val());
+			});
+		});
 	}
 }
 
-class Post extends Data{
+class Post extends Data {
 	constructor(forum, postId) {
-		super(`${forum}/posts`,postId)
+		super(`${forum}/posts/`, postId);
+		this.forum = forum;
+		this.postId = postId;
 	}
 
 	//note: currently untested without a working forumn
@@ -257,43 +97,42 @@ class Post extends Data{
 		});
 	}
 
-	getPost(){
-		return new Promise( (resolve,reject) =>{
-			this.ref.once('value', (post) => {resolve(post.val())})
-		})
+	getPost() {
+		return new Promise((resolve, reject) => {
+			this.ref.once("value", (post) => {
+				resolve(post.val());
+			});
+		});
 	}
 
-	async #updatePost(){this.post =  await this.getPost();}
+	async #updatePost() {
+		this.post = await this.getPost();
+	}
 
 	async updateClicks() {
-		let clicks = await this.getAttribute('clicks') === undefined ? 0 : await this.getAttribute('clicks');
+		let clicks = (await this.getAttribute("clicks")) === undefined ? 0 : await this.getAttribute("clicks");
 		this.ref.child("clicks").set(clicks - 1);
 	}
 
-	/**
-	 * creates comment objects of children of parent post, and stores them in a list
-	 * @returns {Array}
-	 */
-	async getComments(){
-		let listOfComments =  [];
-		let comments = await this.getAttribute('comments');
-		for(let comment in comments){
-			let c = new Comment(this.ref,comment.valueOf())
-			listOfComments.push(c);
-			//c.getComment().then( (val) => listOfComments.push(val));
-		}
+	getComments() {
+		this.getAttribute("comments").then((comments) => {
+			for (let comment in comments) {
+				console.log(new Comment(this.forum, this.postId, comment));
+			}
+		});
 		return listOfComments;
 	}
 }
 
-class Forum {
+class Forum extends Data {
 	constructor(forum) {
-		this.forum = `${forum}/posts`;
-		this.ref = firebase.database().ref(this.forum);
+		super("", forum);
+		this.ref = firebase.database().ref(`${forum}/posts`);
+		this.forum = forum;
 	}
 
 	writePost(userId, title, content) {
-		let newKey = this.ref.child('posts').push().key;
+		let newKey = this.ref.child("posts").push().key;
 		this.ref.child(newKey).set({
 			userId: userId,
 			title: title,
@@ -303,33 +142,250 @@ class Forum {
 		});
 	}
 
-
 	/*
       > gets all posts from the specified forumn/field
         >> note: I use forumn and field interchangeably because each forum is supposed to represent a field/industry
     */
-	getAllPosts() {
+	getPosts() {
 		let listOfPosts = [];
 
 		let get = this.ref.orderByChild("clicks").on("value", (posts) => {
 			posts.forEach((childPost) => {
-				new Post(this.ref, childPost.key).getPost().then(
-					(post) =>{
-						listOfPosts.push(post);
-					}
-				)
-
+				listOfPosts.push(new Post(this.forum, childPost.key));
 			});
-		})
+		});
 
 		setTimeout(() => {
 			this.ref.orderByChild("clicks").off("value", get);
-		}, 1500); 
+		}, 1500);
 
 		return listOfPosts;
 	}
 }
 
+class CommentBox {
+	constructor(comment, parentContainer) {
+		this.comment = comment;
+		this.parentContainer = parentContainer;
+	}
 
+	createComment() {
+		let mainCont = document.createElement("div");
+		let container = document.createElement("div");
+		let userBox = document.createElement("div");
+		let commentBox = document.createElement("div");
+		let replyNTimeCont = document.createElement("div");
+		let timeBox = document.createElement("div");
+		let repliesCont;
 
-export { Forum, Post , Comment};
+		container.setAttribute("id", this.comment.getId());
+		container.classList.add("post");
+
+		userBox.setAttribute("id", "user");
+		userBox.classList.add("commentContent");
+		this.comment.getAttribute("userId").then((userId) => (userBox.innerHTML = `<strong>${userId}</strong>`));
+
+		commentBox.setAttribute("id", "userComment");
+		commentBox.classList.add("commentContent");
+		this.comment.getAttribute("comment").then((comment) => (commentBox.innerHTML = `<p>${comment}</p>`));
+
+		replyNTimeCont.classList.add("row", "commentContent");
+
+		timeBox.setAttribute("id", "userTimeSub");
+		timeBox.classList.add("col-sm");
+		this.comment.getAttribute("timeSubmitted").then((time) => (timeBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
+		replyNTimeCont.appendChild(timeBox);
+
+		container.appendChild(userBox);
+		container.appendChild(commentBox);
+		container.appendChild(replyNTimeCont);
+
+		mainCont.appendChild(container);
+
+		repliesCont = document.createElement("div");
+		repliesCont.classList.add("replies");
+		mainCont.appendChild(repliesCont);
+
+		let reply = document.createElement("div");
+		reply.classList.add("col-sm", "replyBtn");
+		let replyBtn = document.createElement("button");
+
+		replyBtn.classList.add("pull-right", "Replies");
+		replyBtn.innerHTML = '<i class="fa fa-reply"></i>';
+
+		replyBtn.onclick = () => {
+			commentBtn.innerHTML = "Post Reply";
+			container.appendChild(document.getElementById("writeCoR"));
+			//_post.writeReply('baboya',postId,id,reply)
+		};
+
+		reply.appendChild(replyBtn);
+		replyNTimeCont.appendChild(reply);
+		this.parentContainer.appendChild(mainCont);
+	}
+}
+
+class PostBox {
+	constructor(post, parentContainer) {
+		this.post = post;
+		this.parentContainer = parentContainer;
+	}
+
+	createPost() {
+		let postBox = document.createElement("div");
+
+		postBox.classList.add("POSTS", "post"); //using boostrap container and border
+		postBox.setAttribute("id", this.post.getAttribute("id"));
+
+		/**
+		 * increments clicks on post by 1, then redirects to actual post
+		 * currently redirects to index.html, >> victoira make sure to redirect to actual post(topic page)
+		 * when its done
+		 */
+		postBox.onclick = () => {
+			this.post.updateClicks();
+			new Cookie().setCookie("postId", this.post.getAttribute("id"), 7);
+			new Cookie().setCookie("forum", this.post.getAttribute("id"), 7);
+			location.href = "02_topic.html";
+		};
+
+		//creating a div to hold userID
+		let userBox = document.createElement("div");
+		userBox.classList.add("postContent");
+		userBox.innerHTML = '<i class="fa fa-user"></i> ' + this.post.getAttribute("userId"); //putting content into the div UserBox.
+
+		let titleBox = document.createElement("div");
+		titleBox.classList.add("postContent");
+		titleBox.innerHTML = this.post.getAttribute("title");
+
+		let contentBox = document.createElement("div");
+		contentBox.classList.add("postContent");
+		contentBox.innerHTML = this.post.getAttribute("content");
+
+		let timeSubmittedBox = document.createElement("div");
+		timeSubmittedBox.classList.add("postContent");
+		timeSubmittedBox.style.width = "fit-content";
+
+		timeSubmittedBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(this.post.getAttribute("timeSubmitted"));
+
+		postBox.appendChild(userBox);
+		postBox.appendChild(titleBox);
+		postBox.appendChild(contentBox);
+		postBox.appendChild(timeSubmittedBox);
+
+		/**
+		 *currently pastes each postBox onto the body.
+		 * This was done for the sake of experimenting.
+		 * In actuality,  each postBox would be pasted onto
+		 * document.getElementById(postContainer) instead of document.body
+		 */
+		this.parentContainer.appendChild(postBox);
+	}
+}
+
+class ReplyBox {
+	constructor(reply, parentContainer) {
+		this.reply = reply;
+		this.parentContainer = parentContainer;
+	}
+
+	createReply() {
+		let container = document.createElement("div");
+		let userBox = document.createElement("div");
+		let commentBox = document.createElement("div");
+		let timeBox = document.createElement("div");
+
+		container.classList.add("post");
+
+		userBox.setAttribute("id", "user");
+		userBox.classList.add("commentContent");
+		userBox.innerHTML = `<strong>${this.reply.userId}</strong>`;
+
+		commentBox.setAttribute("id", "userComment");
+		commentBox.classList.add("commentContent");
+		commentBox.innerHTML = `<p>${this.reply.reply}</p>`;
+
+		timeBox.setAttribute("id", "userTimeSub");
+		timeBox.classList.add("col-sm");
+		timeBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(this.reply.timeSubmitted);
+
+		container.appendChild(userBox);
+		container.appendChild(commentBox);
+		container.appendChild(timeBox);
+
+		this.parentContainer.appendChild(container);
+	}
+}
+
+class CommentFactory {
+	/**
+	 * @param {div} parentContainer
+	 * @param {Array} comments
+	 */
+	constructor(parentContainer, post) {
+		this.parentContainer = parentContainer;
+		this.post = post;
+	}
+
+	/**
+	 * creates comment objects of children of parent post, and stores them in a list
+	 */
+	displayComments() {
+		this.post.getAttribute("comments").then((comments) => {
+			for (let comment in comments) {
+				let commObj = new Comment(this.post.forum, this.post.postId, comment);
+				let c = new CommentBox(commObj, this.parentContainer);
+				let replies = commObj.getAttribute("replies");
+
+				c.createComment();
+
+				/**
+				 * if the comment has replies, we iterate over it,
+				 * create the reply, and attach it to the parent comment
+				 **/
+				replies.then((data) => {
+					for (let reply in data) {
+						new ReplyBox(data[reply], document.getElementById(commObj.getId()).parentElement.querySelector(".replies")).createReply();
+					}
+				});
+				
+			}
+		});
+
+		/*for(let comment in this.comments){
+			let c = new commentBox(comment,this.parentContainer)
+			let replies = comment.getAttribute('replies');
+			c.createComment();
+
+			/**
+			 * if the comment has replies, we iterate over it,
+			 * create the reply, and attach it to the parent comment
+			 
+			for(let reply in replies){
+				new ReplyBox(replies[reply],
+					document.getElementById(comment.getAttribute('id'))
+					.parentElement.querySelector(".replies")
+				).createReply();
+			}
+		}*/
+	}
+}
+
+class PostFactory {
+	/**
+	 * @param {DIV} parentContainer
+	 * @param {Array} posts
+	 */
+	constructor(parentContainer, posts) {
+		this.parentContainer = parentContainer;
+		this.posts = posts;
+	}
+
+	display() {
+		for (let post in this.posts) {
+			new PostBox(post, this.parentContainer).createPost();
+		}
+	}
+}
+
+export { Forum, Post, Comment, PostFactory, CommentFactory };
