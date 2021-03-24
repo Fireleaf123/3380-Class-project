@@ -1,5 +1,5 @@
 .commentContent {
-	padding-left: 10px;
+	*padding-left: 10px;
 	border: 2x solid blue;
 }
 #postUser {
@@ -11,23 +11,28 @@
 }
 
 #timeCreated {
+	border-top: solid #1ABC9C;
 }
 
 #content {
-	border: 1px solid #bfbfbf;
+	border: 30px #1ABC9C;
 }
 
 #comments {
+	border-top: 5px solid #1ABC9C;
+	border-bottom: 5px solid #1ABC9C;
 }
 
 #user {
+	padding-bottom: 5px;
 }
 
 #userComment {
+	border-bottom:3px solid #1ABC9C;
 }
 
 #userTimeSub {
-	
+	font-style: italic;
 }
 
 .replies{
