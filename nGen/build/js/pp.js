@@ -14,6 +14,8 @@ const forum = new Cookie().getCookie("forum");
 const postId = new Cookie().getCookie("postId");
 
 const POST = new Post(forum, postId);
+
+
 new CommentFactory(commentArea, POST).displayComments();
 
 async function setPost() {

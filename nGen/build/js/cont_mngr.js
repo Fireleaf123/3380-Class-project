@@ -89,7 +89,7 @@ class Post extends Data {
 	writeComment(userId, comment) {
 		let newKey = this.ref.child("comments").push().key;
 
-		firebase.database().ref(`${this.forum}/posts/${this.postId}/comments/${newKey}`).set({
+		firebase.database().ref(`${this.forum}/posts/${this.getId()}/comments/${newKey}`).set({
 			userId: userId,
 			comment: comment,
 			timeSubmitted: Date.now(),
@@ -234,7 +234,7 @@ class PostBox {
 		let postBox = document.createElement("div");
 
 		postBox.classList.add("POSTS", "post"); //using boostrap container and border
-		postBox.setAttribute("id",this.post.getId());
+		postBox.setAttribute("id", this.post.getId());
 
 		/**
 		 * increments clicks on post by 1, then redirects to actual post
@@ -251,21 +251,21 @@ class PostBox {
 		//creating a div to hold userID
 		let userBox = document.createElement("div");
 		userBox.classList.add("postContent");
-		this.post.getAttribute("userId").then( user => userBox.innerHTML = '<i class="fa fa-user"></i> ' + user); //putting content into the div UserBox.
+		this.post.getAttribute("userId").then((user) => (userBox.innerHTML = '<i class="fa fa-user"></i> ' + user)); //putting content into the div UserBox.
 
 		let titleBox = document.createElement("div");
 		titleBox.classList.add("postContent");
-		this.post.getAttribute("title").then( title => titleBox.innerHTML = title);
+		this.post.getAttribute("title").then((title) => (titleBox.innerHTML = title));
 
 		let contentBox = document.createElement("div");
 		contentBox.classList.add("postContent");
-		this.post.getAttribute("content").then( content => contentBox.innerHTML = content);
+		this.post.getAttribute("content").then((content) => (contentBox.innerHTML = content));
 
 		let timeSubmittedBox = document.createElement("div");
 		timeSubmittedBox.classList.add("postContent");
 		timeSubmittedBox.style.width = "fit-content";
 
-		this.post.getAttribute("timeSubmitted").then(time => timeSubmittedBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time));
+		this.post.getAttribute("timeSubmitted").then((time) => (timeSubmittedBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
 
 		postBox.appendChild(userBox);
 		postBox.appendChild(titleBox);
@@ -332,7 +332,7 @@ class CommentFactory {
 	displayComments() {
 		this.post.getAttribute("comments").then((comments) => {
 			for (let comment in comments) {
-				let commObj = new Comment(this.post.forum, this.post.postId, comment);
+				let commObj = new Comment(this.post.forum, this.post.getId(), comment);
 				let c = new CommentBox(commObj, this.parentContainer);
 				let replies = commObj.getAttribute("replies");
 
@@ -347,7 +347,6 @@ class CommentFactory {
 						new ReplyBox(data[reply], document.getElementById(commObj.getId()).parentElement.querySelector(".replies")).createReply();
 					}
 				});
-				
 			}
 		});
 
@@ -384,14 +383,13 @@ class PostFactory {
 		let ref = firebase.database().ref(`${this.forum}/posts/`);
 		let get = ref.orderByChild("clicks").on("value", (posts) => {
 			posts.forEach((childPost) => {
-				new PostBox(new Post(this.forum, childPost.key), this.parentContainer,).createPost();
+				new PostBox(new Post(this.forum, childPost.key), this.parentContainer).createPost();
 			});
 		});
 
 		setTimeout(() => {
 			ref.orderByChild("clicks").off("value", get);
 		}, 1500);
-
 	}
 }
 

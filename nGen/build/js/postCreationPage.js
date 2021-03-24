@@ -14,7 +14,7 @@ function savePost(userId) {
 
 	if (allFieldsFilled([title, forum, content])) {
 		page.writePost(userId, title, content);
-		setInterval(() => {
+		setTimeout(() => {
 			location.href = "index.html";
 		}, 0); //sends user back to homepage after post creation
 	} else {
