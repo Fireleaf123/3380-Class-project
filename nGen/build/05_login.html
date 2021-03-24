@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Forum :: New account</title>
+        <title>Login</title>
 
     
         <script defer src="/__/firebase/8.2.8/firebase-app.js"></script>
@@ -49,7 +49,7 @@
         <link rel="stylesheet" type="text/css" href="rs-plugin/css/settings.css" media="screen" />
 
     </head>
-    <body class="newaccountpage">
+    <body class="newaccountpage" onload="UserStateChecker()">
 
         <div class="container-fluid">
 
@@ -125,39 +125,23 @@
                                         </div>
                                         <div class="topwrap">
                                             <div class="userinfo pull-left">&nbsp;</div>
-                                            <div class="posttext pull-left">
-
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6">
-                                                        <button class="btn btn-fb">Log in with Facebook</button>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6">
-                                                        <button class="btn btn-tw">Log in with Twitter</button>                                                       
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6">
-                                                        <button type="button" class="btn btn-go" onClick="googleLogin()">Log in with Google</button>
-                                                    </div>
-                                                    
-                                                </div>
-
-                                            </div>
                                             <div class="clearfix"></div>
                                         </div>  
                                     </div>
                                     
                                     <div class="postinfobot">
                                         <div class="pull-right postreply">
-                                            <!--
-                                                <div class="pull-left smile"><a href="#"><i class="fa fa-smile-o"></i></a></div>
-                                            -->
                                             <button type="button" class="btn btn-primary center-block" onclick="signInWithEmailPassword()" >Log In</button>
                                             <div class="clearfix"></div>
                                         </div>
 
                                         <div class="clearfix"></div>
                                     </div>
+                                </form>
+                            </div>
+                            <div class="avatar pull-left dropdown">
+                                <form action="04_new_account.html" method="post" class="form">
+                                    <button class="btn btn-primary" id="redirect_button">New Here? Register Here!</button>
                                 </form>
                             </div>
                         

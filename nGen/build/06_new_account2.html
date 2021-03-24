@@ -99,14 +99,24 @@
                                                 <div class="row">   
                                                     <div class="col-lg-6 col-md-6">
                                                         <label for="userName">Username</label>
-                                                        <input type="text" class="form-control" id="userName" placeholder="you@example.com">
+                                                        <input type="text" class="form-control" id="userName" placeholder="username">
                                                         
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-6">
                                                         <label for="userBday">Birthday</label>
-                                                        <input type="password" class="form-control" id="userBday" placeholder="**********">
+                                                        <input type="text" class="form-control" id="userBday" placeholder="MM/DD/YYYY">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class ="col-lg-6 col-md-6">
+                                                        <label for="userRole">User Type:</label>
+                                                        <select id="userRole">
+                                                          <option value="Student">Student</option>
+                                                          <option value="Professional">Professional</option>
+                                                          <option value="Moderater">Moderator</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -125,7 +135,6 @@
                                         <div class="topwrap">
                                             <div class="userinfo pull-left">&nbsp;</div>
                                             <div class="posttext pull-left">
-
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>  
@@ -133,9 +142,6 @@
                                     
                                     <div class="postinfobot">
                                         <div class="pull-right postreply">
-                                            <!--
-                                                <div class="pull-left smile"><a href="#"><i class="fa fa-smile-o"></i></a></div>
-                                            -->
                                             <button type="button" class="btn btn-primary center-block" onclick="saveUser()" >Log In</button>
                                             <div class="clearfix"></div>
                                         </div>
