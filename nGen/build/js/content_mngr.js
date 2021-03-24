@@ -86,11 +86,47 @@ class Post {
 
 		return val;
 	}
+	//TEST_________________________________________________________________________________________________________
+	getClicksTrending() {
+		this.updatePost();
+
+		let val = this.post.clicksTrending;
+
+		if (val === undefined)
+			 return 0;
+
+		return val;
+	}
+
+	updateClicksTrending() {
+		this.ref.child("clicksTrending").set(this.getClicks() - 1);
+	}
+	
+	resetClicksTrending() {
+		var date = new Date(),
+			h = new Date(d.getFullYear(), date.getMonth(), date.getDate(), date.getHours() + 1, 0, 0, 0),
+			e = h - date;
+		if (e > 100) { 
+			window.setTimeout(resetClicksTrending, e);
+		}
+		var objDate = new Date();
+		var hours = objDate.getHours();
+
+		if(hours >= 12 && hours <= 11) {
+    		this.ref.child("clicksTrending").set(this.getClicks() = 0);
+		}
+
+	}
+
+	//Test_____________________________________________________________________________________________________________
+
 
 	//incremenets posts count on each click.
 	updateClicks() {
 		this.ref.child("clicks").set(this.getClicks() - 1);
 	}
+
+
 
 	getAComment(commentId) {
 		let commentRef = firebase.database().ref(`${this.forum}/posts/${this.postId}/comments/${commentId}`);;
