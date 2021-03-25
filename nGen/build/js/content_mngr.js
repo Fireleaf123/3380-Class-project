@@ -86,10 +86,17 @@ class Post {
 
 		return val;
 	}
-	//TEST_________________________________________________________________________________________________________
+	
+
+	//incremenets posts count on each click.
+	updateClicks() {
+		this.ref.child("clicks").set(this.getClicks() - 1);
+	}
+
+	// getClicksTrending
 	getClicksTrending() {
 		this.updatePost();
-
+		
 		let val = this.post.clicksTrending;
 
 		if (val === undefined)
@@ -98,34 +105,20 @@ class Post {
 		return val;
 	}
 
+	//Update clickTrending back to 0 if time is 12am else it will increment by 1
 	updateClicksTrending() {
-		this.ref.child("clicksTrending").set(this.getClicks() - 1);
-	}
-	
-	resetClicksTrending() {
-		var date = new Date(),
-			h = new Date(d.getFullYear(), date.getMonth(), date.getDate(), date.getHours() + 1, 0, 0, 0),
-			e = h - date;
-		if (e > 100) { 
-			window.setTimeout(resetClicksTrending, e);
+		let date = new Date();
+		let hours = date.getHours();
+		//alert(hours);
+		if( hours ==  24){
+			this.ref.child("clicksTrending").set(this.getClicksTrending() % 1);
+		}else{
+			this.ref.child("clicksTrending").set(this.getClicksTrending() - 1 );
 		}
-		var objDate = new Date();
-		var hours = objDate.getHours();
+		
+		
 
-		if(hours >= 12 && hours <= 11) {
-    		this.ref.child("clicksTrending").set(this.getClicks() = 0);
-		}
-
-	}
-
-	//Test_____________________________________________________________________________________________________________
-
-
-	//incremenets posts count on each click.
-	updateClicks() {
-		this.ref.child("clicks").set(this.getClicks() - 1);
-	}
-
+	}	
 
 
 	getAComment(commentId) {
@@ -201,7 +194,10 @@ class Post {
 		 */
 		postBox.onclick = () => {
 			this.updateClicks();
+			this.updateClicksTrending(); 
 			location.href = "index.html";
+
+				
 		};
 
 		/*Below are examples of styling using JS
@@ -257,6 +253,7 @@ class Forum {
 			content: content,
 			timeSubmitted: Date.now(),
 			clicks: 0,
+			clicksTrending: 0,
 		});
 	}
 
