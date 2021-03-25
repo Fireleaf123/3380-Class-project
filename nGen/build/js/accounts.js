@@ -1,13 +1,13 @@
 /* ===============================================================================================================
  * |  JavaScript file for all user account related functions                                                     |
  * |  Functions in this file include but are not limited to account registration, signing in, and authentication |
- * |  References:                                                                                                 |
+ * |  References:                                                                                                |
  * |  Google Firebase: https://firebase.google.com/docs/auth/web/firebaseui                                      |
  * |                                                                                                             |
  * ===============================================================================================================
  * | Accounts Branch designed by: Ryan Bourdais rbourd4                                                          |
  * |  Project led by Baboya Chock                                                                                |
- * |  Latest Update: March 11, 2021                                                                              |
+ * |  Latest Update: March 24, 2021                                                                              |
  * =============================================================================================================== 
  */
 
@@ -59,7 +59,7 @@ function signInWithEmailPassword() {
 }
   //initialize variables for saveUser()
 
-function saveUser(userName, userBbday, userId, userRole) {
+function saveUser(userName, userBday, userId, userRole) {
   var userId = firebase.auth().currentUser.uid;
   var userName = document.getElementById("userName").value;
   var userBday = document.getElementById("userBday").value;
@@ -125,11 +125,19 @@ async function IndexUserStateChecker(){
       console.log("there is no signed in user");
       document.getElementById('my-profile-button').style.visibility = 'hidden'; 
     }
-    if (userrole ='Professional')  {
+    
+    if (userrole =='Professional')  {
       document.getElementById('new-post').style.visibility = 'visible';
     }
-    else if (userrole != 'Professional'){
+    else if (userrole !== 'Professional'){
       document.getElementById('new-post').style.visibility = 'hidden';
+    }
+
+    if (userrole =='Moderator')  {
+      document.getElementById('mod-tools').style.visibility = 'visible';
+    }
+    else if (userrole !== 'Moderator'){
+      document.getElementById('mod-tools').style.visibility = 'hidden';
     }
   });
 }

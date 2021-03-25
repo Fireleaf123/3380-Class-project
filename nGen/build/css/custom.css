@@ -1185,8 +1185,15 @@ a.down:hover {
 	bottom: 135px;
 	left: 88px;
 }
+
 #my-profile-button{
 	position: relative;
 	bottom: 13px;
 	left: 72px;
+}
+
+#mod-tools{
+	position: relative;
+	bottom: 21.5px;
+	right: 12px;
 }
