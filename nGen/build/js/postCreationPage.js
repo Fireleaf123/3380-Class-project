@@ -1,4 +1,5 @@
-import { Forum, Post } from "./content_mngr.js";
+import { Forum } from "./content_mngr.js";
+import { User } from "./User.js";
 
 //if any item in the list has is blank, has no value, it returns false
 function allFieldsFilled(list) {
@@ -14,7 +15,7 @@ function savePost(userId) {
 
 	if (allFieldsFilled([title, forum, content])) {
 		page.writePost(userId, title, content);
-		setInterval(() => {
+		setTimeout(() => {
 			location.href = "index.html";
 		}, 0); //sends user back to homepage after post creation
 	} else {
@@ -22,7 +23,7 @@ function savePost(userId) {
 	}
 }
 document.getElementById("submit").onclick = () => {
-	savePost("baboya");
+	new User().getAttribute('username').then( user => {savePost(user)});
 };
 
   

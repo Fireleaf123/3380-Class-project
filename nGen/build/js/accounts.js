@@ -141,3 +141,14 @@ async function IndexUserStateChecker(){
     }
   });
 }
+
+function signOut() {
+  // [START auth_sign_out]
+  firebase.auth().signOut().then(() => {
+    // Sign-out successful.
+    setTimeout(function(){location.href = "index.html"} , 2500);
+  }).catch((error) => {
+    // An error happened.
+  });
+  // [END auth_sign_out]
+}

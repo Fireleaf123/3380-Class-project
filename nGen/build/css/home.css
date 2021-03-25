@@ -1,0 +1,28 @@
+#log_user_out{
+    padding-left: 5px;
+    visibility: hidden;
+}
+#signupbutton{
+	position: relative;
+	right: 450px;
+	bottom: 75px;
+}
+
+#redirect_button{
+	width: 200px;
+	position: relative;
+	bottom: 135px;
+	left: 88px;
+}
+
+#my-profile-button{
+	position: relative;
+	bottom: 13px;
+	left: 72px;
+}
+
+#mod-tools{
+	position: relative;
+	bottom: 21.5px;
+	right: 12px;
+}
