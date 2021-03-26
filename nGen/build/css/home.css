@@ -1,28 +1,48 @@
-#log_user_out{
+ #log_user_out{
     padding-left: 5px;
     visibility: hidden;
+    position: relative;
+    left: auto;
+    top: auto;
 }
-#signupbutton{
-	position: relative;
-	right: 450px;
-	bottom: 75px;
+
+#buttons{
+    position: relative;
+    bottom: 70px;
+    left: 1000px;
+}
+
+.all-buttons{
+    padding-left: 5px;
 }
 
 #redirect_button{
-	width: 200px;
-	position: relative;
-	bottom: 135px;
-	left: 88px;
+    position: relative;
+    bottom: 33px;
+    left: 15px;
 }
 
-#my-profile-button{
-	position: relative;
-	bottom: 13px;
-	left: 72px;
+#signupbutton{
+    position: relative;
+    bottom: 78px;
+    right: 460px;
 }
 
 #mod-tools{
-	position: relative;
-	bottom: 21.5px;
-	right: 12px;
+    visibility: hidden;
 }
+
+#new-post{
+    visibility: hidden;
+}
+
+#logout{
+    visibility: hidden;
+}
+
+#post-header{
+    position: relative;
+    bottom: 15px;
+    left: 300px;
+}
+

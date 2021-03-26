@@ -1,5 +1,89 @@
 import { Cookie } from "./cookies.js";
 
+class Firebase {
+    constructor() {
+        this.ref = firebase.database();
+    }
+
+    writePost(forum, userId, title, content) {
+        let location = this.ref.ref(`${forum}/posts`);
+        let newKey = location.push().key;
+
+        location.child(newKey).set({
+            userId: userId,
+            title: title,
+            content: content,
+            timeSubmitted: Date.now(),
+            clicks: 0,
+        });
+    }
+
+    writeComment(forum, postId, userId, comment) {
+        let location = this.ref.ref(`${forum}/posts/${postId}/comments`);
+        let newKey = location.push().key;
+
+        location.child(newKey).set({
+            userId: userId,
+            comment: comment,
+            timeSubmitted: Date.now(),
+        });
+    }
+
+    /**
+     * Writes the reply to the parent comment
+     * @param {String} userId
+     * @param {String} content
+     */
+    writeReply(forum, postId, commentId, userId, content) {
+        let location = this.ref.ref(`${forum}/posts/${postId}/comments/${commentId}/replies`);
+        let newKey = location.push().key;
+
+        location.child(newKey).set({
+            userId: userId,
+            reply: content,
+            timeSubmitted: Date.now(),
+        });
+    }
+
+    flagPost(postId, forum) {
+        let location = this.ref.ref('FlaggedContent');
+        let newKey = location.push().key;
+        location.child(newKey).set({
+            type: 'post',
+            postId: postId,
+            forum: forum,
+            reports: -1,
+        });
+    }
+
+    flagComment(commentId, postId, forum) {
+        let location = this.ref.ref('FlaggedContent/');
+        let newKey = location.push().key;
+        location.child(newKey).set({
+            type: 'comment',
+            commentId: commentId,
+            postId: postId,
+            forum: forum,
+            reports: -1,
+        });
+    }
+
+	
+	
+	flagContent(data) {
+        let location = this.ref.ref('FlaggedContent/');
+        let newKey = location.push().key;
+        location.child(newKey).set(data);
+		
+		postContent({
+            type: post,
+            postId: postId,
+            forum: forum,
+            reports: -1,
+        }) 	
+    }
+}
+
 class Search {
 	constructor(field) {
 		this.database = firebase.database.ref(`field/posts`);
@@ -393,4 +477,4 @@ class PostFactory {
 	}
 }
 
-export { Forum, Post, Comment, PostFactory, CommentFactory };
+export { Forum, Post, Comment, PostFactory, CommentFactory, Firebase };

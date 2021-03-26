@@ -23,6 +23,8 @@
         -->
     <script defer src="/__/firebase/init.js?useEmulator=false"></script>
     <script type="module" src="js/index.js"></script>
+    <script type="module" src="js/postPage.js"></script>
+    <script type="module" src="js/content_mngr.js"></script>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -31,6 +33,7 @@
     <link href="css/custom.css" rel="stylesheet" />
     <link href="css/topic.css" rel="stylesheet" />
     <link href="css/forum.css" rel="stylesheet" />
+    <link href="css/home.css" rel="stylesheet" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,7 +58,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo">
-							<a href="index.html"><img src="images/logo.jpg" alt="" /></a>
+							<a href="#"><img src="images/logo.jpg" alt="" /></a>
 						</div>
 						<div class="col-lg-3 col-xs-9 col-sm-5 col-md-3 selecttopic">
 							<div class="dropdown">
@@ -66,34 +69,28 @@
 									<li role="presentation"><a role="menuitem" tabindex="-3" href="#">Borderlands 3</a></li>
 								</ul>
 							</div>
+							
 						</div>
-						<div class="col-lg-4 search hidden-xs hidden-sm col-md-3">
-							<div class="wrap">
-								<form action="#" method="post" class="form">
-									<div class="pull-left txt"><input type="text" class="form-control" placeholder="Search Topics" /></div>
-									<div class="pull-right">
-										<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-									</div>
-									<div class="clearfix"></div>
-								</form>
-							</div>
-						</div>
-						<div class="col-lg-4 col-xs-12 col-sm-5 col-md-4 avt">
-							<div class="stnt pull-left">
-								<form action="03_new_topic.html" method="post" class="form">
+						<div class="clearfix" id="post-header"></div>
+						<div class="col-lg-8 col-xs-12 col-sm-5 col-md-4 avt" id="buttons">
+							<div class="stnt pull-left all-buttons">
+								<form action="03_new_topic.html" method="post" class="form" id="new-post">
 									<button class="btn btn-primary">Start New Topic</button>
 								</form>
 							</div>
-							<div class="env pull-left"><i class="fa fa-envelope"></i></div>
-
-							<div class="avatar pull-left dropdown">
-								<form id="account" action="05_login.html" method="post" class="form">
-									<button class="btn btn-primary">Login</button>
+							<div class="stnt pull-left all-buttons">
+								<form action="05_login.html" method="post" class="form" id="login-button ">
+									<button class="btn btn-primary" id="login-button">Login</button>
 								</form>
 							</div>
-							<div id="log_user_out" class="avatar pull-left dropdown">
+							<div id="log-user-out" class="stnt pull-left all-buttons">
 								<form method="post" class="form">
-									<p id="logout" class="btn btn-primary">logout</p>
+									<button id="logout" class="btn btn-primary" onclick="signOut()">logout</button>
+								</form>
+							</div>
+							<div class="stnt pull-left all-buttons" id="mod-tools">
+								<form  action="05_login.html" method="post" class="form" >
+									<button class="btn btn-primary" >Mod Tools</button>
 								</form>
 							</div>
 
@@ -115,7 +112,6 @@
             <div class="col-lg-8 col-md-8">
               <!-- POST -->
               <div class="post beforepagination">
-                <div class="topwrap">
                   <div class="userinfo pull-left">
                   </div>
                   <div class="posttext pull-left">
@@ -123,6 +119,12 @@
                     <h2 id="title"></h2>
                     <p id=content></p>
                     <div id="timeCreated"class="posted pull-left"><i class="fa fa-clock-o"></i></div>
+                    <div class="topwrap">
+                      <div class="stnt pull-left all-buttons">
+                        <form method="post" class="form">
+                          <p class="btn btn-primary" id="report-post">Report</p>
+                        </form>
+                      </div>
                   </div>
                   <div class="clearfix"></div>
                 </div>
