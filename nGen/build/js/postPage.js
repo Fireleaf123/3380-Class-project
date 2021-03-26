@@ -1,4 +1,4 @@
-import { Post, Comment, CommentFactory } from "./content_mngr.js";
+import { Post, Comment, CommentFactory, Firebase, Flag } from "./content_mngr.js";
 import { Cookie } from "./cookies.js";
 import { User } from "./User.js";
 
@@ -16,6 +16,17 @@ const postId = new Cookie().getCookie("postId");
 
 const POST = new Post(forum, postId);
 
+let find = new Flag("FlaggedContent", "commentId");
+
+t.searchFor("-MUQFY7t9U0AbiNhYMY9").then((data) => console.log(data));
+t.searchForParent("-MUQFY7t9U0AbiNhYMY9").then((data) => console.log(data));
+t.exists("-MUQFY7t9U0AbiNhYMY9").then((val) => console.log(val));
+t.updateReports(124);
+/**
+ * t.searchFor(233).then((data) => console.log(data));
+t.exists(233).then((val) => console.log(val));
+ */
+
 new CommentFactory(commentArea, POST).displayComments();
 
 async function setPost() {
@@ -28,9 +39,9 @@ setPost();
 
 function saveComment(comment, userId, type, commentId) {
 	if (type === "comment") {
-		POST.writeComment(userId, comment);
+		new Firebase().writeComment(forum, postId, userId, comment);
 	} else if (type === "reply") {
-		new Comment(forum, postId, commentId).writeReply(userId, comment);
+		new Firebase().writeReply(forum, postId, commentId, userId, comment);
 	}
 	setTimeout((location.href = "02_topic.html"), 0);
 }

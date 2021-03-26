@@ -1,4 +1,4 @@
-import { Forum } from "./content_mngr.js";
+import { Firebase, Forum } from "./content_mngr.js";
 import { User } from "./User.js";
 
 //if any item in the list has is blank, has no value, it returns false
@@ -14,7 +14,7 @@ function savePost(userId) {
 	let page = new Forum(forum);
 
 	if (allFieldsFilled([title, forum, content])) {
-		page.writePost(userId, title, content);
+		new Firebase().writePost(forum, userId, title, content);
 		setTimeout(() => {
 			location.href = "index.html";
 		}, 0); //sends user back to homepage after post creation
@@ -23,8 +23,7 @@ function savePost(userId) {
 	}
 }
 document.getElementById("submit").onclick = () => {
-	new User().getAttribute('username').then( user => {savePost(user)});
+	new User().getAttribute("username").then((user) => {
+		savePost(user);
+	});
 };
-
-  
-
