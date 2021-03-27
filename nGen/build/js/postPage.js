@@ -16,17 +16,6 @@ const postId = new Cookie().getCookie("postId");
 
 const POST = new Post(forum, postId);
 
-let find = new Flag("FlaggedContent", "commentId");
-
-t.searchFor("-MUQFY7t9U0AbiNhYMY9").then((data) => console.log(data));
-t.searchForParent("-MUQFY7t9U0AbiNhYMY9").then((data) => console.log(data));
-t.exists("-MUQFY7t9U0AbiNhYMY9").then((val) => console.log(val));
-t.updateReports(124);
-/**
- * t.searchFor(233).then((data) => console.log(data));
-t.exists(233).then((val) => console.log(val));
- */
-
 new CommentFactory(commentArea, POST).displayComments();
 
 async function setPost() {

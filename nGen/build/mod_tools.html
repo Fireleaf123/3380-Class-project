@@ -39,7 +39,11 @@
 		<![endif]-->
 
 		<!-- fonts -->
-		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+		<link
+			href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+			rel="stylesheet"
+			type="text/css"
+		/>
 		<link rel="stylesheet" href="font-awesome-4.0.3/css/font-awesome.min.css" />
 
 		<!-- CSS STYLE-->
@@ -60,18 +64,28 @@
 							<div class="dropdown">
 								<a data-toggle="dropdown" href="index.html">Borderlands 2</a> <b class="caret"></b>
 								<ul class="dropdown-menu" role="menu">
-									<li role="presentation"><a role="menuitem" tabindex="-1" a href="05_login.html">Login</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-2" href="#">Borderlands 2</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-3" href="#">Borderlands 3</a></li>
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" a href="05_login.html">Login</a>
+									</li>
+									<li role="presentation">
+										<a role="menuitem" tabindex="-2" href="#">Borderlands 2</a>
+									</li>
+									<li role="presentation">
+										<a role="menuitem" tabindex="-3" href="#">Borderlands 3</a>
+									</li>
 								</ul>
 							</div>
 						</div>
 						<div class="col-lg-4 search hidden-xs hidden-sm col-md-3">
 							<div class="wrap">
 								<form action="#" method="post" class="form">
-									<div class="pull-left txt"><input type="text" class="form-control" placeholder="Search Topics" /></div>
+									<div class="pull-left txt">
+										<input type="text" class="form-control" placeholder="Search Topics" />
+									</div>
 									<div class="pull-right">
-										<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+										<button class="btn btn-default" type="button">
+											<i class="fa fa-search"></i>
+										</button>
 									</div>
 									<div class="clearfix"></div>
 								</form>
@@ -107,7 +121,14 @@
 					<div class="row">
 						<div class="col-lg-8 col-md-8">
 							<div class="clearfix"></div>
-							<div id="postArea"></div>
+							<div>
+								<p style="text-align: center; font-size: 20px"><strong>Flagged Posts</strong></p>
+								<div id="postArea"></div>
+							</div>
+							<div>
+								<p style="text-align: center; font-size: 20px"><strong>Flagged Comments</strong></p>
+								<div id="commentArea"></div>
+							</div>
 							<div class="clearfix"></div>
 						</div>
 					</div>
