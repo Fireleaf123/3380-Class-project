@@ -1,6 +1,8 @@
 import { User } from "./User.js";
-function setClick(element,func){
-  element.onclick = () => {func()}
+function setClick(element, func) {
+	element.onclick = () => {
+		func();
+	};
 }
 
 function GetUserId() {

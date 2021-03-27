@@ -30,9 +30,9 @@ setPost();
 
 function saveComment(comment, userId, type, commentId) {
 	if (type === "comment") {
-		POST.writeComment(userId, comment);
+		new Firebase().writeComment(forum, postId, userId, comment);
 	} else if (type === "reply") {
-		new Comment(forum, postId, commentId).writeReply(userId, comment);
+		new Firebase().writeReply(forum, postId, commentId, userId, comment);
 	}
 	setTimeout((location.href = "02_topic.html"), 0);
 }

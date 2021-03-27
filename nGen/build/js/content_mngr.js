@@ -89,14 +89,91 @@ class Search {
 		this.database = firebase.database.ref(`field/posts`);
 	}
 
-	findPost(userId, postTitle) {
-		this.database.ref
-			.orderByChild("title")
-			.startAt(postTitle)
-			.endAt(postTitle + "\uf8ff");
+	flagPost(postId, forum) {
+		let location = firebase.database.ref(`FlaggedContent/${newKey}`).push().key;
+		let newKey = location.push().key;
+		this.ref(`FlaggedContent/${newKey}`).set({
+			type: post,
+			postId: postId,
+			forum: forum,
+			reports: -1,
+		});
+	}
+
+	flagComment(commentId, postId, forum) {
+		let location = firebase.database.ref(`FlaggedContent/${newKey}`).push().key;
+		let newKey = location.push().key;
+		this.ref(`FlaggedContent/${newKey}`).set({
+			type: comment,
+			commentId: commentId,
+			postId: postId,
+			forum: forum,
+			reports: -1,
+		});
 	}
 }
 
+class Search {
+	constructor(location, orderBy) {
+		this.ref = firebase.database().ref(location);
+		this.orderBy = orderBy;
+	}
+	searchFor(data) {
+		return new Promise((resolve, reject) => {
+			this.ref
+				.orderByChild(this.orderBy)
+				.equalTo(data)
+				.once("value", (snapshot) => {
+					resolve(snapshot.val());
+				});
+		});
+	}
+	searchForParent(data) {
+		return new Promise((resolve, reject) => {
+			this.ref
+				.orderByChild(this.orderBy)
+				.equalTo(data)
+				.once("value", (snapshot) => {
+					resolve(Object.keys(snapshot.val())[0]);
+				});
+		});
+	}
+	async exists(data) {
+		if ((await this.searchFor(data)) !== null) return true;
+		return false;
+	}
+}
+
+class Flag extends Search {
+	constructor(location, orderBy) {
+		super(location, orderBy);
+	}
+
+	async updateReports(data) {
+		let parent = await this.searchForParent(data);
+		console.log(parent);
+		let reports = await this.getReports(parent);
+		console.log(reports);
+		firebase
+			.database()
+			.ref(`FlaggedContent/${parent}`)
+			.update({
+				reports: reports - 1,
+			});
+	}
+
+	getReports(parent) {
+		return new Promise((resolve, reject) => {
+			firebase
+				.database()
+				.ref(`FlaggedContent/${parent}`)
+				.child("reports")
+				.once("value", (val) => {
+					resolve(val.val());
+				});
+		});
+	}
+}
 class Data {
 	constructor(parent, id) {
 		this.parent = parent;
@@ -137,20 +214,6 @@ class Comment extends Data {
 	}
 
 	/**
-	 * Writes the reply to the parent comment
-	 * @param {String} userId
-	 * @param {String} content
-	 */
-	writeReply(userId, content) {
-		let newKey = this.ref.child("replies").push().key;
-
-		this.ref.child(`replies/${newKey}`).set({
-			userId: userId,
-			reply: content,
-			timeSubmitted: Date.now(),
-		});
-	}
-	/**
 	 * returns the given comment as an object
 	 * @returns {Object}
 	 */
@@ -170,16 +233,6 @@ class Post extends Data {
 	}
 
 	//note: currently untested without a working forumn
-	writeComment(userId, comment) {
-		let newKey = this.ref.child("comments").push().key;
-
-		firebase.database().ref(`${this.forum}/posts/${this.getId()}/comments/${newKey}`).set({
-			userId: userId,
-			comment: comment,
-			timeSubmitted: Date.now(),
-		});
-	}
-
 	getPost() {
 		return new Promise((resolve, reject) => {
 			this.ref.once("value", (post) => {
@@ -213,18 +266,6 @@ class Forum extends Data {
 		this.ref = firebase.database().ref(`${forum}/posts`);
 		this.forum = forum;
 	}
-
-	writePost(userId, title, content) {
-		let newKey = this.ref.child("posts").push().key;
-		this.ref.child(newKey).set({
-			userId: userId,
-			title: title,
-			content: content,
-			timeSubmitted: Date.now(),
-			clicks: 0,
-		});
-	}
-
 	/*
       > gets all posts from the specified forumn/field
         >> note: I use forumn and field interchangeably because each forum is supposed to represent a field/industry
@@ -276,7 +317,9 @@ class CommentBox {
 
 		timeBox.setAttribute("id", "userTimeSub");
 		timeBox.classList.add("col-sm");
-		this.comment.getAttribute("timeSubmitted").then((time) => (timeBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
+		this.comment
+			.getAttribute("timeSubmitted")
+			.then((time) => (timeBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
 		replyNTimeCont.appendChild(timeBox);
 
 		container.appendChild(userBox);
@@ -349,7 +392,9 @@ class PostBox {
 		timeSubmittedBox.classList.add("postContent");
 		timeSubmittedBox.style.width = "fit-content";
 
-		this.post.getAttribute("timeSubmitted").then((time) => (timeSubmittedBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
+		this.post
+			.getAttribute("timeSubmitted")
+			.then((time) => (timeSubmittedBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
 
 		postBox.appendChild(userBox);
 		postBox.appendChild(titleBox);
@@ -428,7 +473,10 @@ class CommentFactory {
 				 **/
 				replies.then((data) => {
 					for (let reply in data) {
-						new ReplyBox(data[reply], document.getElementById(commObj.getId()).parentElement.querySelector(".replies")).createReply();
+						new ReplyBox(
+							data[reply],
+							document.getElementById(commObj.getId()).parentElement.querySelector(".replies")
+						).createReply();
 					}
 				});
 			}
@@ -477,4 +525,4 @@ class PostFactory {
 	}
 }
 
-export { Forum, Post, Comment, PostFactory, CommentFactory, Firebase };
+export { Forum, Post, Comment, PostFactory, CommentFactory, Firebase, Flag };
