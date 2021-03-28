@@ -46,7 +46,6 @@
         <link rel="stylesheet" type="text/css" href="rs-plugin/css/settings.css" media="screen" />
    
   <script src="js/index.js" type="module" ></script>
-  <!-- <script src="js/accounts.js"></script> -->
 
     </head>
     <body class="newaccountpage" onload ="UserStateChecker()">
@@ -94,7 +93,6 @@
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">My Profile</a></li>
                                     <li role="presentation"><a role="menuitem" tabindex="-2" href="#">Inbox</a></li>
                                     <li role="presentation"><a role="menuitem" tabindex="-3" href="#">Log Out</a></li>
-                                     <!-- <li role="presentation"><a role="menuitem" tabindex="-4" href="04_new_account.html">Create account</a></li> -->
                                 </ul>
                             </div>
                             <div class="clearfix"></div>
@@ -103,7 +101,7 @@
                 </div>
             </div>
 
-
+ <!-- begin profile section-->
             <section class="content">
                 <div class="container">
                     <div class="row">
@@ -117,31 +115,25 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8 col-md-8">
-
-
-
                             <!-- POST -->
                             <div class="post">
                                 <form action="#" class="form newtopic" method="post">
                                     <div class="postinfotop">
                                         <h2>My Profile Settings</h2>
                                     </div>
-
                                     <!-- acc section -->
                                     <div class="accsection">
                                         
                                         <div class="topwrap">
                                             <div class="userinfo pull-left">
-                                                
-                                                
                                             </div>
                                             <div class="posttext pull-left">
                                                 <div class="row">
-                                                    <!-- WIP: getting placeholder to display current name in firebase-->
+                                                    <!--  getting placeholder to display current name from firebase-->
                                                     <div class="col-lg-6 col-md-6" >
                                                         <input type="text" id="username" placeholder=" "  class="form-control" />
                                                     </div>
-                                                     <!-- WIP: getting placeholder to display Current indsutry value in firebase-->
+                                                     <!-- getting placeholder to display Current industry value from firebase-->
                                                      <div class="col-lg-6 col-md-6" >
                                                          
                                                         <input type="text" id="industry" placeholder=" "  class="form-control" />
@@ -163,7 +155,7 @@
 
                                     <div class="postinfobot">
                                         <div class="pull-right postreply">
-
+                                            <!-- Button that saves changes to firebase, if nothing is changed nothing is sent.-->
                                             <div class="pull-left"><button type="submit" id = "update" class="btn btn-primary">Save Changes</button></div>
                                             <div class="clearfix"></div>
                                         </div>
@@ -179,14 +171,6 @@
                         <div class="col-lg-1 col-xs-3 col-sm-2 logo "><a href="#"><img src="images/logo.jpg" alt=""  /></a></div>
                         <div class="col-lg-8 col-xs-9 col-sm-5 ">Copyrights 2021, nGen.com</div>
                         <div class="col-lg-3 col-xs-12 col-sm-5 sociconcent">
-                            <ul class="socialicons">
-                                <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-cloud"></i></a></li>
-                                <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
