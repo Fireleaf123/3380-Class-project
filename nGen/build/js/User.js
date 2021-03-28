@@ -46,6 +46,7 @@ class User{
 }
 
 class Accounts {
+
     signUpWithEmailPassword() {
         var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
@@ -100,7 +101,7 @@ class Accounts {
         var userRole = document.getElementById("userRole").value;
         var userIndustry = document.getElementById("userIndustry").value;
         var userEducation = document.getElementById("userEducation").value;
-        //let newKey = this.database.ref().push().key;
+        
         firebase.database().ref(`users/${userId}/`).set({
             userId: userId,
             username: userName,
@@ -112,38 +113,6 @@ class Accounts {
         });
         setTimeout(function(){location.href = "index.html"} , 3500);
       }
-      
-      
-      // // async UserStateChecker(){
-      //   var userId = await GetUserId();
-      //   var userrole = await GetUserRole(userId);
-      //   firebase.auth().onAuthStateChanged(function(user)
-        
-      //    {
-      //     if (user) { 
-      //     // User is signed in.
-      //       console.log("there is a currently signed in user: " + userrole + " " + userId);           
-      //       document.getElementById('login-button').style.visibility = 'hidden';                                                                                                          
-      //     } else {
-      //       console.log("there is no signed in user");
-      //       document.getElementById('my-profile-button').style.visibility = 'hidden'; 
-      //     }
-          
-      //     if (userrole =='Professional')  {
-      //       document.getElementById('new-post').style.visibility = 'visible';
-      //     }
-      //     else if (userrole !== 'Professional'){
-      //       document.getElementById('new-post').style.visibility = 'hidden';
-      //     }
-      
-      //     if (userrole =='Moderator')  {
-      //       document.getElementById('mod-tools').style.visibility = 'visible';
-      //     }
-      //     else if (userrole !== 'Moderator'){
-      //       document.getElementById('mod-tools').style.visibility = 'hidden';
-      //     }
-      //   });
-      // // }
       
       signOut() {
         // [START auth_sign_out]
@@ -157,9 +126,5 @@ class Accounts {
       }
       
 }
-// document.body.onload = () => {Acct.UserStateChecker()};
-// document.getElementById('signupbutton').onclick = () => {Acct.signUpWithEmailPassword()};
-// document.getElementById('login-button').onclick = () => {Acct.signInWithEmailPasswordsignInWithEmailPassword()};
-// document.getElementById('saveuser').onclick = () => {Acct.saveUser(userName, userBday, userId, userRole, userIndustry, userEducation)};
-// document.getElementById('logout').onclick = () => {Acct.signOut()};
+
 export {User, Accounts}
