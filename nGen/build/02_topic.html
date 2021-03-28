@@ -122,7 +122,12 @@
                     <h2 id="user"><i class="fa fa-user"></i></h2>
                     <h2 id="title"></h2>
                     <p id=content></p>
-                    <div id="timeCreated"class="posted pull-left"><i class="fa fa-clock-o"></i></div>
+                    <div class="container-fluid row">
+                      <div id="timeCreated" class="col-sm posted pull-left"><i class="fa fa-clock-o"></i></div>
+                      <div class="col-sm"><button class="btn btn-close-white post-btns reportBtn"></button></div>
+                      <div class="col-sm"><button class="btn btn-danger post-btns removeBtn"></button></div>
+                      <div class="col-sm"><button class="btn btn-success post-btns reportBtn"></button></div>
+                    </div>
                   </div>
                   <div class="clearfix"></div>
                 </div>
@@ -151,7 +156,6 @@
                       <div id="comment" class="pull-left"><p id="commentBtn" class="btn btn-primary">Post Comment</p></div>
                       <div class="clearfix"></div>
                     </div>
-
                     <div class="clearfix"></div>
                   </div>
                 </form>

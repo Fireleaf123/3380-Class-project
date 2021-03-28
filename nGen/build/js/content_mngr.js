@@ -2,12 +2,13 @@ import { Cookie } from "./cookies.js";
 
 class Firebase {
 	//https://gist.github.com/jofftiquez/f60dc81b39d77cd4eb1f5b5cbe6585ad
+	#ref;
 	constructor() {
-		this.ref = firebase.database();
+		this.#ref = firebase.database();
 	}
 
 	writePost(forum, userId, title, content) {
-		let location = this.ref.ref(`${forum}/posts`);
+		let location = this.#ref.ref(`${forum}/posts`);
 		let newKey = location.push().key;
 
 		location.child(newKey).set({
@@ -20,7 +21,7 @@ class Firebase {
 	}
 
 	writeComment(forum, postId, userId, comment) {
-		let location = this.ref.ref(`${forum}/posts/${postId}/comments`);
+		let location = this.#ref.ref(`${forum}/posts/${postId}/comments`);
 		let newKey = location.push().key;
 
 		location.child(newKey).set({
@@ -36,7 +37,7 @@ class Firebase {
 	 * @param {String} content
 	 */
 	writeReply(forum, postId, commentId, userId, content) {
-		let location = this.ref.ref(`${forum}/posts/${postId}/comments/${commentId}/replies`);
+		let location = this.#ref.ref(`${forum}/posts/${postId}/comments/${commentId}/replies`);
 		let newKey = location.push().key;
 
 		location.child(newKey).set({
@@ -96,8 +97,7 @@ class Flag extends Search {
 
 	async updateReports(data) {
 		let parent = await this.searchForParent(data);
-		console.log(parent);
-		let reports = await this.getReports(parent);
+		let reports = await this.#getReports(parent);
 		console.log(reports);
 		firebase
 			.database()
@@ -107,7 +107,7 @@ class Flag extends Search {
 			});
 	}
 
-	getReports(parent) {
+	#getReports(parent) {
 		return new Promise((resolve, reject) => {
 			firebase
 				.database()
@@ -161,7 +161,7 @@ class Data {
 		return this.id;
 	}
 	//returns the parent
-	#getParent() {
+	getParent() {
 		return this.parent;
 	}
 
@@ -199,6 +199,7 @@ class Comment extends Data {
 }
 
 class Post extends Data {
+	forum;
 	constructor(forum, postId) {
 		super(`${forum}/posts/`, postId);
 		this.forum = forum;
@@ -233,10 +234,12 @@ class Post extends Data {
 }
 
 class Forum extends Data {
+	#ref;
+	#forum;
 	constructor(forum) {
 		super("", forum);
-		this.ref = firebase.database().ref(`${forum}/posts`);
-		this.forum = forum;
+		this.#ref = firebase.database().ref(`${forum}/posts`);
+		this.#forum = forum;
 	}
 	/*
       > gets all posts from the specified forumn/field
@@ -245,14 +248,14 @@ class Forum extends Data {
 	async getPosts() {
 		let listOfPosts = [];
 
-		let get = this.ref.orderByChild("clicks").on("value", (posts) => {
+		let get = this.#ref.orderByChild("clicks").on("value", (posts) => {
 			posts.forEach((childPost) => {
-				listOfPosts.push(new Post(this.forum, childPost.key));
+				listOfPosts.push(new Post(this.#forum, childPost.key));
 			});
 		});
 
 		setTimeout(() => {
-			this.ref.orderByChild("clicks").off("value", get);
+			this.#ref.orderByChild("clicks").off("value", get);
 		}, 1500);
 
 		return listOfPosts;
@@ -260,9 +263,11 @@ class Forum extends Data {
 }
 
 class CommentBox {
+	#comment;
+	#parentContainer;
 	constructor(comment, parentContainer) {
-		this.comment = comment;
-		this.parentContainer = parentContainer;
+		this.#comment = comment;
+		this.#parentContainer = parentContainer;
 	}
 
 	createComment() {
@@ -274,22 +279,22 @@ class CommentBox {
 		let timeBox = document.createElement("div");
 		let repliesCont;
 
-		container.setAttribute("id", this.comment.getId());
+		container.setAttribute("id", this.#comment.getId());
 		container.classList.add("post");
 
 		userBox.setAttribute("id", "user");
 		userBox.classList.add("commentContent");
-		this.comment.getAttribute("userId").then((userId) => (userBox.innerHTML = `<strong>${userId}</strong>`));
+		this.#comment.getAttribute("userId").then((userId) => (userBox.innerHTML = `<strong>${userId}</strong>`));
 
 		commentBox.setAttribute("id", "userComment");
 		commentBox.classList.add("commentContent");
-		this.comment.getAttribute("comment").then((comment) => (commentBox.innerHTML = `<p>${comment}</p>`));
+		this.#comment.getAttribute("comment").then((comment) => (commentBox.innerHTML = `<p>${comment}</p>`));
 
 		replyNTimeCont.classList.add("container-fluid", "row", "commentContent");
 
 		timeBox.setAttribute("id", "userTimeSub");
 		timeBox.classList.add("col-sm");
-		this.comment
+		this.#comment
 			.getAttribute("timeSubmitted")
 			.then((time) => (timeBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
 		replyNTimeCont.appendChild(timeBox);
@@ -327,6 +332,7 @@ class CommentBox {
 			const forum = new Cookie().getCookie("forum");
 			const postId = new Cookie().getCookie("postId");
 			new Firebase().flagComment(forum, postId, commentId);
+			setTimeout(location.reload(), 0);
 		};
 		reportBtn.onclick = () => {
 			flag(reportBtn);
@@ -336,7 +342,7 @@ class CommentBox {
 		report.appendChild(reportBtn);
 		replyNTimeCont.appendChild(reply);
 		replyNTimeCont.appendChild(report);
-		this.parentContainer.appendChild(mainCont);
+		this.#parentContainer.appendChild(mainCont);
 	}
 
 	createFlaggedComment() {
@@ -347,22 +353,22 @@ class CommentBox {
 		let removeNTimeCont = document.createElement("div");
 		let timeBox = document.createElement("div");
 
-		container.setAttribute("id", this.comment.getId());
+		container.setAttribute("id", this.#comment.getId());
 		container.classList.add("post");
 
 		userBox.setAttribute("id", "user");
 		userBox.classList.add("commentContent");
-		this.comment.getAttribute("userId").then((userId) => (userBox.innerHTML = `<strong>${userId}</strong>`));
+		this.#comment.getAttribute("userId").then((userId) => (userBox.innerHTML = `<strong>${userId}</strong>`));
 
 		commentBox.setAttribute("id", "userComment");
 		commentBox.classList.add("commentContent");
-		this.comment.getAttribute("comment").then((comment) => (commentBox.innerHTML = `<p>${comment}</p>`));
+		this.#comment.getAttribute("comment").then((comment) => (commentBox.innerHTML = `<p>${comment}</p>`));
 
 		removeNTimeCont.classList.add("row", "commentContent");
 
 		timeBox.setAttribute("id", "userTimeSub");
 		timeBox.classList.add("col-sm");
-		this.comment
+		this.#comment
 			.getAttribute("timeSubmitted")
 			.then((time) => (timeBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
 		removeNTimeCont.appendChild(timeBox);
@@ -381,13 +387,14 @@ class CommentBox {
 		removeBtn.innerHTML = "Delete";
 
 		removeBtn.onclick = async () => {
-			let parent = await new Flag("FlaggedContent", "commentId").searchForParent(this.comment.getId());
+			let parent = await new Flag("FlaggedContent", "commentId").searchForParent(this.#comment.getId());
 			let c = new Data("FlaggedContent", parent);
 			Promise.all([c.getAttribute("forum"), c.getAttribute("postId"), c.getAttribute("commentId")]).then(
 				(data) => {
 					new Flag().delete(...data);
 				}
 			);
+			setTimeout(location.reload(), 0);
 		};
 
 		let removeFlag = document.createElement("button");
@@ -395,27 +402,30 @@ class CommentBox {
 		removeFlag.innerHTML = "Unflag";
 
 		removeFlag.onclick = async () => {
-			new Flag().deleteFlag("commentId", this.comment.getId());
+			new Flag().deleteFlag("commentId", this.#comment.getId());
+			setTimeout(location.reload(), 0);
 		};
 
 		remove.appendChild(removeBtn);
 		remove.appendChild(removeFlag);
 		removeNTimeCont.appendChild(remove);
-		this.parentContainer.appendChild(mainCont);
+		this.#parentContainer.appendChild(mainCont);
 	}
 }
 
 class PostBox {
+	#post;
+	#parentContainer;
 	constructor(post, parentContainer) {
-		this.post = post;
-		this.parentContainer = parentContainer;
+		this.#post = post;
+		this.#parentContainer = parentContainer;
 	}
 
 	createPost() {
 		let postBox = document.createElement("div");
 
 		postBox.classList.add("POSTS", "post"); //using boostrap container and border
-		postBox.setAttribute("id", this.post.getId());
+		postBox.setAttribute("id", this.#post.getId());
 
 		/**
 		 * increments clicks on post by 1, then redirects to actual post
@@ -423,24 +433,24 @@ class PostBox {
 		 * when its done
 		 */
 		postBox.onclick = () => {
-			this.post.updateClicks();
-			new Cookie().setCookie("postId", this.post.getId(), 7);
-			new Cookie().setCookie("forum", this.post.forum, 7);
+			this.#post.updateClicks();
+			new Cookie().setCookie("postId", this.#post.getId(), 7);
+			new Cookie().setCookie("forum", this.#post.forum, 7);
 			location.href = "02_topic.html";
 		};
 
 		//creating a div to hold userID
 		let userBox = document.createElement("div");
 		userBox.classList.add("postContent");
-		this.post.getAttribute("userId").then((user) => (userBox.innerHTML = '<i class="fa fa-user"></i> ' + user)); //putting content into the div UserBox.
+		this.#post.getAttribute("userId").then((user) => (userBox.innerHTML = '<i class="fa fa-user"></i> ' + user)); //putting content into the div UserBox.
 
 		let titleBox = document.createElement("div");
 		titleBox.classList.add("postContent");
-		this.post.getAttribute("title").then((title) => (titleBox.innerHTML = title));
+		this.#post.getAttribute("title").then((title) => (titleBox.innerHTML = title));
 
 		let contentBox = document.createElement("div");
 		contentBox.classList.add("postContent");
-		this.post.getAttribute("content").then((content) => {
+		this.#post.getAttribute("content").then((content) => {
 			if (content.length >= 200) contentBox.innerHTML = content.substring(0, 200) + "...";
 			else {
 				contentBox.innerHTML = content;
@@ -451,7 +461,7 @@ class PostBox {
 		timeSubmittedBox.classList.add("postContent");
 		timeSubmittedBox.style.width = "fit-content";
 
-		this.post
+		this.#post
 			.getAttribute("timeSubmitted")
 			.then((time) => (timeSubmittedBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
 
@@ -466,14 +476,16 @@ class PostBox {
 		 * In actuality,  each postBox would be pasted onto
 		 * document.getElementById(postContainer) instead of document.body
 		 */
-		this.parentContainer.appendChild(postBox);
+		this.#parentContainer.appendChild(postBox);
 	}
 }
 
 class ReplyBox {
+	#reply;
+	#parentContainer;
 	constructor(reply, parentContainer) {
-		this.reply = reply;
-		this.parentContainer = parentContainer;
+		this.#reply = reply;
+		this.#parentContainer = parentContainer;
 	}
 
 	createReply() {
@@ -486,42 +498,44 @@ class ReplyBox {
 
 		userBox.setAttribute("id", "user");
 		userBox.classList.add("commentContent");
-		userBox.innerHTML = `<strong>${this.reply.userId}</strong>`;
+		userBox.innerHTML = `<strong>${this.#reply.userId}</strong>`;
 
 		commentBox.setAttribute("id", "userComment");
 		commentBox.classList.add("commentContent");
-		commentBox.innerHTML = `<p>${this.reply.reply}</p>`;
+		commentBox.innerHTML = `<p>${this.#reply.reply}</p>`;
 
 		timeBox.setAttribute("id", "userTimeSub");
 		timeBox.classList.add("col-sm");
-		timeBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(this.reply.timeSubmitted);
+		timeBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(this.#reply.timeSubmitted);
 
 		container.appendChild(userBox);
 		container.appendChild(commentBox);
 		container.appendChild(timeBox);
 
-		this.parentContainer.appendChild(container);
+		this.#parentContainer.appendChild(container);
 	}
 }
 
 class CommentFactory {
+	#parentContainer;
+	#post;
 	/**
 	 * @param {div} parentContainer
 	 * @param {Array} comments
 	 */
 	constructor(parentContainer, post) {
-		this.parentContainer = parentContainer;
-		this.post = post;
+		this.#parentContainer = parentContainer;
+		this.#post = post;
 	}
 
 	/**
 	 * creates comment objects of children of parent post, and stores them in a list
 	 */
 	displayComments() {
-		this.post.getAttribute("comments").then((comments) => {
+		this.#post.getAttribute("comments").then((comments) => {
 			for (let comment in comments) {
-				let commObj = new Comment(this.post.forum, this.post.getId(), comment);
-				let c = new CommentBox(commObj, this.parentContainer);
+				let commObj = new Comment(this.#post.forum, this.#post.getId(), comment);
+				let c = new CommentBox(commObj, this.#parentContainer);
 				let replies = commObj.getAttribute("replies");
 
 				c.createComment();
@@ -544,20 +558,22 @@ class CommentFactory {
 }
 
 class PostFactory {
+	#parentContainer;
+	#forum;
 	/**
 	 * @param {DIV} parentContainer
 	 * @param {Array} posts
 	 */
 	constructor(parentContainer, forum) {
-		this.parentContainer = parentContainer;
-		this.forum = forum;
+		this.#parentContainer = parentContainer;
+		this.#forum = forum;
 	}
 
 	displayPosts() {
-		let ref = firebase.database().ref(`${this.forum}/posts/`);
+		let ref = firebase.database().ref(`${this.#forum}/posts/`);
 		let get = ref.orderByChild("clicks").on("value", (posts) => {
 			posts.forEach((childPost) => {
-				new PostBox(new Post(this.forum, childPost.key), this.parentContainer).createPost();
+				new PostBox(new Post(this.#forum, childPost.key), this.#parentContainer).createPost();
 			});
 		});
 
@@ -568,9 +584,10 @@ class PostFactory {
 }
 
 class FlagFactory extends Flag {
+	#parentContainer;
 	constructor(parent) {
 		super("FlaggedContent", "type");
-		this.parentContainer = parent;
+		this.#parentContainer = parent;
 	}
 
 	displayComments() {
@@ -582,9 +599,8 @@ class FlagFactory extends Flag {
 					content.getAttribute("parent"),
 					content.getAttribute("commentId"),
 				]).then((data) => {
-					console.log(data);
 					let comment = new Comment(data[0], data[1], data[2]);
-					new CommentBox(comment, this.parentContainer).createFlaggedComment();
+					new CommentBox(comment, this.#parentContainer).createFlaggedComment();
 				});
 			}
 		});
@@ -596,7 +612,7 @@ class FlagFactory extends Flag {
 				let content = new Data("FlaggedContent", id);
 				Promise.all([content.getAttribute("forum"), content.getAttribute("postId")]).then((data) => {
 					let post = new Post(data[0], data[1]);
-					new PostBox(post, this.parentContainer).createPost();
+					new PostBox(post, this.#parentContainer).createPost();
 				});
 			}
 		});

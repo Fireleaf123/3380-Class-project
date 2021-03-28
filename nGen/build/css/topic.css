@@ -11,16 +11,16 @@
 }
 
 #timeCreated {
-	border-top: solid #1ABC9C;
+	border-top: solid #1abc9c;
 }
 
 #content {
-	border: 30px #1ABC9C;
+	border: 30px #1abc9c;
 }
 
 #comments {
-	border-top: 5px solid #1ABC9C;
-	border-bottom: 5px solid #1ABC9C;
+	border-top: 5px solid #1abc9c;
+	border-bottom: 5px solid #1abc9c;
 }
 
 #user {
@@ -28,22 +28,36 @@
 }
 
 #userComment {
-	border-bottom:3px solid #1ABC9C;
+	border-bottom: 3px solid #1abc9c;
 }
 
 #userTimeSub {
 	font-style: italic;
 }
 
-.replies{
+.replies {
 	padding-left: 50px;
 }
 
-.replyTime{
-	
+.replyTime {
 }
 
-.replyBtn{
+.replyBtn {
 	max-width: 30px;
+}
 
+.post-btns {
+	max-width: ;
+}
+
+.removeBtn::after {
+	content: "Delete";
+}
+
+.unFlagBtn::after {
+	content: "Unflag";
+}
+
+.reportBtn::after {
+	content: "Report";
 }

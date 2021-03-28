@@ -2,13 +2,15 @@ class User{
     constructor(){
 
     }
+    /**
+     * 
+     * @returns {String} of current 
+     */
     getUserId(){
-        
         return new Promise( (resolve,reject) => {
             firebase.auth().onAuthStateChanged( 
                 function(){
                     resolve(firebase.auth().currentUser.uid)
-
                 }
             );
         })
