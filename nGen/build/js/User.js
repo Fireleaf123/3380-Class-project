@@ -95,7 +95,6 @@ class Accounts {
         //initialize variables for saveUser()
       
       saveUser(userName, userBday, userId, userRole, userIndustry, userEducation) {
-        var userId = firebase.auth().currentUser.uid;
         var userName = document.getElementById("userName").value;
         var userBday = document.getElementById("userBday").value;
         var userRole = document.getElementById("userRole").value;
@@ -114,54 +113,37 @@ class Accounts {
         setTimeout(function(){location.href = "index.html"} , 3500);
       }
       
-      GetUserRole(userId) {
-        var UserRoleRef = firebase.database().ref(`users/${userId}`).child('userrole');
-        return new Promise( (resolve,reject) => {
-             UserRoleRef.once("value", (userrole) => {
-            resolve(userrole.val());
-        }) 
-        });
-      }
       
-      GetUserId() {
-         return new Promise( (resolve,reject) => {
-          firebase.auth().onAuthStateChanged(function(user) {
-            resolve(firebase.auth().currentUser.uid)
-           });
-         })
-      }
-      
-      
-      async UserStateChecker(){
-        var userId = await GetUserId();
-        var userrole = await GetUserRole(userId);
-        firebase.auth().onAuthStateChanged(function(user)
+      // // async UserStateChecker(){
+      //   var userId = await GetUserId();
+      //   var userrole = await GetUserRole(userId);
+      //   firebase.auth().onAuthStateChanged(function(user)
         
-         {
-          if (user) { 
-          // User is signed in.
-            console.log("there is a currently signed in user: " + userrole + " " + userId);           
-            document.getElementById('login-button').style.visibility = 'hidden';                                                                                                          
-          } else {
-            console.log("there is no signed in user");
-            document.getElementById('my-profile-button').style.visibility = 'hidden'; 
-          }
+      //    {
+      //     if (user) { 
+      //     // User is signed in.
+      //       console.log("there is a currently signed in user: " + userrole + " " + userId);           
+      //       document.getElementById('login-button').style.visibility = 'hidden';                                                                                                          
+      //     } else {
+      //       console.log("there is no signed in user");
+      //       document.getElementById('my-profile-button').style.visibility = 'hidden'; 
+      //     }
           
-          if (userrole =='Professional')  {
-            document.getElementById('new-post').style.visibility = 'visible';
-          }
-          else if (userrole !== 'Professional'){
-            document.getElementById('new-post').style.visibility = 'hidden';
-          }
+      //     if (userrole =='Professional')  {
+      //       document.getElementById('new-post').style.visibility = 'visible';
+      //     }
+      //     else if (userrole !== 'Professional'){
+      //       document.getElementById('new-post').style.visibility = 'hidden';
+      //     }
       
-          if (userrole =='Moderator')  {
-            document.getElementById('mod-tools').style.visibility = 'visible';
-          }
-          else if (userrole !== 'Moderator'){
-            document.getElementById('mod-tools').style.visibility = 'hidden';
-          }
-        });
-      }
+      //     if (userrole =='Moderator')  {
+      //       document.getElementById('mod-tools').style.visibility = 'visible';
+      //     }
+      //     else if (userrole !== 'Moderator'){
+      //       document.getElementById('mod-tools').style.visibility = 'hidden';
+      //     }
+      //   });
+      // // }
       
       signOut() {
         // [START auth_sign_out]
@@ -175,5 +157,9 @@ class Accounts {
       }
       
 }
-
+// document.body.onload = () => {Acct.UserStateChecker()};
+// document.getElementById('signupbutton').onclick = () => {Acct.signUpWithEmailPassword()};
+// document.getElementById('login-button').onclick = () => {Acct.signInWithEmailPasswordsignInWithEmailPassword()};
+// document.getElementById('saveuser').onclick = () => {Acct.saveUser(userName, userBday, userId, userRole, userIndustry, userEducation)};
+// document.getElementById('logout').onclick = () => {Acct.signOut()};
 export {User, Accounts}

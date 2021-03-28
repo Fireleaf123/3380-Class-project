@@ -11,48 +11,34 @@
  * =============================================================================================================== 
  */
 
-import { Accounts } from "./User.js";
+import { Accounts, User } from "./User.js";
 const Acct = new Accounts();
 
 
-
-class AccountsCall{
-
-  calls(){
-
-     
     var path = window.location.pathname;
     var page = path.split("/").pop();
-    console.log( page );
 
     if (page ==='04_new_account.html')
     {
     document.getElementById('signupbutton').onclick = () => {Acct.signUpWithEmailPassword()};
-    console.log('1');
     }
   
     else if (page ==='05_login.html')
     {
     document.getElementById('login-button').onclick = () => {Acct.signInWithEmailPasswordsignInWithEmailPassword()};
-    console.log('2');
     }
 
     else if (page ==='06_new_account2.html')
     {
+    var userId;
+    new User().getUserId().then(User => {userId = User})
+    
     document.getElementById('saveuser').onclick = () => {Acct.saveUser(userName, userBday, userId, userRole, userIndustry, userEducation)};
-    console.log('3');
     }
 
     else 
     {
     document.getElementById('logout').onclick = () => {Acct.signOut()};
-    console.log('4');
     }
 
-    document.body.onload = () => {Acct.UserStateChecker()};
-    console.log('5');
-  }
-}
 
-
-export{AccountsCall};
