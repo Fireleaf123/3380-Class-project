@@ -55,23 +55,22 @@ document.getElementById("comment").onclick = async () => {
 
 //Calls
 
-let data;
- if (type= "post")
- {
- 	data = { 
- 	postId: postId,
- 	forum: forum,
- 	reports: -1, }
- }
- if (type= "comment")
-{
-	data = {
-	postId: postId,
-	commentId: commentId,
-	forum: forum,
-	reports: -1, }
-}
+// let data;
+//  if (type= "post")
+//  {
+//  	data = { 
+//  	postId: postId,
+//  	forum: forum,
+//  	reports: -1, }
+//  }
+//  if (type= "comment")
+// {
+// 	data = {
+// 	postId: postId,
+// 	commentId: commentId,
+// 	forum: forum,
+// 	reports: -1, }
+// }
 
 
-new Firebase().flagContent(data);
-document.getElementById('report-post').onclick = function(){FIRE.flagContent(data)};
+document.getElementById('report-post').onclick = function(){FIRE.flagPost(postId, forum)};

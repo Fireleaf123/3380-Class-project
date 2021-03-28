@@ -34,9 +34,8 @@ async function IndexUserStateChecker(){
 	  //GetUserRole(userId).then( (role) => { userRole = role}) 
 		console.log("there is a currently signed in user: " + userrole + " " + userId);            
 		document.getElementById('logout').style.visibility = 'visible';   
-		var btn = document.getElementById("lsogin-button");
-			btn.innerHTML = "Profile";
-			btn.onclick = function(){ location.href= "profile.html"};
+		document.getElementById('profile-button').style.visibility = 'visible'; 
+		document.getElementById('login-button').style.visibility = 'hidden'; 
 		if (userrole =='Professional')  
 		{
 			document.getElementById('new-post').style.visibility = 'visible';
@@ -72,8 +71,3 @@ function signOut() {
 
 //calls 
 
-document.getElementById('logout').onclick = function(){signOut()};
-
-document.body.onload = function () {
-	IndexUserStateChecker();
-};
