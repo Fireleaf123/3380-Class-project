@@ -83,6 +83,25 @@ class Firebase {
 			}
 		});
 	}
+	saveUser(userName, userBday, userId, userRole, userIndustry, userEducation) {
+		var userName = document.getElementById("userName").value;
+		var userBday = document.getElementById("userBday").value;
+		var userRole = document.getElementById("userRole").value;
+		var userIndustry = document.getElementById("userIndustry").value;
+		var userEducation = document.getElementById("userEducation").value;
+
+		firebase.database().ref(`users/${userId}/`).set({
+			userId: userId,
+			username: userName,
+			birthday: userBday,
+			userrole: userRole,
+			industry: userIndustry,
+			education: userEducation,
+		});
+		setTimeout(function () {
+			location.href = "index.html";
+		}, 3500);
+	}
 }
 
 class Search {
@@ -319,9 +338,7 @@ class CommentBox {
 
 		timeBox.setAttribute("id", "userTimeSub");
 		timeBox.classList.add("col-sm");
-		this.#comment
-			.getAttribute("timeSubmitted")
-			.then((time) => (timeBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
+		this.#comment.getAttribute("timeSubmitted").then((time) => (timeBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
 		replyNTimeCont.appendChild(timeBox);
 
 		container.appendChild(userBox);
@@ -393,9 +410,7 @@ class CommentBox {
 
 		timeBox.setAttribute("id", "userTimeSub");
 		timeBox.classList.add("col-sm");
-		this.#comment
-			.getAttribute("timeSubmitted")
-			.then((time) => (timeBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
+		this.#comment.getAttribute("timeSubmitted").then((time) => (timeBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
 		removeNTimeCont.appendChild(timeBox);
 
 		container.appendChild(userBox);
@@ -414,11 +429,9 @@ class CommentBox {
 		removeBtn.onclick = async () => {
 			let parent = await new Flag("FlaggedContent", "commentId").searchForParent(this.#comment.getId());
 			let c = new Data("FlaggedContent", parent);
-			Promise.all([c.getAttribute("forum"), c.getAttribute("postId"), c.getAttribute("commentId")]).then(
-				(data) => {
-					new Flag().delete(...data);
-				}
-			);
+			Promise.all([c.getAttribute("forum"), c.getAttribute("postId"), c.getAttribute("commentId")]).then((data) => {
+				new Flag().delete(...data);
+			});
 			setTimeout(location.reload(), 300);
 		};
 
@@ -486,9 +499,7 @@ class PostBox {
 		timeSubmittedBox.classList.add("postContent");
 		timeSubmittedBox.style.width = "fit-content";
 
-		this.#post
-			.getAttribute("timeSubmitted")
-			.then((time) => (timeSubmittedBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
+		this.#post.getAttribute("timeSubmitted").then((time) => (timeSubmittedBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
 
 		postBox.appendChild(userBox);
 		postBox.appendChild(titleBox);
@@ -571,10 +582,7 @@ class CommentFactory {
 				 **/
 				replies.then((data) => {
 					for (let reply in data) {
-						new ReplyBox(
-							data[reply],
-							document.getElementById(commObj.getId()).parentElement.querySelector(".replies")
-						).createReply();
+						new ReplyBox(data[reply], document.getElementById(commObj.getId()).parentElement.querySelector(".replies")).createReply();
 					}
 				});
 			}
@@ -619,11 +627,7 @@ class FlagFactory extends Flag {
 		this.searchFor("comment").then((flagged) => {
 			for (let id in flagged) {
 				let content = new Data("FlaggedContent", id);
-				Promise.all([
-					content.getAttribute("forum"),
-					content.getAttribute("parent"),
-					content.getAttribute("commentId"),
-				]).then((data) => {
+				Promise.all([content.getAttribute("forum"), content.getAttribute("parent"), content.getAttribute("commentId")]).then((data) => {
 					let comment = new Comment(data[0], data[1], data[2]);
 					new CommentBox(comment, this.#parentContainer).createFlaggedComment();
 				});
