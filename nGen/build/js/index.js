@@ -14,11 +14,10 @@ import { User } from './User.js'
 document.body.onload = async function () {
 	var userrole = await new User().getAttribute('userrole');
 	var userId = await new User().getUserId();
-	console.log(userId + userrole);	
 	firebase.auth().onAuthStateChanged(function (user) {
 		if (user) { 
 			    // User is signed in.
-			      console.log("there is a currently signed in user: " + userrole + " " + userId);           
+			      console.log("there is a currently signed in user with role: '" + userrole + "' and id: " + userId);        
 			      document.getElementById('login-button').style.visibility = 'hidden';                                                                                                          
 				  document.getElementById('profile-button').style.visibility = 'visible';
 				  document.getElementById('logout').style.visibility = 'visible';
@@ -27,9 +26,7 @@ document.body.onload = async function () {
 				}
 			    if (userrole !=='Student')  {
 			      document.getElementById('new-post').style.visibility = 'visible';
-			    }
-			console.log(userrole);
-			    
+			    }    
 			}
 				else {
 					console.log("there is no signed in user");

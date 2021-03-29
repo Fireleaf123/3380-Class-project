@@ -1,8 +1,23 @@
 .postContent{
     padding-left: 10px;
-    width: fit-content;
+    padding-bottom: 5px;
 }
 
-.POSTS{
-    
+.post-title{
+    font-size: 20px;
+    color: black;
+    border-bottom: .5px solid rgb(34, 32, 32);
+    padding-bottom: 3px;
+}
+
+.post-content{
+    padding-top: 2px;
+}
+
+.post-time{
+    font-size: 10px;
+}
+
+#postArea{
+    padding-top: 15px;
 }

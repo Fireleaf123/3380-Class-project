@@ -91,34 +91,18 @@ class Accounts {
           .catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
+            window.alert("errorMessage");
           });
       }
         //initialize variables for saveUser()
       
-      saveUser(userName, userBday, userId, userRole, userIndustry, userEducation) {
-        var userName = document.getElementById("userName").value;
-        var userBday = document.getElementById("userBday").value;
-        var userRole = document.getElementById("userRole").value;
-        var userIndustry = document.getElementById("userIndustry").value;
-        var userEducation = document.getElementById("userEducation").value;
-        
-        firebase.database().ref(`users/${userId}/`).set({
-            userId: userId,
-            username: userName,
-            birthday: userBday,
-            userrole: userRole,
-            industry: userIndustry,
-            education: userEducation,
       
-        });
-        setTimeout(function(){location.href = "index.html"} , 3500);
-      }
       
       signOut() {
         // [START auth_sign_out]
         firebase.auth().signOut().then(() => {
           // Sign-out successful.
-          setTimeout(function(){location.href = "index.html"} , 2500);
+          setTimeout(function(){location.href = "index.html"} , 100);
         }).catch((error) => {
           // An error happened.
         });

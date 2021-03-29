@@ -90,6 +90,24 @@ class Firebase {
 		})
 
 	}
+	saveUser(userName, userBday, userId, userRole, userIndustry, userEducation) {
+        var userName = document.getElementById("userName").value;
+        var userBday = document.getElementById("userBday").value;
+        var userRole = document.getElementById("userRole").value;
+        var userIndustry = document.getElementById("userIndustry").value;
+        var userEducation = document.getElementById("userEducation").value;
+        
+        firebase.database().ref(`users/${userId}/`).set({
+            userId: userId,
+            username: userName,
+            birthday: userBday,
+            userrole: userRole,
+            industry: userIndustry,
+            education: userEducation,
+      
+        });
+        setTimeout(function(){location.href = "index.html"} , 3500);
+      }
 }
 
 
@@ -396,18 +414,18 @@ class PostBox {
 		//creating a div to hold userID
 		let userBox = document.createElement("div");
 		userBox.classList.add("postContent");
-		this.post.getAttribute("userId").then((user) => (userBox.innerHTML = '<i class="fa fa-user"></i> ' + user)); //putting content into the div UserBox.
+		this.post.getAttribute("userId").then((user) => (userBox.innerHTML = `<b id="post-user">posted by: <i class="fa fa-user"></i> ${user}</b>`)); //putting content into the div UserBox.
 
 		let titleBox = document.createElement("div");
-		titleBox.classList.add("postContent");
+		titleBox.classList.add("postContent", "post-title");
 		this.post.getAttribute("title").then((title) => (titleBox.innerHTML = title));
 
 		let contentBox = document.createElement("div");
-		contentBox.classList.add("postContent");
+		contentBox.classList.add("postContent", "post-content");
 		this.post.getAttribute("content").then((content) => (contentBox.innerHTML = content));
 
 		let timeSubmittedBox = document.createElement("div");
-		timeSubmittedBox.classList.add("postContent");
+		timeSubmittedBox.classList.add("postContent","post-time");
 		timeSubmittedBox.style.width = "fit-content";
 
 		this.post

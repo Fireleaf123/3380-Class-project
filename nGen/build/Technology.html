@@ -3,20 +3,19 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Vibin</title>
+		<title>Technology</title>
 		<!-- update the version number as needed -->
 		<script defer src="/__/firebase/8.2.8/firebase-app.js"></script>
 		<!-- include only the Firebase features as you need -->
 		<script defer src="/__/firebase/8.2.8/firebase-auth.js"></script>
 		<script defer src="/__/firebase/8.2.8/firebase-database.js"></script>
-		<!--
-    <script defer src="/__/firebase/8.2.8/firebase-firestore.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-functions.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-storage.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-analytics.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-remote-config.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-performance.js"></script> -->
+		<script defer src="/__/firebase/8.2.8/firebase-firestore.js"></script>
+		<script defer src="/__/firebase/8.2.8/firebase-functions.js"></script>
+		<script defer src="/__/firebase/8.2.8/firebase-messaging.js"></script>
+		<script defer src="/__/firebase/8.2.8/firebase-storage.js"></script>
+		<script defer src="/__/firebase/8.2.8/firebase-analytics.js"></script>
+		<script defer src="/__/firebase/8.2.8/firebase-remote-config.js"></script>
+		<script defer src="/__/firebase/8.2.8/firebase-performance.js"></script>
 		<!-- 
       initialize the SDK after all desired features are loaded, set useEmulator to false
       to avoid connecting the SDK to running emulators.
@@ -25,10 +24,10 @@
 		<script type="module" src="js/index.js"></script>
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet" />
-
+		
 		<!-- Custom -->
 		<link href="css/custom.css" rel="stylesheet" />
-		<link href="css/forums.css" rel="stylesheet" />
+		<link href="css/forum.css" rel="stylesheet" />
 		<link href="css/home.css" rel="stylesheet" />
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -49,24 +48,19 @@
 		<link rel="stylesheet" type="text/css" href="rs-plugin/css/settings.css" media="screen" />
 	</head>
 	<body>
-		<div class="container-fluid">
-			<div class="headernav">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo">
-							<a href="#"><img src="images/logo.jpg" alt="" /></a>
-						</div>
-						<div class="col-lg-3 col-xs-9 col-sm-5 col-md-3 selecttopic">
-							<div class="dropdown">
-								<a data-toggle="dropdown" href="#">Borderlands 2</a> <b class="caret"></b>
-								<ul class="dropdown-menu" role="menu">
-									<li role="presentation"><a role="menuitem" tabindex="-1" a href="05_login.html">Login</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-2" href="#">Borderlands 2</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-3" href="#">Borderlands 3</a></li>
-								</ul>
-							</div>						
-						</div>
-						<div class="clearfix" id="post-header"></div>
+		
+		<div class="headernav">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo">
+						<a href="#"><img src="images/logo.jpg" alt="" /></a>
+					</div>
+					<div class="col-lg-3 col-xs-9 col-sm-5 col-md-3 selecttopic">
+						<div>
+							<a href="index.html">nGen</a> <b class="caret"></b>
+						</div>		
+					</div>
+					<div class="clearfix" id="post-header"></div>
 					<div class="col-lg-8 col-xs-12 col-sm-5 col-md-4 avt" id="buttons">
 						<div class="stnt pull-left all-buttons">
 							<form action="03_new_topic.html" method="post" class="form" id="new-post">
@@ -94,37 +88,15 @@
 							</form>
 						</div>
 							<div class="clearfix"></div>
-				</div>
+						</div>
+					</div>
 			</div>
+		</div>
 
 			<section class="content">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-8 col-xs-12 col-md-8">
-							<div class="pull-left">
-								<a href="#" class="prevnext"><i class="fa fa-angle-left"></i></a>
-							</div>
-							<div class="pull-left">
-								<ul class="paginationforum">
-									<li class="hidden-xs"><a href="#">1</a></li>
-									<li class="hidden-xs"><a href="#">2</a></li>
-									<li class="hidden-xs"><a href="#">3</a></li>
-									<li class="hidden-xs"><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">6</a></li>
-									<li><a href="#" class="active">7</a></li>
-									<li><a href="#">8</a></li>
-									<li class="hidden-xs"><a href="#">9</a></li>
-									<li class="hidden-xs"><a href="#">10</a></li>
-									<li class="hidden-xs hidden-md"><a href="#">11</a></li>
-									<li class="hidden-xs hidden-md"><a href="#">12</a></li>
-									<li class="hidden-xs hidden-sm hidden-md"><a href="#">13</a></li>
-									<li><a href="#">1586</a></li>
-								</ul>
-							</div>
-							<div class="pull-left">
-								<a href="#" class="prevnext last"><i class="fa fa-angle-right"></i></a>
-							</div>
 							<div class="clearfix"></div>
 						</div>
 					</div>
@@ -246,33 +218,6 @@
 
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-8 col-xs-12">
-							<div class="pull-left">
-								<a href="#" class="prevnext"><i class="fa fa-angle-left"></i></a>
-							</div>
-							<div class="pull-left">
-								<ul class="paginationforum">
-									<li class="hidden-xs"><a href="#">1</a></li>
-									<li class="hidden-xs"><a href="#">2</a></li>
-									<li class="hidden-xs"><a href="#">3</a></li>
-									<li class="hidden-xs"><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">6</a></li>
-									<li><a href="#" class="active">7</a></li>
-									<li><a href="#">8</a></li>
-									<li class="hidden-xs"><a href="#">9</a></li>
-									<li class="hidden-xs"><a href="#">10</a></li>
-									<li class="hidden-xs hidden-md"><a href="#">11</a></li>
-									<li class="hidden-xs hidden-md"><a href="#">12</a></li>
-									<li class="hidden-xs hidden-sm hidden-md"><a href="#">13</a></li>
-									<li><a href="#">1586</a></li>
-								</ul>
-							</div>
-							<div class="pull-left">
-								<a href="#" class="prevnext last"><i class="fa fa-angle-right"></i></a>
-							</div>
-							<div class="clearfix"></div>
-						</div>
 					</div>
 				</div>
 			</section>
@@ -320,5 +265,6 @@
 
 		<script src="js/bootstrap.min.js"></script>
 		<script defer type="module" src="js/forum.js"></script>
+		
 	</body>
 </html>

@@ -18,7 +18,13 @@
 
 #redirect_button{
     position: relative;
-    bottom: 33px;
+    bottom: 32.5px;
+    left: 15px;
+}
+
+#redirect-button{
+    position: relative;
+    bottom: 32.5px;
     left: 15px;
 }
 

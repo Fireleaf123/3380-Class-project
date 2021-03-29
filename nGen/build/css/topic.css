@@ -1,5 +1,5 @@
 .commentContent {
-	*padding-left: 10px;
+	padding-left: 10px;
 	border: 2x solid blue;
 }
 #postUser {
@@ -20,7 +20,6 @@
 
 #comments {
 	border-top: 5px solid #1ABC9C;
-	border-bottom: 5px solid #1ABC9C;
 }
 
 #user {

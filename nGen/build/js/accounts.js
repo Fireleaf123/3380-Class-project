@@ -11,8 +11,10 @@
  * =============================================================================================================== 
  */
 
+import { Firebase } from "./content_mngr.js";
 import { Accounts, User } from "./User.js";
 const Acct = new Accounts();
+const Fire = new Firebase;
 
 
     var path = window.location.pathname;
@@ -25,7 +27,7 @@ const Acct = new Accounts();
   
     else if (page ==='05_login.html')
     {
-    document.getElementById('login-button').onclick = () => {Acct.signInWithEmailPasswordsignInWithEmailPassword()};
+    document.getElementById('login-button').onclick = () => {Acct.signInWithEmailPassword()};
     }
 
     else if (page ==='06_new_account2.html')
@@ -33,7 +35,7 @@ const Acct = new Accounts();
     var userId;
     new User().getUserId().then(User => {userId = User})
     
-    document.getElementById('saveuser').onclick = () => {Acct.saveUser(userName, userBday, userId, userRole, userIndustry, userEducation)};
+    document.getElementById('saveuser').onclick = () => {Fire.saveUser(userName, userBday, userId, userRole, userIndustry, userEducation)};
     }
 
     else 

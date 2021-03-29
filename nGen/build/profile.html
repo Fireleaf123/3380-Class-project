@@ -28,6 +28,8 @@
         <!-- Custom -->
         <link href="css/custom.css" rel="stylesheet">
         <link href="css/home.css" rel="stylesheet" />
+        <script type="module" src="js/index.js"></script>
+        <script src="js/profilePage.js" type="module" ></script>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,8 +48,6 @@
         <!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
         <link rel="stylesheet" type="text/css" href="rs-plugin/css/settings.css" media="screen" />
    
-  <script src="js/profilePage.js" type="module" ></script>
-  <!-- <script src="js/accounts.js"></script> -->
 
     </head>
     <body class="newaccountpage">
@@ -61,35 +61,35 @@
                     <div class="row">
                         <div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo "><a href="index.html"><img src="images/logo.jpg" alt=""  /></a></div>
                         <div class="col-lg-3 col-xs-9 col-sm-5 col-md-3 selecttopic">
-                            <div class="dropdown">
-                                <a data-toggle="dropdown" href="#">Borderlands 2</a> <b class="caret"></b>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Borderlands 1</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-2" href="#">Borderlands 2</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-3" href="#">Borderlands 3</a></li>
-                                </ul>
-                            </div>
+                            <div>
+								<a href="index.html">nGen</a> <b class="caret"></b>
+							</div>
                         </div>
-                        <div class="col-lg-4 search hidden-xs hidden-sm col-md-3">
-                            <div class="wrap">
-                                <form action="#" method="post" class="form">
-                                    <div class="pull-left txt"><input type="text" class="form-control" placeholder="Search Topics"></div>
-                                    <div class="pull-right"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></div>
-                                    <div class="clearfix"></div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-xs-12 col-sm-5 col-md-4 avt">
-                            <div class="stnt pull-left">                            
-                                <form action="03_new_topic.html" method="post" class="form">
-                                    <button class="btn btn-primary">Start New Topic</button>
-                                </form>
-                            </div>
-                            <div class="env pull-left"><i class="fa fa-envelope"></i></div>
-
-                            <div id="log_user_out" class="avatar pull-left dropdown">
+                        <div class="clearfix"></div>
+						<div class="col-lg-8 col-xs-12 col-sm-5 col-md-4 avt" id="buttons">
+							<div class="stnt pull-left all-buttons">
+								<form action="03_new_topic.html" method="post" class="form" id="new-post">
+									<button class="btn btn-primary">Start New Topic</button>
+								</form>
+							</div>
+							<div class="stnt pull-left all-buttons">
+								<form action="05_login.html" method="post" class="form" id="login-button">
+									<button class="btn btn-primary">Login</button>
+								</form>
+							</div>
+							<div class="stnt pull-left all-buttons">
+								<form action="profile.html" method="post" class="form" id="profile-button ">
+									<button class="btn btn-primary" id="profile-button">My Profile</button>
+								</form>
+							</div>
+							<div id="log-user-out" class="stnt pull-left all-buttons">
 								<form method="post" class="form">
 									<button id="logout" class="btn btn-primary">Logout</button>
+								</form>
+							</div>
+							<div class="stnt pull-left all-buttons">
+								<form  action="mod_tools.html" method="post" class="form" id="mod-tools">
+									<button class="btn btn-primary" >Mod Tools</button>
 								</form>
 							</div>
                             

@@ -22,11 +22,11 @@ import {User} from './User.js'
   // sets firebase value to div class industry
   //industry.placeholder = "Industry";
 
-  function UserStateChecker(){
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-      // User is signed in.
-      console.log("there is a currently signed in user");
+  // function UserStateChecker(){
+  //   firebase.auth().onAuthStateChanged(function(user) {
+  //     if (user) {
+  //     // User is signed in.
+  //     console.log("there is a currently signed in user");
  
       /*
       let logoutButton = document.getElementById("logout");
@@ -37,16 +37,16 @@ import {User} from './User.js'
         //firebase.auth().getInstance().signOut();
       }*/
       
-      } else {
-        console.log("there is no signed in user");
-        let logoutButton = document.getElementById("logout");
-        logoutButton.style.visibility = "hidden";
-      }
-    });
-  }
-  document.body.onload= function(){
-    UserStateChecker();
-  }
+  //     } else {
+  //       console.log("there is no signed in user");
+  //       let logoutButton = document.getElementById("logout");
+  //       logoutButton.style.visibility = "hidden";
+  //     }
+  //   });
+  // }
+  // document.body.onload= function(){
+  //   UserStateChecker();
+  // }
 
 document.getElementById("update").onclick = function(){
     const FIRE = new User();
