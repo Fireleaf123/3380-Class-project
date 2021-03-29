@@ -1,5 +1,5 @@
 .commentContent {
-	*padding-left: 10px;
+	padding-left: 30px;
 	border: 2x solid blue;
 }
 #postUser {
@@ -17,15 +17,13 @@
 #content {
 	border: 30px #1abc9c;
 }
-.post-buttons{
-
+.post-buttons {
 }
 #comments {
 	border-top: 5px solid #1abc9c;
-	border-bottom: 5px solid #1abc9c;
 }
 
-.bt{
+.bt {
 	width: fit-content;
 }
 #user {
@@ -48,24 +46,15 @@
 }
 
 .replyBtn {
-	max-width: 30px;
+	width: fit-content;
+	float: right;
 }
-
-.post-btns {
-	max-width: ;
+.reportBtn {
+	width: fit-content;
+	float: right;
 }
-
-.removeBtn::after {
-	content: "Delete";
+.reportBtn {
+	padding-left: 5px;
 }
-
-.unFlagBtn::after {
-	content: "Unflag";
-}
-
-}
-
-#report-post{
-    position: relative;
-    left: 290px;
+#report-post {
 }

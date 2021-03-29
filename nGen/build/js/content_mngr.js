@@ -100,7 +100,7 @@ class Firebase {
 		});
 		setTimeout(function () {
 			location.href = "index.html";
-		}, 3500);
+		}, 0);
 	}
 }
 
@@ -337,7 +337,7 @@ class CommentBox {
 		replyNTimeCont.classList.add("container-fluid", "row", "commentContent");
 
 		timeBox.setAttribute("id", "userTimeSub");
-		timeBox.classList.add("col-sm");
+		timeBox.classList.add("col-lg-8");
 		this.#comment.getAttribute("timeSubmitted").then((time) => (timeBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
 		replyNTimeCont.appendChild(timeBox);
 
@@ -352,11 +352,11 @@ class CommentBox {
 		mainCont.appendChild(repliesCont);
 
 		let reply = document.createElement("div");
-		reply.classList.add("col-sm", "replyBtn");
+		reply.classList.add("col-lg-2", "replyBtn");
 		let replyBtn = document.createElement("button");
 
-		replyBtn.classList.add("pull-right", "Replies");
-		replyBtn.innerHTML = '<i class="fa fa-reply"></i>';
+		replyBtn.classList.add("btn", "btn-info", "pull-right", "Replies", "pull-right");
+		replyBtn.innerHTML = "Reply";
 
 		replyBtn.onclick = () => {
 			commentBtn.innerHTML = "Post Reply";
@@ -365,9 +365,9 @@ class CommentBox {
 		};
 
 		let report = document.createElement("div");
-		report.classList.add("col-sm", "replyBtn");
+		report.classList.add("col-lg-2", "reportBtn");
 		let reportBtn = document.createElement("button");
-		reportBtn.classList.add("btn", "report-comment", "Replies");
+		reportBtn.classList.add("btn", "btn-warning", "pull-right");
 		reportBtn.innerHTML = "Report";
 		let flag = (btn) => {
 			let commentId = btn.parentElement.parentElement.parentElement.getAttribute("id");
