@@ -58,44 +58,31 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo">
-							<a href="#"><img src="images/logo.jpg" alt="" /></a>
+							<a href="index.html"><img src="images/logo.jpg" alt="" /></a>
 						</div>
-						<div class="col-lg-3 col-xs-9 col-sm-5 col-md-3 selecttopic">
-							<div class="dropdown">
-								<a data-toggle="dropdown" href="#">Borderlands 2</a> <b class="caret"></b>
-								<ul class="dropdown-menu" role="menu">
-									<li role="presentation"><a role="menuitem" tabindex="-1" a href="05_login.html">Login</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-2" href="#">Borderlands 2</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-3" href="#">Borderlands 3</a></li>
-								</ul>
-							</div>
-							
+						<div class="col-lg-3 col-xs-9 col-sm-5 col-md-3 title">
+							<a href="index.html"><strong>nGen</strong></a>
 						</div>
-						<div class="clearfix" id="post-header"></div>
-						<div class="col-lg-8 col-xs-12 col-sm-5 col-md-4 avt" id="buttons">
-							<div class="stnt pull-left all-buttons">
+						<div class="clearfix"></div>
+						<div class="col-lg-5 col-xs-12 col-sm-5 col-md-4 avt" id="buttons">
+							<div class="stnt pull-left all-buttons-conts">
 								<form action="03_new_topic.html" method="post" class="form" id="new-post">
-									<button class="btn btn-primary">Start New Topic</button>
+									<button class="btn btn-primary all-buttons">Start New Topic</button>
 								</form>
 							</div>
-							<div class="stnt pull-left all-buttons">
-								<form action="05_login.html" method="post" class="form" id="login-button ">
-									<button class="btn btn-primary" id="login-button">Login</button>
+							<div class="stnt pull-left all-buttons-conts">
+								<form action="05_login.html" method="post" class="form" id="login-button">
+									<button id="login_profile" class="btn btn-primary all-buttons">Login</button>
 								</form>
 							</div>
-              <div class="stnt pull-left all-buttons">
-								<form action="profile.html" method="post" class="form" id="profile-button ">
-									<button class="btn btn-primary" id="profile-button">My Profile</button>
+							<div class="stnt pull-left all-buttons-conts">
+								<form method="post" class="form" id="log-user-out">
+									<button id="logout" class="btn btn-primary all-buttons">Logout</button>
 								</form>
 							</div>
-							<div id="log-user-out" class="stnt pull-left all-buttons">
-								<form method="post" class="form">
-									<button id="logout" class="btn btn-primary">Logout</button>
-								</form>
-							</div>
-							<div class="stnt pull-left all-buttons" id="mod-tools">
-								<form  action="05_login.html" method="post" class="form" >
-									<button class="btn btn-primary" >Mod Tools</button>
+							<div class="stnt pull-left all-buttons-conts">
+								<form action="mod_tools.html" method="post" class="form" id="mod-tools">
+									<button class="btn btn-primary all-buttons">Mod Tools</button>
 								</form>
 							</div>
 
@@ -123,12 +110,20 @@
                     <h2 id="user"><i class="fa fa-user"></i></h2>
                     <h2 id="title"></h2>
                     <p id=content></p>
-                    <div id="timeCreated"class="posted pull-left"><i class="fa fa-clock-o"></i></div>
                     <div class="topwrap">
-                      <div class="stnt pull-left all-buttons">
-                        <form method="post" class="form">
-                          <p class="btn btn-primary" id="report-post">Report</p>
-                        </form>
+                      <div class="container-fluid row">
+                        <div id="timeCreated"class="col-sm-18"><i class="fa fa-clock-o"></i></div>
+                        <div class="row col-sm-5">
+                          <div class="col-sm-4 post-buttons">
+                            <p class="btn btn-warning" id="report-post">Report</p>
+                          </div>
+                          <div class="col-sm-4 post-buttons">
+                            <p class="btn btn-success" id="unflag-post">Unflag</p>
+                          </div>
+                          <div class="col-sm-4 post-buttons">
+                            <p class="btn btn-danger" id="delete-post">Delete</p>
+                          </div>
+                        </div>
                       </div>
                   </div>
                   <div class="clearfix"></div>

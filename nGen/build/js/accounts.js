@@ -25,7 +25,7 @@ const Acct = new Accounts();
   
     else if (page ==='05_login.html')
     {
-    document.getElementById('login-button').onclick = () => {Acct.signInWithEmailPasswordsignInWithEmailPassword()};
+    document.getElementById('login-button').onclick = () => {Acct.signInWithEmailPassword()};
     }
 
     else if (page ==='06_new_account2.html')

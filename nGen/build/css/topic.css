@@ -17,12 +17,17 @@
 #content {
 	border: 30px #1abc9c;
 }
+.post-buttons{
 
+}
 #comments {
 	border-top: 5px solid #1abc9c;
 	border-bottom: 5px solid #1abc9c;
 }
 
+.bt{
+	width: fit-content;
+}
 #user {
 	padding-bottom: 5px;
 }

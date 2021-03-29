@@ -46,7 +46,8 @@
         <!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
         <link rel="stylesheet" type="text/css" href="rs-plugin/css/settings.css" media="screen" />
    
-  <script src="js/profilePage.js" type="module" ></script>
+  <script src="js/profile.js" type="module" ></script>
+  <script src="js/index.js" type="module"></script>
   <!-- <script src="js/accounts.js"></script> -->
 
     </head>
@@ -54,50 +55,43 @@
 
         <div class="container-fluid">
 
-            
-
             <div class="headernav">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo "><a href="index.html"><img src="images/logo.jpg" alt=""  /></a></div>
-                        <div class="col-lg-3 col-xs-9 col-sm-5 col-md-3 selecttopic">
-                            <div class="dropdown">
-                                <a data-toggle="dropdown" href="#">Borderlands 2</a> <b class="caret"></b>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Borderlands 1</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-2" href="#">Borderlands 2</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-3" href="#">Borderlands 3</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 search hidden-xs hidden-sm col-md-3">
-                            <div class="wrap">
-                                <form action="#" method="post" class="form">
-                                    <div class="pull-left txt"><input type="text" class="form-control" placeholder="Search Topics"></div>
-                                    <div class="pull-right"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></div>
-                                    <div class="clearfix"></div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-xs-12 col-sm-5 col-md-4 avt">
-                            <div class="stnt pull-left">                            
-                                <form action="03_new_topic.html" method="post" class="form">
-                                    <button class="btn btn-primary">Start New Topic</button>
-                                </form>
-                            </div>
-                            <div class="env pull-left"><i class="fa fa-envelope"></i></div>
-
-                            <div id="log_user_out" class="avatar pull-left dropdown">
-								<form method="post" class="form">
-									<button id="logout" class="btn btn-primary">Logout</button>
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo">
+							<a href="index.html"><img src="images/logo.jpg" alt="" /></a>
+						</div>
+						<div class="col-lg-3 col-xs-9 col-sm-5 col-md-3 title">
+							<a href="index.html"><strong>nGen</strong></a>
+						</div>
+						<div class="clearfix"></div>
+						<div class="col-lg-5 col-xs-12 col-sm-5 col-md-4 avt" id="buttons">
+							<div class="stnt pull-left all-buttons-conts">
+								<form action="03_new_topic.html" method="post" class="form" id="new-post">
+									<button class="btn btn-primary all-buttons">Start New Topic</button>
 								</form>
 							</div>
-                            
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+							<div class="stnt pull-left all-buttons-conts">
+								<form action="05_login.html" method="post" class="form" id="login-button">
+									<button id="login_profile" class="btn btn-primary all-buttons">Login</button>
+								</form>
+							</div>
+							<div class="stnt pull-left all-buttons-conts">
+								<form method="post" class="form" id="log-user-out">
+									<button id="logout" class="btn btn-primary all-buttons">Logout</button>
+								</form>
+							</div>
+							<div class="stnt pull-left all-buttons-conts">
+								<form action="mod_tools.html" method="post" class="form" id="mod-tools">
+									<button class="btn btn-primary all-buttons">Mod Tools</button>
+								</form>
+							</div>
+
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
 
 
             <section class="content">

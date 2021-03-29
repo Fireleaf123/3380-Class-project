@@ -3,20 +3,19 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Mod Dashboard</title>
+		<title>Technology</title>
 		<!-- update the version number as needed -->
 		<script defer src="/__/firebase/8.2.8/firebase-app.js"></script>
 		<!-- include only the Firebase features as you need -->
 		<script defer src="/__/firebase/8.2.8/firebase-auth.js"></script>
 		<script defer src="/__/firebase/8.2.8/firebase-database.js"></script>
-		<!--
-    <script defer src="/__/firebase/8.2.8/firebase-firestore.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-functions.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-storage.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-analytics.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-remote-config.js"></script>
-    <script defer src="/__/firebase/8.2.8/firebase-performance.js"></script> -->
+		<script defer src="/__/firebase/8.2.8/firebase-firestore.js"></script>
+		<script defer src="/__/firebase/8.2.8/firebase-functions.js"></script>
+		<script defer src="/__/firebase/8.2.8/firebase-messaging.js"></script>
+		<script defer src="/__/firebase/8.2.8/firebase-storage.js"></script>
+		<script defer src="/__/firebase/8.2.8/firebase-analytics.js"></script>
+		<script defer src="/__/firebase/8.2.8/firebase-remote-config.js"></script>
+		<script defer src="/__/firebase/8.2.8/firebase-performance.js"></script>
 		<!-- 
       initialize the SDK after all desired features are loaded, set useEmulator to false
       to avoid connecting the SDK to running emulators.
@@ -91,17 +90,50 @@
 			<section class="content">
 				<div class="container">
 					<div class="row">
+						<div class="col-lg-8 col-xs-12 col-md-8">
+							<div style="height: 15px;"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="container">
+					<div class="row">
 						<div class="col-lg-8 col-md-8">
 							<div class="clearfix"></div>
-							<div>
-								<p id="posts-title" style="text-align: center; font-size: 20px; visibility: hidden"><strong>Flagged Posts</strong></p>
-								<div id="postArea"></div>
-							</div>
-							<div>
-								<p id="comments-title" style="text-align: center; font-size: 20px; visibility: hidden"><strong>Flagged Comments</strong></p>
-								<div id="commentArea"></div>
-							</div>
+							<div id="postArea"></div>
 							<div class="clearfix"></div>
+						</div>
+						<div class="col-lg-4 col-md-4">
+							<!-- -->
+							<div class="sidebarblock">
+								<h3>Categories</h3>
+								<div class="divline"></div>
+								<div class="blocktxt">
+									<ul class="cats">
+										<li>
+											<a href="#">Trading for Money <span class="badge pull-right">20</span></a>
+										</li>
+										<li>
+											<a href="#">Vault Keys Giveway <span class="badge pull-right">10</span></a>
+										</li>
+										<li>
+											<a href="#">Misc Guns Locations <span class="badge pull-right">50</span></a>
+										</li>
+										<li>
+											<a href="#">Looking for Players <span class="badge pull-right">36</span></a>
+										</li>
+										<li>
+											<a href="#">Stupid Bugs &amp; Solves <span class="badge pull-right">41</span></a>
+										</li>
+										<li>
+											<a href="#">Video &amp; Audio Drivers <span class="badge pull-right">11</span></a>
+										</li>
+										<li>
+											<a href="#">2K Official Forums <span class="badge pull-right">5</span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

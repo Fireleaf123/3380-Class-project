@@ -1,57 +1,60 @@
- #log_user_out{
-    padding-left: 5px;
-    visibility: hidden;
-    position: relative;
-    left: auto;
-    top: auto;
+#log_user_out {
+	padding-left: 5px;
+	visibility: hidden;
+	position: relative;
+	left: auto;
+	top: auto;
 }
 
-#buttons{
-    position: relative;
-    bottom: 70px;
-    left: 1000px;
+#buttons {
+	position: relative;
+	bottom: 70px;
+	left: 1000px;
 }
 
-.all-buttons{
-    padding-left: 5px;
+.all-buttons-conts {
+	padding-left: 5px;
+}
+.all-buttons {
+	border-radius: 10px;
+	font-weight: bold;
+}
+#redirect_button {
+	position: relative;
+	bottom: 33px;
+	left: 15px;
 }
 
-#redirect_button{
-    position: relative;
-    bottom: 33px;
-    left: 15px;
+#signupbutton {
+	position: relative;
+	bottom: 78px;
+	right: 460px;
 }
 
-#signupbutton{
-    position: relative;
-    bottom: 78px;
-    right: 460px;
+#mod-tools {
+	visibility: hidden;
 }
 
-#mod-tools{
-    visibility: hidden;
+#new-post {
+	visibility: hidden;
 }
 
-#new-post{
-    visibility: hidden;
+#logout {
+	visibility: hidden;
 }
 
-#logout{
-    visibility: hidden;
+#post-header {
+	position: relative;
+	bottom: 15px;
+	left: 300px;
 }
 
-#post-header{
-    position: relative;
-    bottom: 15px;
-    left: 300px;
+#profile-button {
+	visibility: hidden;
 }
 
-#profile-button{
-    visibility: hidden;
-}
-
-.report-comment{
-    background-color: #1abc9c;
+.report-comment {
+	background-color: #1abc9c;
 	box-shadow: none;
 	border-radius: 2px;
 	padding: 10px 15px;
@@ -59,6 +62,6 @@
 	font-size: 14px;
 	font-family: "Open Sans Bold", sans-serif;
 	border: none;
-    position: relative;
-    right: 140px;
+	position: relative;
+	right: 140px;
 }
