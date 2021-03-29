@@ -100,7 +100,7 @@ class Firebase {
 		});
 		setTimeout(function () {
 			location.href = "index.html";
-		}, 0);
+		}, 1000);
 	}
 }
 
