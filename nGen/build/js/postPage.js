@@ -1,4 +1,4 @@
-import { Post, Comment, CommentFactory, Firebase, Flag } from "./content_mngr.js";
+import { Post, Comment, CommentFactory, Firebase } from "./content_mngr.js";
 import { Cookie } from "./cookies.js";
 import { User } from "./User.js";
 
@@ -15,6 +15,8 @@ const forum = new Cookie().getCookie("forum");
 const postId = new Cookie().getCookie("postId");
 
 const POST = new Post(forum, postId);
+
+let FIRE = new Firebase();
 
 new CommentFactory(commentArea, POST).displayComments();
 
@@ -50,3 +52,25 @@ document.getElementById("comment").onclick = async () => {
 		}
 	}
 };
+
+//Calls
+
+// let data;
+//  if (type= "post")
+//  {
+//  	data = { 
+//  	postId: postId,
+//  	forum: forum,
+//  	reports: -1, }
+//  }
+//  if (type= "comment")
+// {
+// 	data = {
+// 	postId: postId,
+// 	commentId: commentId,
+// 	forum: forum,
+// 	reports: -1, }
+// }
+
+
+document.getElementById('report-post').onclick = function(){FIRE.flagPost(postId, forum)};

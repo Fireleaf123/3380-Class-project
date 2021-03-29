@@ -1,6 +1,7 @@
 import { Cookie } from "./cookies.js";
 
 class Firebase {
+<<<<<<< HEAD
 	//https://gist.github.com/jofftiquez/f60dc81b39d77cd4eb1f5b5cbe6585ad
 	#ref;
 	constructor() {
@@ -55,8 +56,99 @@ class Firebase {
 		let location = firebase.database().ref("FlaggedContent");
 		let newKey = location.push().key;
 		location(newKey).set(data);
+=======
+    constructor() {
+        this.ref = firebase.database();
+    }
+
+    writePost(forum, userId, title, content) {
+        let location = this.ref.ref(`${forum}/posts`);
+        let newKey = location.push().key;
+
+        location.child(newKey).set({
+            userId: userId,
+            title: title,
+            content: content,
+            timeSubmitted: Date.now(),
+            clicks: 0,
+        });
+    }
+
+    writeComment(forum, postId, userId, comment) {
+        let location = this.ref.ref(`${forum}/posts/${postId}/comments`);
+        let newKey = location.push().key;
+
+        location.child(newKey).set({
+            userId: userId,
+            comment: comment,
+            timeSubmitted: Date.now(),
+        });
+    }
+
+    /**
+     * Writes the reply to the parent comment
+     * @param {String} userId
+     * @param {String} content
+     */
+    writeReply(forum, postId, commentId, userId, content) {
+        let location = this.ref.ref(`${forum}/posts/${postId}/comments/${commentId}/replies`);
+        let newKey = location.push().key;
+
+        location.child(newKey).set({
+            userId: userId,
+            reply: content,
+            timeSubmitted: Date.now(),
+        });
+    }
+
+	flagContent(data) {
+        let location = firebase.database().ref('FlaggedContent');
+        let newKey = location.push().key;
+        location.child(newKey).set(data);
+    }
+
+    flagPost(postId, forum) {
+        new Flag('FlaggedContent','postId').exists(postId).then( (res) => {
+			//if already flagged	
+			  if(res)
+			  {
+				new Flag('FlaggedContent','postId').updateReports(postId)
+			  }
+			  else
+			  {
+				new Firebase().flagContent({
+						type: 'post',
+						postId: postId,
+						forum: forum,
+						reports: -1,
+				});
+			
+			}
+		});
+    }
+
+    flagComment(forum, postId, commentId){
+		new Flag('FlaggedContent','commentId').exists(commentId).then( (res) => {
+  		//if already flagged
+  		if(res){
+      		new Flag('FlaggedContent','commentId').updateReports(commentId);
+  		}
+  		else{
+      		new Firebase().flagContent({
+           	 	type: 'comment',            	
+				forum: forum,
+            	parent: postId,
+            	commentId: commentId,
+            	reports: -1
+  				});
+  			}
+
+		})
+
+>>>>>>> 9eb53322f89213700d9376368cd168cdb59b8e41
 	}
 }
+
 
 class Search {
 	constructor(location, orderBy) {
@@ -119,6 +211,7 @@ class Flag extends Search {
 		});
 	}
 
+<<<<<<< HEAD
 	/**
 	 *
 	 * @param {string} type -> pass commentId if its a comment; -> pass postId if its a post
@@ -128,6 +221,10 @@ class Flag extends Search {
 		console.log(type, id);
 		new Search("FlaggedContent", type).searchForParent(id).then((parent) => {
 			console.log(parent);
+=======
+	deleteFlag(type, id) {
+		new Flag("FlaggedContent", type).searchForParent(id).then((parent) => {
+>>>>>>> 9eb53322f89213700d9376368cd168cdb59b8e41
 			firebase.database().ref(`FlaggedContent/${parent}`).remove();
 		});
 	}
@@ -325,6 +422,7 @@ class CommentBox {
 		let report = document.createElement("div");
 		report.classList.add("col-sm", "replyBtn");
 		let reportBtn = document.createElement("button");
+<<<<<<< HEAD
 		reportBtn.classList.add("btn", "btn-danger", "Replies");
 
 		let flag = (btn) => {
@@ -337,11 +435,25 @@ class CommentBox {
 		reportBtn.onclick = () => {
 			flag(reportBtn);
 		};
+=======
+		reportBtn.classList.add("btn", "report-comment", "Replies");
+		reportBtn.innerHTML = 'Report';
+		let flag = (btn) => {
+            let commentId = btn.parentElement.parentElement.parentElement.getAttribute("id");
+            const forum = new Cookie().getCookie("forum");
+            const postId = new Cookie().getCookie("postId");
+            new Firebase().flagComment(forum, postId, commentId);
+        };
+        reportBtn.onclick = () => {
+            flag(reportBtn);
+        };
+>>>>>>> 9eb53322f89213700d9376368cd168cdb59b8e41
 
 		reply.appendChild(replyBtn);
 		report.appendChild(reportBtn);
 		replyNTimeCont.appendChild(reply);
 		replyNTimeCont.appendChild(report);
+<<<<<<< HEAD
 		this.#parentContainer.appendChild(mainCont);
 	}
 
@@ -410,6 +522,9 @@ class CommentBox {
 		remove.appendChild(removeFlag);
 		removeNTimeCont.appendChild(remove);
 		this.#parentContainer.appendChild(mainCont);
+=======
+		this.parentContainer.appendChild(mainCont);
+>>>>>>> 9eb53322f89213700d9376368cd168cdb59b8e41
 	}
 }
 

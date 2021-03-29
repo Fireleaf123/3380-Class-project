@@ -58,6 +58,9 @@
 	content: "Unflag";
 }
 
-.reportBtn::after {
-	content: "Report";
+}
+
+#report-post{
+    position: relative;
+    left: 290px;
 }

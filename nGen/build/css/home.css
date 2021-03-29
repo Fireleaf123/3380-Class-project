@@ -1,5 +1,64 @@
-#log_user_out {
-	padding-left: 5px;
-	visibility: hidden;
+ #log_user_out{
+    padding-left: 5px;
+    visibility: hidden;
+    position: relative;
+    left: auto;
+    top: auto;
 }
 
+#buttons{
+    position: relative;
+    bottom: 70px;
+    left: 1000px;
+}
+
+.all-buttons{
+    padding-left: 5px;
+}
+
+#redirect_button{
+    position: relative;
+    bottom: 33px;
+    left: 15px;
+}
+
+#signupbutton{
+    position: relative;
+    bottom: 78px;
+    right: 460px;
+}
+
+#mod-tools{
+    visibility: hidden;
+}
+
+#new-post{
+    visibility: hidden;
+}
+
+#logout{
+    visibility: hidden;
+}
+
+#post-header{
+    position: relative;
+    bottom: 15px;
+    left: 300px;
+}
+
+#profile-button{
+    visibility: hidden;
+}
+
+.report-comment{
+    background-color: #1abc9c;
+	box-shadow: none;
+	border-radius: 2px;
+	padding: 10px 15px;
+	color: #ffffff;
+	font-size: 14px;
+	font-family: "Open Sans Bold", sans-serif;
+	border: none;
+    position: relative;
+    right: 140px;
+}

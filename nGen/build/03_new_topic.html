@@ -21,13 +21,15 @@
         to avoid connecting the SDK to running emulators.
         -->
     <script defer src="/__/firebase/init.js?useEmulator=false"></script>
-	<script type="module" src="js/index.js"></script>
+    <script type="module" src="js/index.js"></script>
+
+    <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="css/new_topic.css">
     <!-- Custom -->
     <link href="css/custom.css" rel="stylesheet" />
-	<link href="css/home.css" rel="stylesheet" />
+    <link href="css/home.css" rel="stylesheet" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,62 +48,58 @@
     <!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
     <link rel="stylesheet" type="text/css" href="rs-plugin/css/settings.css" media="screen" />
   </head>
-  <body onload="UserStateChecker()">
+  <body >
           
-      <div class="headernav">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo">
-              <a href="index.html"><img src="images/logo.jpg" alt="" /></a>
+    <div class="headernav">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo">
+            <a href="#"><img src="images/logo.jpg" alt="" /></a>
+          </div>
+          <div class="col-lg-3 col-xs-9 col-sm-5 col-md-3 selecttopic">
+            <div class="dropdown">
+              <a data-toggle="dropdown" href="#">Borderlands 2</a> <b class="caret"></b>
+              <ul class="dropdown-menu" role="menu">
+                <li role="presentation"><a role="menuitem" tabindex="-1" a href="05_login.html">Login</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-2" href="#">Borderlands 2</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-3" href="#">Borderlands 3</a></li>
+              </ul>
             </div>
-            <div id="later" class="col-lg-3 col-xs-9 col-sm-5 col-md-3 selecttopic">
-              <div class="dropdown">
-                <a data-toggle="dropdown" href="#">Borderlands 2</a>
-                <b class="caret"></b>
-                <ul class="dropdown-menu" role="menu">
-                  <li role="presentation">
-                    <a role="menuitem" tabindex="-1" href="#">Borderlands 1</a>
-                  </li>
-                  <li role="presentation">
-                    <a role="menuitem" tabindex="-2" href="#">Borderlands 2</a>
-                  </li>
-                  <li role="presentation">
-                    <a role="menuitem" tabindex="-3" href="#">Borderlands 3</a>
-                  </li>
-                </ul>
-              </div>
+            
+          </div>
+          <div class="clearfix" id="post-header"></div>
+          <div class="col-lg-8 col-xs-12 col-sm-5 col-md-4 avt" id="buttons">
+            <div class="stnt pull-left all-buttons">
+              <form action="03_new_topic.html" method="post" class="form" id="new-post">
+                <button class="btn btn-primary">Start New Topic</button>
+              </form>
             </div>
-            <div class="col-lg-4 search hidden-xs hidden-sm col-md-3">
-              <div class="invisible wrap">
-                <form action="#" method="post" class="form">
-                  <div class="pull-left txt">
-                    <input type="text"  class="hide form-control" placeholder="Search Topics" />
-                  </div>
-                  <div class="pull-right">
-                    <button class="btn btn-default" type="button">
-                      <i class="fa fa-search"></i>
-                    </button>
-                  </div>
-                  <div class="clearfix"></div>
-                </form>
-              </div>
+            <div class="stnt pull-left all-buttons">
+              <form action="05_login.html" method="post" class="form" id="login-button ">
+                <button class="btn btn-primary" id="login-button">Login</button>
+              </form>
             </div>
-            <div class="col-lg-4 col-xs-12 col-sm-5 col-md-4 avt">
-              <div class="stnt pull-left">
-                <form action="03_new_topic.html" method="post" class="form">
-                  <button class="btn btn-primary">Start New Topic</button>
-                </form>
-              </div>
-			  <div id="log_user_out" class="avatar pull-left dropdown">
-				<form method="post" class="form">
-					<button id="logout" class="btn btn-primary">Logout</button>
-				</form>
-			</div>
-              <div class="clearfix"></div>
+            <div class="stnt pull-left all-buttons">
+              <form action="profile.html" method="post" class="form" id="profile-button ">
+                <button class="btn btn-primary" id="profile-button">My Profile</button>
+              </form>
             </div>
+            <div id="log-user-out" class="stnt pull-left all-buttons">
+              <form method="post" class="form">
+                <button id="logout" class="btn btn-primary">Logout</button>
+              </form>
+            </div>
+            <div class="stnt pull-left all-buttons" id="mod-tools">
+              <form  action="05_login.html" method="post" class="form" >
+                <button class="btn btn-primary" >Mod Tools</button>
+              </form>
+            </div>
+
+            <div class="clearfix"></div>
           </div>
         </div>
       </div>
+    </div>
 
       <section class="content">
         <div id="later" class="container">
@@ -212,5 +210,6 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script defer type="module" src="js/postCreationPage.js"></script> 
+    <script src="js/accounts.js"></script>
   </body>
 </html>
