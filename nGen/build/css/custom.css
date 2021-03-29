@@ -1165,6 +1165,15 @@ a.down:hover {
 /*-----------------------------------------------------------------*/
 /*--- Large devices (more 1200px) ---*/
 @media (min-width: 1201px) {
+<<<<<<< HEAD
+  .container-fluid {
+    padding: 0;
+  }
+
+  .container {
+    padding: 0;
+  }
+=======
 	.container-fluid {
 		padding: 0;
 	}
@@ -1172,4 +1181,9 @@ a.down:hover {
 	.container {
 		padding: 0;
 	}
+<<<<<<< HEAD
 }
+=======
+>>>>>>> 66f5245a12fa5367d39cdcc112cdbd0faca8d681
+}
+>>>>>>> d02c648d633c538d1d626ff60cceb71b36ca110f
