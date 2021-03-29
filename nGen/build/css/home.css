@@ -26,6 +26,10 @@
 	bottom: 32.5px;
 	left: 15px;
 }
+#redirect-button{
+	position:relative;
+	bottom: 32.5px;
+}
 
 #signupbutton {
 	position: relative;
@@ -66,4 +70,9 @@
 	border: none;
 	position: relative;
 	right: 140px;
+}
+
+#new-post-container{
+	position:relative;
+	top: 35px;
 }

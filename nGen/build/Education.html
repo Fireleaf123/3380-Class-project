@@ -1,180 +1,185 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Education</title>
-		<!-- update the version number as needed -->
-		<script defer src="/__/firebase/8.2.8/firebase-app.js"></script>
-		<!-- include only the Firebase features as you need -->
-		<script defer src="/__/firebase/8.2.8/firebase-auth.js"></script>
-		<script defer src="/__/firebase/8.2.8/firebase-database.js"></script>
-		<script defer src="/__/firebase/8.2.8/firebase-firestore.js"></script>
-		<script defer src="/__/firebase/8.2.8/firebase-functions.js"></script>
-		<script defer src="/__/firebase/8.2.8/firebase-messaging.js"></script>
-		<script defer src="/__/firebase/8.2.8/firebase-storage.js"></script>
-		<script defer src="/__/firebase/8.2.8/firebase-analytics.js"></script>
-		<script defer src="/__/firebase/8.2.8/firebase-remote-config.js"></script>
-		<script defer src="/__/firebase/8.2.8/firebase-performance.js"></script>
-		<!-- 
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Education</title>
+	<!-- update the version number as needed -->
+	<script defer src="/__/firebase/8.2.8/firebase-app.js"></script>
+	<!-- include only the Firebase features as you need -->
+	<script defer src="/__/firebase/8.2.8/firebase-auth.js"></script>
+	<script defer src="/__/firebase/8.2.8/firebase-database.js"></script>
+	<script defer src="/__/firebase/8.2.8/firebase-firestore.js"></script>
+	<script defer src="/__/firebase/8.2.8/firebase-functions.js"></script>
+	<script defer src="/__/firebase/8.2.8/firebase-messaging.js"></script>
+	<script defer src="/__/firebase/8.2.8/firebase-storage.js"></script>
+	<script defer src="/__/firebase/8.2.8/firebase-analytics.js"></script>
+	<script defer src="/__/firebase/8.2.8/firebase-remote-config.js"></script>
+	<script defer src="/__/firebase/8.2.8/firebase-performance.js"></script>
+	<!-- 
       initialize the SDK after all desired features are loaded, set useEmulator to false
       to avoid connecting the SDK to running emulators.
     -->
-		<script defer src="/__/firebase/init.js?useEmulator=false"></script>
-		<script type="module" src="js/index.js"></script>
-		<!-- Bootstrap -->
-		<link href="css/bootstrap.min.css" rel="stylesheet" />
+	<script defer src="/__/firebase/init.js?useEmulator=false"></script>
+	<script type="module" src="js/index.js"></script>
+	<!-- Bootstrap -->
+	<link href="css/bootstrap.min.css" rel="stylesheet" />
 
-		<!-- Custom -->
-		<link href="css/custom.css" rel="stylesheet" />
-		<link href="css/forum.css" rel="stylesheet" />
-		<link href="css/home.css" rel="stylesheet" />
+	<!-- Custom -->
+	<link href="css/custom.css" rel="stylesheet" />
+	<link href="css/forum.css" rel="stylesheet" />
+	<link href="css/home.css" rel="stylesheet" />
 
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
-		<!-- fonts -->
-		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" href="font-awesome-4.0.3/css/font-awesome.min.css" />
+	<!-- fonts -->
+	<link
+		href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+		rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="font-awesome-4.0.3/css/font-awesome.min.css" />
 
-		<!-- CSS STYLE-->
-		<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-	</head>
-	<body>
-		<div class="container-fluid">
-			<div class="headernav">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo">
-							<a href="index.html"><img src="images/logo.png" alt="" /></a>
+	<!-- CSS STYLE-->
+	<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="headernav">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo">
+						<a href="index.html"><img src="images/logo.png" alt="" /></a>
+					</div>
+					<div class="col-lg-3 col-xs-9 col-sm-5 col-md-3 title">
+						<a href="index.html"><strong>nGen</strong></a>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-lg-5 col-xs-12 col-sm-5 col-md-4 avt" id="buttons">
+						<div class="stnt pull-left all-buttons-conts">
+							<form action="03_new_topic.html" method="post" class="form" id="new-post">
+								<button class="btn btn-primary all-buttons">Start New Topic</button>
+							</form>
 						</div>
-						<div class="col-lg-3 col-xs-9 col-sm-5 col-md-3 title">
-							<a href="index.html"><strong>nGen</strong></a>
+						<div class="stnt pull-left all-buttons-conts">
+							<form action="05_login.html" method="post" class="form" id="login-button">
+								<button id="login_profile" class="btn btn-primary all-buttons">Login</button>
+							</form>
 						</div>
+						<div class="stnt pull-left all-buttons-conts">
+							<form method="post" class="form" id="log-user-out">
+								<button id="logout" class="btn btn-primary all-buttons">Logout</button>
+							</form>
+						</div>
+						<div class="stnt pull-left all-buttons-conts">
+							<form action="mod_tools.html" method="post" class="form" id="mod-tools">
+								<button class="btn btn-primary all-buttons">Mod Tools</button>
+							</form>
+						</div>
+
 						<div class="clearfix"></div>
-						<div class="col-lg-5 col-xs-12 col-sm-5 col-md-4 avt" id="buttons">
-							<div class="stnt pull-left all-buttons-conts">
-								<form action="03_new_topic.html" method="post" class="form" id="new-post">
-									<button class="btn btn-primary all-buttons">Start New Topic</button>
-								</form>
-							</div>
-							<div class="stnt pull-left all-buttons-conts">
-								<form action="05_login.html" method="post" class="form" id="login-button">
-									<button id="login_profile" class="btn btn-primary all-buttons">Login</button>
-								</form>
-							</div>
-							<div class="stnt pull-left all-buttons-conts">
-								<form method="post" class="form" id="log-user-out">
-									<button id="logout" class="btn btn-primary all-buttons">Logout</button>
-								</form>
-							</div>
-							<div class="stnt pull-left all-buttons-conts">
-								<form action="mod_tools.html" method="post" class="form" id="mod-tools">
-									<button class="btn btn-primary all-buttons">Mod Tools</button>
-								</form>
-							</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-							<div class="clearfix"></div>
-						</div>
+		<section class="content">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-xs-12 col-md-8">
+						<div style="height: 15px"></div>
 					</div>
 				</div>
 			</div>
 
-			<section class="content">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-8 col-xs-12 col-md-8">
-							<div style="height: 15px"></div>
-						</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-md-8">
+						<div class="clearfix"></div>
+						<div id="postArea"></div>
+						<div class="clearfix"></div>
 					</div>
-				</div>
+					<div class="col-lg-4 col-md-4">
+						<!-- -->
+						<div class="sidebarblock">
+							<h3>Categories</h3>
+							<div class="divline"></div>
+							<div class="blocktxt">
+								<ul class="cats">
+									<li><a href="#">Architecture</a></li>
+									<li><a href="#">Arts</a></li>
+									<li><a href="#">Business</a></li>
+									<li><a href="#">Communication</a></li>
+									<li><a href="Education.html">Education</a></li>
+									<li><a href="#">English</a></li>
+									<li><a href="#">Entertainment</a></li>
+									<li><a href="#">Farming, Fishing, and Forestry</a></li>
+									<li><a href="#">Government</a></li>
+									<li><a href="#">History</a></li>
+									<li><a href="#">Law</a></li>
+									<li><a href="#">Maths</a></li>
+									<li><a href="#">Medicine</a></li>
+									<li><a href="#">Repair and Maintence</a></li>
+									<li><a href="#">Sales</a></li>
+									<li><a href="Science.html">Science</a></li>
+									<li><a href="#">Social Services</a></li>
+									<li><a href="Technology.html">Technology</a></li>
+									<li><a href="#">Theater</a></li>
 
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-8 col-md-8">
-							<div class="clearfix"></div>
-							<div id="postArea"></div>
-							<div class="clearfix"></div>
-						</div>
-						<div class="col-lg-4 col-md-4">
-							<!-- -->
-							<div class="sidebarblock">
-								<h3>Categories</h3>
-								<div class="divline"></div>
-								<div class="blocktxt">
-									<ul class="cats">
-										<li>
-											<a href="#">Trading for Money <span class="badge pull-right">20</span></a>
-										</li>
-										<li>
-											<a href="#">Vault Keys Giveway <span class="badge pull-right">10</span></a>
-										</li>
-										<li>
-											<a href="#">Misc Guns Locations <span class="badge pull-right">50</span></a>
-										</li>
-										<li>
-											<a href="#">Looking for Players <span class="badge pull-right">36</span></a>
-										</li>
-										<li>
-											<a href="#">Stupid Bugs &amp; Solves <span class="badge pull-right">41</span></a>
-										</li>
-										<li>
-											<a href="#">Video &amp; Audio Drivers <span class="badge pull-right">11</span></a>
-										</li>
-										<li>
-											<a href="#">2K Official Forums <span class="badge pull-right">5</span></a>
-										</li>
-									</ul>
-								</div>
+								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
-			</section>
+			</div>
+	</div>
+	</section>
 
-			<footer>
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-1 col-xs-3 col-sm-2 logo">
-							<a href="#"><img src="images/logo.jpg" alt="" /></a>
-						</div>
-						<div class="col-lg-8 col-xs-9 col-sm-5">Copyrights 2014, websitename.com</div>
-						<div class="col-lg-3 col-xs-12 col-sm-5 sociconcent">
-							<ul class="socialicons">
-								<li>
-									<a href="#"><i class="fa fa-facebook-square"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-google-plus"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-dribbble"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-cloud"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-rss"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-1 col-xs-3 col-sm-2 logo">
+					<a href="#"><img src="images/logo.jpg" alt="" /></a>
 				</div>
-			</footer>
+				<div class="col-lg-8 col-xs-9 col-sm-5">Copyrights 2014, websitename.com</div>
+				<div class="col-lg-3 col-xs-12 col-sm-5 sociconcent">
+					<ul class="socialicons">
+						<li>
+							<a href="#"><i class="fa fa-facebook-square"></i></a>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-twitter"></i></a>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-google-plus"></i></a>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-dribbble"></i></a>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-cloud"></i></a>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-rss"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
+	</footer>
+	</div>
 
-		<!-- get jQuery from the google apis -->
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
+	<!-- get jQuery from the google apis -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
 
 
-		<script src="js/bootstrap.min.js"></script>
-		<script defer type="module" src="js/forum.js"></script>
-	</body>
+	<script src="js/bootstrap.min.js"></script>
+	<script defer type="module" src="js/forum.js"></script>
+</body>
+
 </html>
