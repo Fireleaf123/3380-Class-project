@@ -480,23 +480,23 @@ class PostBox {
 		//creating a div to hold userID
 		let userBox = document.createElement("div");
 		userBox.classList.add("postContent");
-		this.#post.getAttribute("userId").then((user) => (userBox.innerHTML = '<i class="fa fa-user"></i> ' + user)); //putting content into the div UserBox.
+		this.#post.getAttribute("userId").then((user) => (userBox.innerHTML = `<b id="post-user">posted by: <i class="fa fa-user"></i> ${user}</b>`)); //putting content into the div UserBox.
 
 		let titleBox = document.createElement("div");
-		titleBox.classList.add("postContent");
+		titleBox.classList.add("postContent", "post-title");
 		this.#post.getAttribute("title").then((title) => (titleBox.innerHTML = title));
 
 		let contentBox = document.createElement("div");
-		contentBox.classList.add("postContent");
+		contentBox.classList.add("postContent", "post-content");
 		this.#post.getAttribute("content").then((content) => {
-			if (content.length >= 200) contentBox.innerHTML = content.substring(0, 200) + "...";
+			if (content.length >= 700) contentBox.innerHTML = content.substring(0, 700) + "...";
 			else {
 				contentBox.innerHTML = content;
 			}
 		});
 
 		let timeSubmittedBox = document.createElement("div");
-		timeSubmittedBox.classList.add("postContent");
+		timeSubmittedBox.classList.add("postContent", "post-time");
 		timeSubmittedBox.style.width = "fit-content";
 
 		this.#post.getAttribute("timeSubmitted").then((time) => (timeSubmittedBox.innerHTML = '<i class="fa fa-clock-o"></i> ' + new Date(time)));
