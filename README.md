@@ -1,19 +1,25 @@
-<<<<<<< HEAD
-# 3380-Class-project
-index = main page
+## nGen - nextGeneration Job Fair - 3380 Class Project - Team Blind and Brice
 
-underwater_basket_weaving / vibbing / copy_paste  = main threads
+Our project proposal is to create a web platform for students to connect to industry professionals in a casual setting. The current landscape has two main issues. One, it is too formal. Being too formal scares away prospecting students in their search. Two, the information is too decentralized. Information is all over place, and thus info is hard to find, overwhelming prospecting students. Our solution to this issue is to create a platform where students and industry professionals can interact and ask questions in a relaxed setting. 
 
-02_topic = dummy post thread
+### Team Members
+  - Baboya Choch {Team Leader}
+  - Ryan Bourdais
+  - Victoria Surman
+  - Gerald Anthony
+  - Brice Trung
+  - Mark Abrahams
+  - 
+### Technologies:
+  - HTML/CSS
+  - JavaScript
+  - BootStrap
+  - Firebase
+  - 
+### Core Features:
+  - Forum/Feed
+  - Account Registration
+  - Account Login
+  - Posting
+  - Commenting
 
-03_topic = post window
-
-ignore 404 / page_template / 04_new acc
-=======
-# 3380-Class-project: nGen
-<<<<<<< HEAD
-=======
-
->>>>>>> b0609c98b355699333dace33e5d888e676e141f4
-Team Blind and Brice Spring 3380 project
->>>>>>> 66f5245a12fa5367d39cdcc112cdbd0faca8d681
