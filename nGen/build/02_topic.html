@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Forum :: Topic</title>
+
+    <script defer src="/__/firebase/8.2.8/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.2.8/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-database.js"></script>
+    <!--
+    <script defer src="/__/firebase/8.2.8/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-functions.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-storage.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-performance.js"></script> -->
+    <!-- 
+        initialize the SDK after all desired features are loaded, set useEmulator to false
+        to avoid connecting the SDK to running emulators.
+        -->
+    <script defer src="/__/firebase/init.js?useEmulator=false"></script>
+    <script type="module" src="js/index.js"></script>
+    <script type="module" src="js/postPage.js"></script>
+    <script type="module" src="js/content_mngr.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom -->
+    <link href="css/custom.css" rel="stylesheet" />
+    <link href="css/topic.css" rel="stylesheet" />
+    <link href="css/forum.css" rel="stylesheet" />
+    <link href="css/home.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="font-awesome-4.0.3/css/font-awesome.min.css" />
+
+    <!-- CSS STYLE-->
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+  </head>
+  <body class="topic">
+    <div class="container-fluid">
+    
+      <div class="headernav">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo">
+              <a href="index.html"><img src="images/logo.png" alt="" /></a>
+            </div>
+            <div class="col-lg-1 col-xs-9 col-sm-5 col-md-3 title">
+              <a href="index.html"><strong>nGen</strong></a>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-lg-4 col-xs-12 col-sm-5 col-md-4" id="buttons">
+              <div class="stnt pull-left all-buttons-conts">
+                <form action="03_new_topic.html" method="post" class="form" id="new-post">
+                  <button class="btn btn-primary all-buttons">Start New Topic</button>
+                </form>
+              </div>
+              <div class="stnt pull-left all-buttons-conts">
+                <form action="05_login.html" method="post" class="form" id="login-button">
+                  <button id="login_profile" class="btn btn-primary all-buttons">Login</button>
+                </form>
+              </div>
+              <div class="stnt pull-left all-buttons-conts">
+                <form method="post" class="form" id="log-user-out">
+                  <button id="logout" class="btn btn-primary all-buttons">Logout</button>
+                </form>
+              </div>
+              <div class="stnt pull-left all-buttons-conts">
+                <form action="mod_tools.html" method="post" class="form" id="mod-tools">
+                  <button class="btn btn-primary all-buttons">Mod Tools</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="content">
+        <div class="container">
+  
+        </div>
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-8">
+              <!-- POST -->
+              <div class="post beforepagination">
+                  <div class="userinfo pull-left">
+                  </div>
+                  <div class="posttext pull-left">
+                    <h2 id="user"><i class="fa fa-user"></i></h2>
+                    <h2 id="title"></h2>
+                    <p id=content></p>
+                    <div class="topwrap">
+                      <div class="container-fluid row">
+                        <div id="timeCreated"class="col-sm-18"><i class="fa fa-clock-o"></i></div>
+                        <div class="row col-sm-5">
+                          <div class="col-sm-4 post-buttons">
+                            <p class="btn btn-warning" id="report-post">Report</p>
+                          </div>
+                          <div class="col-sm-4 post-buttons">
+                            <p class="btn btn-success" id="unflag-post">Unflag</p>
+                          </div>
+                          <div class="col-sm-4 post-buttons">
+                            <p class="btn btn-danger" id="delete-post">Delete</p>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+              <div class="clearfix" style="height: 20px"></div>
+              <!-- post a comment-->
+              <div id="writeCoR" class="post sendComment">
+                <form action="#" class="form" method="post">
+                  <div class="topwrap">
+                    <div class="userinfo pull-left">
+
+                    </div>
+                    <div class="posttext pull-left">
+                      <div class="textwraper">
+                        <div class="postreply">Post a comment</div>
+                        <textarea name="reply" id="reply" maxlength="300" placeholder="Character Limit: 300. Type your message here"></textarea>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="postinfobot">
+                    <div class="pull-right postreply">
+                      <div class="pull-left smile">
+                        <a href="#"><i class="fa fa-smile-o"></i></a>
+                      </div>
+                      <div id="comment" class="pull-left"><p id="commentBtn" class="btn btn-primary">Post Comment</p></div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </form>
+              </div>
+              <!-- post a comment -->
+              <div id="comments"> 
+                
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+              <!-- -->
+             
+    <!-- get jQuery from the google apis -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script defer type="module" src="js/postPage.js"></script>
+    </script>
+
+    <!-- END REVOLUTION SLIDER -->
+  </body>
+</html>

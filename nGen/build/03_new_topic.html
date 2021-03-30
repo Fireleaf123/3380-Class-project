@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Forum :: New topic</title>
+
+    <script defer src="/__/firebase/8.2.8/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.2.8/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-database.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-functions.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-storage.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/8.2.8/firebase-performance.js"></script>
+    <!-- 
+        initialize the SDK after all desired features are loaded, set useEmulator to false
+        to avoid connecting the SDK to running emulators.
+        -->
+    <script defer src="/__/firebase/init.js?useEmulator=false"></script>
+    <script type="module" src="js/index.js"></script>
+		<script type="module" src="js/accounts.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/new_topic.css">
+    <!-- Custom -->
+    <link href="css/custom.css" rel="stylesheet" />
+    <link href="css/home.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="font-awesome-4.0.3/css/font-awesome.min.css" />
+
+    <!-- CSS STYLE-->
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+  </head>
+  <body >
+          
+    <div class="headernav">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo">
+            <a href="index.html"><img src="images/logo.png" alt="" /></a>
+          </div>
+          <div class="col-lg-1 col-xs-9 col-sm-5 col-md-3 title">
+            <a href="index.html"><strong>nGen</strong></a>
+          </div>
+          <div class="clearfix"></div>
+          <div class="col-lg-4 col-xs-12 col-sm-5 col-md-4" id="buttons">
+            <div class="stnt pull-left all-buttons-conts">
+              <form action="03_new_topic.html" method="post" class="form" id="new-post">
+                <button class="btn btn-primary all-buttons">Start New Topic</button>
+              </form>
+            </div>
+            <div class="stnt pull-left all-buttons-conts">
+              <form action="05_login.html" method="post" class="form" id="login-button">
+                <button id="login_profile" class="btn btn-primary all-buttons">Login</button>
+              </form>
+            </div>
+            <div class="stnt pull-left all-buttons-conts">
+              <form method="post" class="form" id="log-user-out">
+                <button id="logout" class="btn btn-primary all-buttons">Logout</button>
+              </form>
+            </div>
+            <div class="stnt pull-left all-buttons-conts">
+              <form action="mod_tools.html" method="post" class="form" id="mod-tools">
+                <button class="btn btn-primary all-buttons">Mod Tools</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <section class="content">
+        <div id="later" class="container">
+          <div class="row">
+            
+          </div>
+        </div>
+
+        <div class="container" id="new-post-container">
+          <div class="row">
+            <div class="col-lg-8 col-md-8">
+              <!-- POST -->
+              <div class="post border-4">
+                <form id="main_post_info" action="#" class="form newtopic" method="post">
+                  <div class="topwrap">
+                    <div class="userinfo pull-left">
+                    </div>
+                    <div class="posttext pull-left">
+                      <div id="topic_cont">
+                        <input id="post_title" type="text" maxlength="70" placeholder="Enter Topic Title" class="form-control" />
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                          <select id="select_field" name="category" id="category" class="form-control">
+                            <option value="" disabled selected>Select Forum</option>
+                            <option value="Basket Weaving">Basket Weaving</option>
+                            <option value="Copy and Pasting">Copy and Pasting</option>
+                            <option value="Vibin">Vibin'</option>
+                            <option value="Science">Science</option>
+                            <option value="Technology">Technology</option>
+                            <option value="English">English</option>
+                            <option value="Maths">Maths</option>
+                            <option value="Arts">Arts'</option>
+                            <option value="Theater">Theater</option>
+                            <option value="Communication">Communication</option>
+                            <option value="History">History</option>
+                            <option value="Law">Law</option>
+                            <option value="Architecture">Architecture</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Business">Business</option>
+                            <option value="Social Services">Social Services</option>
+                            <option value="Education">Education</option>
+                            <option value="Repair and Maintenace">Repair and Maintenace</option>
+                            <option value="Government">Government</option>
+                            <option value="Farming,Fishing, and Forestry">Farming,Fishing, and Forestry</option>
+                            <option value="Medicine">Medicine</option>
+                            <option value="Sales">Sales</option>
+                          </select>
+                        </div>
+                        <div id="sub_cat" class="invisible col-lg-6 col-md-6">
+                          <select name="subcategory" id="subcategory" class="form-control">
+                            <option value="" disabled selected>Select Subcategory</option>
+                            <option value="op1">Option1</option>
+                            <option value="op2">Option2</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div>
+                        <textarea id="post_content" name="desc" id="desc" placeholder="Description" class="form-control"></textarea>
+                      </div>
+                      <div class="float-end">
+                        <button id="submit" onclick="" class="btn-primary" type="button">Post</button>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </section>
+    <footer>
+      <div class="container">
+        <div class="row">
+            <div class="col-lg-1 col-xs-3 col-sm-2 logo">
+              <a href="#"><img src="images/logo.jpg" alt="" /></a>
+            </div>
+                <div class="col-lg-8 col-xs-9 col-sm-5">Copyrights 2014, websitename.com</div>
+                  <div class="col-lg-3 col-xs-12 col-sm-5 sociconcent">
+                    <ul class="socialicons">
+                      <li>
+                        <a href="#"><i class="fa fa-facebook-square"></i></a>
+                      </li>
+                      <li>
+                          <a href="#"><i class="fa fa-twitter"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa fa-dribbble"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa fa-cloud"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa fa-rss"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+        
+      </div>
+    </footer>
+
+    <!-- get jQuery from the google apis -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script defer type="module" src="js/postCreationPage.js"></script> 
+    <script src="js/accounts.js"></script>
+  </body>
+</html>
