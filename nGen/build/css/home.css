@@ -26,8 +26,8 @@
 	bottom: 32.5px;
 	left: 15px;
 }
-#redirect-button{
-	position:relative;
+#redirect-button {
+	position: relative;
 	bottom: 32.5px;
 }
 
@@ -72,7 +72,18 @@
 	right: 140px;
 }
 
-#new-post-container{
-	position:relative;
+#new-post-container {
+	position: relative;
 	top: 35px;
+}
+
+#nav {
+}
+
+#logout-button {
+	padding-right: 4px;
+}
+
+#buttons {
+	padding-top: 15px;
 }

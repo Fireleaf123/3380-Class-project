@@ -1,8 +1,11 @@
+/**
+ * Class that updates and gets current user Iinfo
+ */
 class User {
 	constructor() {}
 	/**
-	 *
-	 * @returns {String} of current
+	 *gets the Id of the currently signed in user
+	 * @returns {String} returns Id of current user
 	 */
 	getUserId() {
 		return new Promise((resolve, reject) => {
@@ -11,21 +14,41 @@ class User {
 			});
 		});
 	}
+
+	/**
+	 *updates username field of user in the database to {newEducation}
+	 * @param {string} newUsername,value to changed to
+	 */
 	async updateUsername(newUsername) {
 		let userId = await this.getUserId();
 		let ref = firebase.database().ref(`users/${userId}`);
 		ref.update({ username: newUsername });
 	}
+
+	/**
+	 * updates Industry field of user in the database to {newEducation}
+	 * @param {string} newIndustr, value to be changed to
+	 */
 	async updateIndustry(newIndustry) {
 		let userId = await this.getUserId();
 		let ref = firebase.database().ref(`users/${userId}`);
 		ref.update({ industry: newIndustry });
 	}
+	/**
+	 * updates Education field of user in the database to {newEducation}
+	 * @param {string} newEducation, value to be changed to
+	 */
 	async updateEducation(newEducation) {
 		let userId = await this.getUserId();
 		let ref = firebase.database().ref(`users/${userId}`);
 		ref.update({ education: newEducation });
 	}
+
+	/**
+	 * gets value of {attribute} passed for the current User
+	 * @param {string} attribute
+	 * @returns Any, returns the value of {attribute} for the currently signed in user
+	 */
 	async getAttribute(attribute) {
 		let ref = firebase.database().ref(`users/${await this.getUserId()}`);
 		let location = ref.child(attribute);
@@ -38,6 +61,10 @@ class User {
 }
 
 class Accounts {
+	/**
+	 * signs up the user using firebase's authnetication service using the info
+	 * in the email and password fields
+	 */
 	signUpWithEmailPassword() {
 		var email = document.getElementById("email").value;
 		var password = document.getElementById("password").value;
@@ -69,7 +96,11 @@ class Accounts {
 			});
 		// [END auth_signin_password]
 	}
-
+	/**
+	 *
+	 * signs in the user using firebase's authnetication service using the info
+	 * in the email and password fields
+	 */
 	signInWithEmailPassword() {
 		var email = document.getElementById("email").value;
 		var password = document.getElementById("password").value;
@@ -88,7 +119,9 @@ class Accounts {
 				var errorMessage = error.message;
 			});
 	}
-
+	/**
+	 * signs out the currently logged in user
+	 */
 	signOut() {
 		// [START auth_sign_out]
 		firebase

@@ -10,6 +10,11 @@ document.body.onload = async function () {
 	var userrole = await new User().getAttribute("userrole");
 	var userId = await new User().getUserId();
 	firebase.auth().onAuthStateChanged(function (user) {
+		/**
+		 * if user is signed in
+		 * 	--> depending on the role of the user, hide or show certain elements
+		 * else no onee is signed in
+		 */
 		if (user) {
 			// User is signed in.
 			console.log("there is a currently signed in user: " + userrole + " " + userId);

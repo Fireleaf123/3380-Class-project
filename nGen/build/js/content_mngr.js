@@ -1,10 +1,18 @@
 import { Cookie } from "./cookies.js";
-
+/**
+ * class that has all the writer operations to Fieebase
+ */
 class Firebase {
 	constructor() {
 		this.ref = firebase.database();
 	}
-
+	/**
+	 * writes a the content to the database
+	 * @param {string} forum, forum to be posted in
+	 * @param {string} userId , username of currretnyl signed in useer
+	 * @param {string} title, user's title
+	 * @param {string} content, user's words
+	 */
 	writePost(forum, userId, title, content) {
 		let location = this.ref.ref(`${forum}/posts`);
 		let newKey = location.push().key;
@@ -17,7 +25,13 @@ class Firebase {
 			clicks: 0,
 		});
 	}
-
+	/**
+	 * writes a the content to the database
+	 * @param {string} forum, forum to be posted in
+	 * @param {postId} postId,id of parent post
+	 * @param {string} userId , username of currretnyl signed in useer
+	 * @param {string} comment, user's words
+	 */
 	writeComment(forum, postId, userId, comment) {
 		let location = this.ref.ref(`${forum}/posts/${postId}/comments`);
 		let newKey = location.push().key;
@@ -30,9 +44,12 @@ class Firebase {
 	}
 
 	/**
-	 * Writes the reply to the parent comment
-	 * @param {String} userId
-	 * @param {String} content
+	 *  Writes the reply to the parent comment passed
+	 * @param {string} forum, forum that content belongs to
+	 * @param {string} postId, id of parent comment
+	 * @param {string} commentId, id of parent
+	 * @param {string} userId, current user's username
+	 * @param {string} content, user's words
 	 */
 	writeReply(forum, postId, commentId, userId, content) {
 		let location = this.ref.ref(`${forum}/posts/${postId}/comments/${commentId}/replies`);
@@ -44,13 +61,21 @@ class Firebase {
 			timeSubmitted: Date.now(),
 		});
 	}
-
+	/**
+	 * saves the data in {data} to flaggedContent table
+	 * @param {object} data
+	 */
 	flagContent(data) {
 		let location = firebase.database().ref("FlaggedContent");
 		let newKey = location.push().key;
 		location.child(newKey).set(data);
 	}
-
+	/**
+	 * checks if a post is already flagged, if not creates a new entry
+	 * if so, incremenet reports
+	 * @param {string} postId, id post reported
+	 * @param {string} forum , forum post belongs to
+	 */
 	flagPost(postId, forum) {
 		new Flag("FlaggedContent", "postId").exists(postId).then((res) => {
 			//if already flagged
@@ -66,7 +91,13 @@ class Firebase {
 			}
 		});
 	}
-
+	/**
+	 * check if comment is already flagged, if not creates a new entry
+	 * if so, increment reports
+	 * @param {string} forum
+	 * @param {string} postId
+	 * @param {strin} commentId
+	 */
 	flagComment(forum, postId, commentId) {
 		new Flag("FlaggedContent", "commentId").exists(commentId).then((res) => {
 			//if already flagged
@@ -83,6 +114,15 @@ class Firebase {
 			}
 		});
 	}
+	/**
+	 *saves user profile info to database
+	 * @param {string} userName
+	 * @param {string} userBday
+	 * @param {string} userId
+	 * @param {string} userRole
+	 * @param {string} userIndustry
+	 * @param {string} userEducation
+	 */
 	saveUser(userName, userBday, userId, userRole, userIndustry, userEducation) {
 		var userName = document.getElementById("userName").value;
 		var userBday = document.getElementById("userBday").value;
@@ -103,12 +143,24 @@ class Firebase {
 		}, 2000);
 	}
 }
-
+/**
+ * Houses operations to serach for data in the database
+ */
 class Search {
+	/**
+	 *
+	 * @param {string} location, database table
+	 * @param {string} orderBy, field to be searched by
+	 */
 	constructor(location, orderBy) {
 		this.ref = firebase.database().ref(location);
 		this.orderBy = orderBy;
 	}
+	/**
+	 * searches for collection that has property orderby of value {data}
+	 * @param {*} data
+	 * @returns
+	 */
 	searchFor(data) {
 		return new Promise((resolve, reject) => {
 			this.ref
@@ -120,6 +172,11 @@ class Search {
 				});
 		});
 	}
+	/**
+	 * retrieves the id of the parent of the collection the data belongs to
+	 * @param {*} data
+	 * @returns string
+	 */
 	searchForParent(data) {
 		return new Promise((resolve, reject) => {
 			this.ref
@@ -135,12 +192,18 @@ class Search {
 		return false;
 	}
 }
-
+/**
+ * houses functions to handle, deletetion and flagging of content in Flagged content table
+ * inherits functions from search to find original location of data reported
+ */
 class Flag extends Search {
 	constructor(location, orderBy) {
 		super(location, orderBy);
 	}
-
+	/**
+	 * increments value of reports at collection of id {data}
+	 * @param {string} data
+	 */
 	async updateReports(data) {
 		let parent = await this.searchForParent(data);
 		let reports = await this.#getReports(parent);
@@ -152,7 +215,11 @@ class Flag extends Search {
 				reports: reports - 1,
 			});
 	}
-
+	/**
+	 * gets curreent value of reports at collection of id parent
+	 * @param {string} parent
+	 * @returns
+	 */
 	#getReports(parent) {
 		return new Promise((resolve, reject) => {
 			firebase
@@ -166,7 +233,7 @@ class Flag extends Search {
 	}
 
 	/**
-	 *
+	 *deletes the flag/report of content at locatin id in flaggedcontent table
 	 * @param {string} type -> pass commentId if its a comment; -> pass postId if its a post
 	 * @param {string} id  -> the postId/commnentId of the thing to be removed
 	 */
@@ -177,7 +244,10 @@ class Flag extends Search {
 			firebase.database().ref(`FlaggedContent/${parent}`).remove();
 		});
 	}
-
+	/**
+	 * permantelt deletes collcetion at location {..args}
+	 * @param  {...any} args
+	 */
 	delete(...args) {
 		if (args.length === 2) {
 			this.deleteFlag("postId", args[1]);
@@ -189,8 +259,15 @@ class Flag extends Search {
 		}
 	}
 }
-
+/**
+ * houses functions to get infoamation about the collection of key id
+ */
 class Data {
+	/**
+	 * intializes a referecnce using the parent and id
+	 * @param {string} parent
+	 * @param {string} id
+	 */
 	constructor(parent, id) {
 		this.parent = parent;
 		this.id = id;
@@ -242,6 +319,9 @@ class Comment extends Data {
 	}
 }
 
+/**
+ * Houses methods to act on posts
+ */
 class Post extends Data {
 	forum;
 	constructor(forum, postId) {
@@ -249,7 +329,7 @@ class Post extends Data {
 		this.forum = forum;
 	}
 
-	//note: currently untested without a working forumn
+	//returns the post with id postId
 	getPost() {
 		return new Promise((resolve, reject) => {
 			this.ref.once("value", (post) => {
@@ -257,16 +337,23 @@ class Post extends Data {
 			});
 		});
 	}
-
+	/**
+	 * updates the post
+	 */
 	async #updatePost() {
 		this.post = await this.getPost();
 	}
-
+	/**
+	 * increments value of clicks property of the current post
+	 */
 	async updateClicks() {
 		let clicks = (await this.getAttribute("clicks")) === undefined ? 0 : await this.getAttribute("clicks");
 		this.ref.child("clicks").set(clicks - 1);
 	}
-
+	/**
+	 * gets the comments associated with the given post
+	 * @returns object
+	 */
 	getComments() {
 		this.getAttribute("comments").then((comments) => {
 			for (let comment in comments) {
@@ -277,6 +364,9 @@ class Post extends Data {
 	}
 }
 
+/**
+ * houses functions to data stored in the given forum
+ */
 class Forum extends Data {
 	#ref;
 	#forum;
@@ -305,15 +395,24 @@ class Forum extends Data {
 		return listOfPosts;
 	}
 }
-
+/**
+ * creates container using comment data passed
+ */
 class CommentBox {
 	#comment;
 	#parentContainer;
+	/**
+	 *
+	 * @param {Comment} comment
+	 * @param {HTML div} parentContainer
+	 */
 	constructor(comment, parentContainer) {
 		this.#comment = comment;
 		this.#parentContainer = parentContainer;
 	}
-
+	/**
+	 * creates a container that displays comment datta
+	 */
 	createComment() {
 		let mainCont = document.createElement("div");
 		let container = document.createElement("div");
@@ -386,7 +485,11 @@ class CommentBox {
 		replyNTimeCont.appendChild(report);
 		this.#parentContainer.appendChild(mainCont);
 	}
-
+	/**
+	 * creates container that houses comment data, but has two additional
+	 * buttons to unflag and remove.
+	 * only created in the mod_tools page to be used by admins
+	 */
 	createFlaggedComment() {
 		let mainCont = document.createElement("div");
 		let container = document.createElement("div");
@@ -450,15 +553,24 @@ class CommentBox {
 		this.#parentContainer.appendChild(mainCont);
 	}
 }
-
+/**
+ * creates container that displays post Info
+ */
 class PostBox {
 	#post;
 	#parentContainer;
+	/**
+	 *
+	 * @param {Post} post
+	 * @param {HTML div} parentContainer
+	 */
 	constructor(post, parentContainer) {
 		this.#post = post;
 		this.#parentContainer = parentContainer;
 	}
-
+	/**
+	 * creates a post using the data from the Post object
+	 */
 	createPost() {
 		let postBox = document.createElement("div");
 
@@ -516,14 +628,24 @@ class PostBox {
 	}
 }
 
+/**
+ * creates container that displays content of reply
+ */
 class ReplyBox {
 	#reply;
 	#parentContainer;
+	/**
+	 *
+	 * @param {object} reply
+	 * @param {HTML div} parentContainer
+	 */
 	constructor(reply, parentContainer) {
 		this.#reply = reply;
 		this.#parentContainer = parentContainer;
 	}
-
+	/**
+	 * creates containers using the data in reply object dynamically
+	 */
 	createReply() {
 		let container = document.createElement("div");
 		let userBox = document.createElement("div");
@@ -552,6 +674,9 @@ class ReplyBox {
 	}
 }
 
+/**
+ * displays all the comments for the given post
+ */
 class CommentFactory {
 	#parentContainer;
 	#post;
@@ -565,7 +690,10 @@ class CommentFactory {
 	}
 
 	/**
-	 * creates comment objects of children of parent post, and stores them in a list
+	 * creates comment objects for each comment of the parent posts and passses them to
+	 * commentBox to be used to create containers to display its data
+	 *
+	 * also takes the replies of each comment and creates its children replies
 	 */
 	displayComments() {
 		this.#post.getAttribute("comments").then((comments) => {
@@ -589,19 +717,25 @@ class CommentFactory {
 		});
 	}
 }
-
+/**
+ * creates containers for every post in at location of the forum passed
+ */
 class PostFactory {
 	#parentContainer;
 	#forum;
 	/**
-	 * @param {DIV} parentContainer
-	 * @param {Array} posts
+	 *
+	 * @param {HTML div} parentContainer
+	 * @param {string} forum
 	 */
 	constructor(parentContainer, forum) {
 		this.#parentContainer = parentContainer;
 		this.#forum = forum;
 	}
-
+	/**
+	 * creates post Objects for every post in the {forum} and passes
+	 * them to postBox so containers can created using its data nd then displayed
+	 */
 	displayPosts() {
 		let ref = firebase.database().ref(`${this.#forum}/posts/`);
 		let get = ref.orderByChild("clicks").on("value", (posts) => {
@@ -615,14 +749,19 @@ class PostFactory {
 		}, 1500);
 	}
 }
-
+/**
+ * creates flagged versions of comment and post containers
+ */
 class FlagFactory extends Flag {
 	#parentContainer;
 	constructor(parent) {
 		super("FlaggedContent", "type");
 		this.#parentContainer = parent;
 	}
-
+	/**
+	 * searches for reports of type 'comment' and displays them
+	 * using containers specificaly made for flagged comments
+	 */
 	displayComments() {
 		this.searchFor("comment").then((flagged) => {
 			for (let id in flagged) {
@@ -634,7 +773,10 @@ class FlagFactory extends Flag {
 			}
 		});
 	}
-
+	/**
+	 * searches for reports of type 'post' and displays them
+	 * admin must click on post to follow read post, and can then remove it from there.
+	 */
 	displayPosts() {
 		this.searchFor("post").then((flagged) => {
 			for (let id in flagged) {

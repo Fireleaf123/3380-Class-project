@@ -56,5 +56,14 @@
 .reportBtn {
 	padding-left: 5px;
 }
+
 #report-post {
+}
+
+#delete-post {
+	visibility: hidden;
+}
+
+#unflag-post {
+	visibility: hidden;
 }
