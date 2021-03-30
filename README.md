@@ -15,7 +15,7 @@ Our project proposal is to create a web platform for students to connect to indu
   - JavaScript
   - BootStrap
   - Firebase
-  - 
+
 ### Core Features:
   - Forum/Feed
   - Account Registration
