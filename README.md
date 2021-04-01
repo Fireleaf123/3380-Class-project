@@ -7,7 +7,7 @@ Our project proposal is to create a web platform for students to connect to indu
   - Ryan Bourdais
   - Victoria Surman
   - Gerald Anthony
-  - Brice Trung
+  - Brice Truong
   - Mark Abrahams
   - 
 ### Technologies:
