@@ -75,24 +75,11 @@ class Accounts {
 				// Signed in
 				var user = userCredential.user;
 				location.href = "06_new_account2.html";
-				// ...
 			})
 			.catch((error) => {
 				var errorCode = error.code;
 				var errorMessage = error.message;
-				// ..
-			});
-		firebase
-			.auth()
-			.signInWithEmailAndPassword(email, password)
-			.then((userCredential) => {
-				// Signed in
-				var user = userCredential.user;
-				// ...
-			})
-			.catch((error) => {
-				var errorCode = error.code;
-				var errorMessage = error.message;
+				document.getElementById("auth-error").innerHTML = errorMessage;
 			});
 		// [END auth_signin_password]
 	}
@@ -101,6 +88,7 @@ class Accounts {
 	 * signs in the user using firebase's authnetication service using the info
 	 * in the email and password fields
 	 */
+
 	signInWithEmailPassword() {
 		var email = document.getElementById("email").value;
 		var password = document.getElementById("password").value;
@@ -117,6 +105,7 @@ class Accounts {
 			.catch((error) => {
 				var errorCode = error.code;
 				var errorMessage = error.message;
+				console.log(errorCode, ": ", errorMessage);
 			});
 	}
 	/**
